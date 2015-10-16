@@ -11,13 +11,11 @@
             <li>
                 <a class="menulink ripplelink">
                     <i class="icon-round58 Fs40"></i>
-                    <span class="Fs18">#{request.userPrincipal}<i class="icon-downwards Fright Fs20"></i><br /><span class="Fs12 FontRobotoLight">Sr. System Administrator</span></span>
+                    <span class="Fs18">#{request.userPrincipal}<i class="icon-downwards Fright Fs20"></i><br /><span class="Fs12 FontRobotoLight">#{credencial.usuario.nombre}</span></span>
                 </a>
                 
                     <ul>
                         <li><a href="#" class="menulink ripplelink"><i class="icon-user158 Fs16"></i> User Profile</a></li>
-                        <li><a href="#" class="menulink ripplelink"><i class="icon-two385 Fs16"></i> Change User</a></li>
-                        <li><p:link styleClass="menulink ripplelink" outcome="/main/banco/listado"><i class="icon-settings49 Fs16"></i>System Settings</p:link></li>
                         <li><h:form><h:commandLink styleClass="menulink ripplelink" action="#{autenticador.logout()}"><i class="fa fa-power-off Fs16"></i> Logout</h:commandLink></h:form></li>
                     </ul>
                 
@@ -27,7 +25,7 @@
         <div class="Separator"></div>
 
         <pr:menu>
-            <p:menuitem id="rm_home" value="Home" icon="icon-planet29" outcome="/index"/>
+            <p:menuitem id="rm_home" value="Home" icon="icon-planet29" outcome="/main/index"/>
             <p:menuitem id="rm_facturas" value="Facturas" icon="icon-planet29" outcome="/main/banco/listado"/>
             
             <!--            <p:submenu id="rm_theme" label="Rio Theme" icon="icon-mountains14">
