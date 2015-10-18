@@ -13,12 +13,12 @@
                     <i class="icon-round58 Fs40"></i>
                     <span class="Fs18">#{request.userPrincipal}<i class="icon-downwards Fright Fs20"></i><br /><span class="Fs12 FontRobotoLight">#{credencial.usuario.nombre}</span></span>
                 </a>
-                
-                    <ul>
-                        <li><a href="#" class="menulink ripplelink"><i class="icon-user158 Fs16"></i> User Profile</a></li>
-                        <li><h:form><h:commandLink styleClass="menulink ripplelink" action="#{autenticador.logout()}"><i class="fa fa-power-off Fs16"></i> Logout</h:commandLink></h:form></li>
-                    </ul>
-                
+
+                <ul>
+                    <li><a href="#" class="menulink ripplelink"><i class="icon-user158 Fs16"></i> User Profile</a></li>
+                    <li><h:form><h:commandLink styleClass="menulink ripplelink" action="#{autenticador.logout()}"><i class="fa fa-power-off Fs16"></i> Logout</h:commandLink></h:form></li>
+                </ul>
+
 
             </li>
         </ul>
@@ -26,8 +26,13 @@
 
         <pr:menu>
             <p:menuitem id="rm_home" value="Home" icon="icon-planet29" outcome="/main/index"/>
-            <p:menuitem id="rm_facturas" value="Facturas" icon="icon-planet29" outcome="/main/banco/listado"/>
-            
+
+            <p:submenu id="rm_theme" label="Base" icon="icon-mountains14">
+                <p:menuitem id="rm_forms" value="Bancos" icon="icon-browser" outcome="/main/banco/listado" />
+                <p:menuitem id="rm_data" value="Unidades de Medida" icon="icon-calendar" outcome="/main/unidadMedida/listado" />
+            </p:submenu>
+
+
             <!--            <p:submenu id="rm_theme" label="Rio Theme" icon="icon-mountains14">
                             <p:menuitem id="rm_forms" value="Form Elements" icon="icon-browser" outcome="/forms" />
                             <p:menuitem id="rm_data" value="Data Components" icon="icon-calendar" outcome="/data" />

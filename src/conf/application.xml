@@ -10,5 +10,7 @@
       <context-root>/facilerp-web</context-root>
     </web>
   </module>
-  
+  <module>
+    <ejb>stock-ejb.jar</ejb>
+  </module>
 </application>

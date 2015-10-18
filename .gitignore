@@ -7,3 +7,12 @@
 /base-ejb/dist/
 /facilerp-web/build/
 /facilerp-web/dist/
+/ejb-stock/nbproject/private/
+/stock-ejb/nbproject/private/
+/Persistencia/build/
+/Persistencia/dist/
+/stock-ejb/build/
+/stock-ejb/dist/
+/Modelo-jpa/nbproject/private/
+/Modelo-jpa/build/
+/Modelo-jpa/dist/
