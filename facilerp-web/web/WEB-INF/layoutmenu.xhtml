@@ -27,9 +27,14 @@
         <pr:menu>
             <p:menuitem id="rm_home" value="Home" icon="icon-planet29" outcome="/main/index"/>
 
-            <p:submenu id="rm_theme" label="Base" icon="icon-mountains14">
-                <p:menuitem id="rm_forms" value="Bancos" icon="icon-browser" outcome="/main/banco/listado" />
-                <p:menuitem id="rm_data" value="Unidades de Medida" icon="icon-calendar" outcome="/main/unidadMedida/listado" />
+            <p:submenu id="rm_theme1" label="Base" icon="icon-mountains14">
+                <p:menuitem id="rm_banco" value="Bancos" icon="icon-browser" outcome="/main/base/banco/listado" />
+                
+            </p:submenu>
+            <p:submenu id="rm_theme2" label="Stock" icon="icon-mountains14">
+                <p:menuitem id="rm_familia" value="Familias" icon="icon-link60 Fs16" outcome="/main/stock/familia/listado"/>
+                <p:menuitem id="rm_unidadmedida" value="Unidades de Medida" icon="icon-calendar" outcome="/main/stock/unidadMedida/listado" />    
+                <p:menuitem id="rm_producto" value="Producto" icon="icon-link60" outcome="/main/stock/producto/listado" />    
             </p:submenu>
 
 

@@ -106,7 +106,7 @@ public class Historial implements Serializable {
 
     @Override
     public String toString() {
-        return "py.gestionpymes.prestamos.adm.modelo.Historial[ id=" + id + " ]";
+        return "py.com.ideaspymes.facilerp.pesistencia.base.Historial[ id=" + id + " ]";
     }
 
 }

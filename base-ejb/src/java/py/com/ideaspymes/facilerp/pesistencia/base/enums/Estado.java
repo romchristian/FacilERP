@@ -3,7 +3,7 @@
  * and open the template in the editor.
  */
 
-package py.com.ideaspymes.facilerp.pesistencia.base;
+package py.com.ideaspymes.facilerp.pesistencia.base.enums;
 
 /**
  *

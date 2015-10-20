@@ -62,7 +62,7 @@ public class Profesion implements Serializable {
 
     @Override
     public String toString() {
-        return "py.gestionpymes.jpa.clientes.Profesion[ id=" + id + " ]";
+        return "py.com.ideaspymes.facilerp.pesistencia.base.Profesion[ id=" + id + " ]";
     }
     
 }

@@ -8,9 +8,9 @@ import java.io.Serializable;
 import javax.enterprise.context.ApplicationScoped;
 import javax.faces.model.SelectItem;
 import javax.inject.Named;
-import py.com.ideaspymes.facilerp.pesistencia.base.Estado;
-import py.com.ideaspymes.facilerp.pesistencia.base.TipoCargo;
-import py.com.ideaspymes.facilerp.pesistencia.base.TipoPersona;
+import py.com.ideaspymes.facilerp.pesistencia.base.enums.Estado;
+import py.com.ideaspymes.facilerp.pesistencia.base.enums.TipoCargo;
+import py.com.ideaspymes.facilerp.pesistencia.base.enums.TipoPersona;
 import py.com.ideaspymes.facilerp.pesistencia.base.enums.CicloIngreso;
 import py.com.ideaspymes.facilerp.pesistencia.base.enums.EstadoCivil;
 import py.com.ideaspymes.facilerp.pesistencia.base.enums.EstadoContactoTelefonico;
@@ -20,6 +20,7 @@ import py.com.ideaspymes.facilerp.pesistencia.base.enums.TipoDireccion;
 import py.com.ideaspymes.facilerp.pesistencia.base.enums.TipoDocumento;
 import py.com.ideaspymes.facilerp.pesistencia.base.enums.TipoEmpresa;
 import py.com.ideaspymes.facilerp.pesistencia.base.enums.TipoReferencia;
+import py.com.ideaspymes.facilerp.pesistencia.stock.enums.TipoProducto;
 
 
 /**
@@ -150,6 +151,16 @@ public class ProductorEnums implements Serializable {
         return R;
     }
 
+    public SelectItem[] obtTipoProducto() {
+        SelectItem[] R = new SelectItem[TipoProducto.values().length];
+        TipoProducto[] lista = TipoProducto.values();
+        for (int i = 0; i < lista.length; i++) {
+            TipoProducto tc = lista[i];
+            R[i] = new SelectItem(tc, tc.toString());
+        }
+        return R;
+    }
+    
 }
 
 //TipoCargo

@@ -5,6 +5,7 @@
 package py.com.ideaspymes.facilerp.pesistencia.base;
 
 
+import py.com.ideaspymes.facilerp.pesistencia.base.enums.Estado;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.*;
@@ -15,12 +16,8 @@ import javax.persistence.*;
  * @author cromero
  */
 @Entity
-@NamedQueries({
-    @NamedQuery(name = Rol.TODOS, query = "select r from Rol r"),
-    @NamedQuery(name = Rol.POR_NOMBRE, query = "select r from Rol r where r.nombre = :nombre")})
 public class Rol implements Serializable{
-    public static final String TODOS = "py.gestionpymes.seguridad.Rol.TODOS";
-    public static final String POR_NOMBRE = "py.gestionpymes.seguridad.Rol.POR_NOMBRE";
+    
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
@@ -109,10 +106,5 @@ public class Rol implements Serializable{
         hash = 43 * hash + (this.id != null ? this.id.hashCode() : 0);
         return hash;
     }
-    
-    
-
-
-    
     
 }

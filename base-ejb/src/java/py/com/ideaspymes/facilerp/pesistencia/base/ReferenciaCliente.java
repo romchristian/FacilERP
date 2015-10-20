@@ -96,7 +96,7 @@ public class ReferenciaCliente implements Serializable {
 
     @Override
     public String toString() {
-        return "py.gestionpymes.jpa.clientes.ReferenciaCliente[ id=" + id + " ]";
+        return "py.com.ideaspymes.facilerp.pesistencia.base.ReferenciaCliente[ id=" + id + " ]";
     }
     
 }

@@ -4,6 +4,7 @@
  */
 package py.com.ideaspymes.facilerp.pesistencia.base;
 
+import py.com.ideaspymes.facilerp.pesistencia.base.enums.Estado;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.*;
@@ -17,10 +18,7 @@ import py.com.ideaspymes.facilerp.pesistencia.base.enums.TipoEmpresa;
  * @author christian
  */
 @Entity
-@NamedQueries({
-    @NamedQuery(name = ActividadLaboral.TODOS, query = "select a from ActividadLaboral a")})
-public class ActividadLaboral implements Serializable {
- public static final String TODOS = "py.gestionpymes.clientes.persistencia.ActividadLaboral.TODOS";
+public class ActividadLaboral implements Serializable,Auditable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -73,6 +71,7 @@ public class ActividadLaboral implements Serializable {
         this.aportaIPS = aportaIPS;
     }
 
+    @Override
     public Long getId() {
         return id;
     }
@@ -151,6 +150,6 @@ public class ActividadLaboral implements Serializable {
 
     @Override
     public String toString() {
-        return "py.gestionpymes.jpa.clientes.ActividadLaboral[ id=" + id + " ]";
+        return "py.com.ideaspymes.facilerp.pesistencia.base.ActividadLaboral[ id=" + id + " ]";
     }
 }

@@ -12,12 +12,8 @@ import javax.persistence.*;
  * @author cromero
  */
 @Entity
-@NamedQueries({
-    @NamedQuery(name = ImpuestoIVA.TODOS, query = "select i from ImpuestoIVA i")})
-public class ImpuestoIVA implements Serializable {
+public class Impuesto implements Serializable, Auditable {
     private static final long serialVersionUID = 1L;
-    
-    public static final String TODOS = "package py.gestionpymes.jpa.adm.ImpuetoIVA.TODOS";
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,10 +23,10 @@ public class ImpuestoIVA implements Serializable {
     private String nombre;
     private Double valor;
 
-    public ImpuestoIVA() {
+    public Impuesto() {
     }
 
-    public ImpuestoIVA(String nombre, Double valor) {
+    public Impuesto(String nombre, Double valor) {
         this.nombre = nombre;
         this.valor = valor;
     }
@@ -42,10 +38,8 @@ public class ImpuestoIVA implements Serializable {
     public void setVersion(Long version) {
         this.version = version;
     }
-    
-    
-    
 
+    @Override
     public Long getId() {
         return id;
     }
@@ -81,10 +75,10 @@ public class ImpuestoIVA implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof ImpuestoIVA)) {
+        if (!(object instanceof Impuesto)) {
             return false;
         }
-        ImpuestoIVA other = (ImpuestoIVA) object;
+        Impuesto other = (Impuesto) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -93,7 +87,7 @@ public class ImpuestoIVA implements Serializable {
 
     @Override
     public String toString() {
-        return "py.gestionpymes.jpa.adm.ImpuestoIVA[ id=" + id + " ]";
+        return "py.com.ideaspymes.facilerp.pesistencia.base.ImpuestoIVA[ id=" + id + " ]";
     }
     
 }

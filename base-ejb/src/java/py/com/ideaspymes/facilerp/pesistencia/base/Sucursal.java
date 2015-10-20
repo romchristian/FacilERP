@@ -4,8 +4,8 @@
  */
 package py.com.ideaspymes.facilerp.pesistencia.base;
 
+import py.com.ideaspymes.facilerp.pesistencia.base.enums.Estado;
 import java.io.Serializable;
-import java.util.List;
 import javax.persistence.*;
 
 /**
@@ -13,14 +13,9 @@ import javax.persistence.*;
  * @author christian
  */
 @Entity
-@NamedQueries({
-    @NamedQuery(name = Sucursal.TODOS, query = "select s from Sucursal s"),
-    @NamedQuery(name = Sucursal.POR_EMPRESA, query = "select s from Sucursal s where s.empresa = :empresa")})
 public class Sucursal implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    public static final String TODOS = "package py.gestionpymes.prestamos.adm.persistencia.Sucursal.TODOS";
-    public static final String POR_EMPRESA = "package py.gestionpymes.jpa.adm.Sucursal.POR_EMPRESA";
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

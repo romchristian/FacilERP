@@ -4,23 +4,19 @@
  */
 package py.com.ideaspymes.facilerp.pesistencia.base;
 
+import py.com.ideaspymes.facilerp.pesistencia.base.enums.Estado;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.*;
- 
+
 /**
  *
  * @author christian
  */
 @Entity
-@NamedQueries({
-    @NamedQuery(name = Empresa.TODOS, query = "select e from Empresa e"),
-    @NamedQuery(name = Empresa.POR_RAZON_SOCIAL, query = "select e from Empresa e where e.razonSocial = :razonSocial")})
 public class Empresa implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    public static final String TODOS = "package py.gestionpymes.prestamos.adm.persistencia.Empresa.TODOS";
-    public static final String POR_RAZON_SOCIAL = "package py.gestionpymes.jpa.adm.Empresa.POR_RAZON_SOCIAL";
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -36,7 +32,7 @@ public class Empresa implements Serializable {
     private Estado estado;
     @OneToMany(mappedBy = "empresa")
     private List<Sucursal> sucursales;
-    
+
     public Empresa() {
         this.estado = Estado.ACTIVO;
     }

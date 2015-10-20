@@ -5,6 +5,7 @@
  */
 package py.com.ideaspymes.facilerp.pesistencia.base;
 
+import py.com.ideaspymes.facilerp.pesistencia.base.enums.Estado;
 import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;

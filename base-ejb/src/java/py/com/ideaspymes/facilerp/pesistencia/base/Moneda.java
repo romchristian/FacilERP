@@ -4,6 +4,7 @@
  */
 package py.com.ideaspymes.facilerp.pesistencia.base;
 
+import py.com.ideaspymes.facilerp.pesistencia.base.enums.Estado;
 import java.io.Serializable;
 import javax.persistence.*;
 
@@ -13,16 +14,9 @@ import javax.persistence.*;
  * @author christian
  */
 @Entity
-@NamedQueries({
-    @NamedQuery(name = Moneda.TODOS, query = "select m from Moneda m"),
-    @NamedQuery(name = Moneda.POR_NOMBRE, query = "select m from Moneda m where m.nombre = :nombre"),
-    @NamedQuery(name = Moneda.POR_ESTADO, query = "select m from Moneda m where m.estado = :estado")})
 public class Moneda implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    public static final String TODOS = "package py.gestionpymes.jpa.adm.Moneda.TODOS";
-    public static final String POR_NOMBRE = "package py.gestionpymes.jpa.adm.Moneda.POR_NOMBRE";
-    public static final String POR_ESTADO = "package py.gestionpymes.jpa.adm.Moneda.POR_ESTADO";
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

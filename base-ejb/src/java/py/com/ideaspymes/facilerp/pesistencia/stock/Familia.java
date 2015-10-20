@@ -7,7 +7,8 @@ package py.com.ideaspymes.facilerp.pesistencia.stock;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.*;
-import py.com.ideaspymes.facilerp.pesistencia.base.Estado;
+import py.com.ideaspymes.facilerp.pesistencia.base.Auditable;
+import py.com.ideaspymes.facilerp.pesistencia.base.enums.Estado;
 
 
 
@@ -16,7 +17,7 @@ import py.com.ideaspymes.facilerp.pesistencia.base.Estado;
  * @author cromero
  */
 @Entity
-public class Familia implements Serializable {
+public class Familia implements Serializable, Auditable {
 
     private static final long serialVersionUID = 1L;
     
@@ -53,6 +54,7 @@ public class Familia implements Serializable {
         this.version = version;
     }
 
+    @Override
     public Long getId() {
         return id;
     }

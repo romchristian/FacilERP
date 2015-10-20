@@ -13,23 +13,15 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.Temporal;
-
 
 /**
  *
  * @author christian
  */
 @Entity
-@NamedQueries({
-    @NamedQuery(name = Cotizacion.ULTIMO, query = "select c from Cotizacion c where c.moneda= :moneda order by c.vigencia desc"),
-    @NamedQuery(name = Cotizacion.TODOS, query = "select c from Cotizacion c")})
 public class Cotizacion implements Serializable {
 
-    public static final String ULTIMO = "py.gestionpymes.prestamos.adm.persistencia.cotizacion.ULTIMO";
-    public static final String TODOS = "py.gestionpymes.prestamos.adm.persistencia.cotizacion.TODOS";
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -44,10 +36,6 @@ public class Cotizacion implements Serializable {
     public Cotizacion() {
     }
 
-
-
-    
-    
     public Long getId() {
         return id;
     }
@@ -110,10 +98,9 @@ public class Cotizacion implements Serializable {
 
     @Override
     public String toString() {
-       
-        NumberFormat nf = NumberFormat.getCurrencyInstance(new Locale("es","py"));
-        return String.format("C: %s / V: %s ",nf.format(compra), nf.format(venta));
+
+        NumberFormat nf = NumberFormat.getCurrencyInstance(new Locale("es", "py"));
+        return String.format("C: %s / V: %s ", nf.format(compra), nf.format(venta));
     }
-    
-    
+
 }

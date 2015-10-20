@@ -4,6 +4,7 @@
  */
 package py.com.ideaspymes.facilerp.pesistencia.base;
 
+import py.com.ideaspymes.facilerp.pesistencia.base.enums.Estado;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.*;
@@ -125,6 +126,6 @@ public class Persona implements Serializable, Auditable {
 
     @Override
     public String toString() {
-        return "py.gestionpymes.jpa.adm.Persona[ id=" + id + " ]";
+        return "py.com.ideaspymes.facilerp.pesistencia.base.Persona[ id=" + id + " ]";
     }
 }

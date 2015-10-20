@@ -5,19 +5,19 @@
 package py.com.ideaspymes.web.stock.converters;
 
 import javax.faces.convert.FacesConverter;
-import py.com.ideaspymes.facilerp.pesistencia.stock.UnidadMedida;
+import py.com.ideaspymes.facilerp.pesistencia.stock.Familia;
 import py.com.ideaspymes.web.generico.ConverterGenerico;
 
 /**
  *
- * @author christian
+ * @author elias
  */
-@FacesConverter(forClass = UnidadMedida.class)
-public class UnidadMedidaConverter extends ConverterGenerico<UnidadMedida> {
+@FacesConverter(forClass = Familia.class)
+public class FamiliaConverter extends ConverterGenerico<Familia> {
 
     @Override
     public String getBeanName() {
-        return "unidadMedidaBean";
+        return "familiaBean";
     }
 
 }

@@ -9,14 +9,11 @@ import javax.persistence.*;
 
 /**
  *
- * @author ACER
+ * @author elias
  */
 @Entity
-@NamedQueries({
-    @NamedQuery(name = Categoria.TODOS, query = "select c from Categoria c")})
-public class Categoria implements Serializable {
-
-    public static final String TODOS = "package py.gestionpymes.clientes.persistencia.Categoria.TODOS";
+public class Categoria implements Serializable,Auditable {
+    
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,6 +34,7 @@ public class Categoria implements Serializable {
         this.cantidadDePagos = cantidadDePagos;
     }
 
+    @Override
     public Long getId() {
         return id;
     }

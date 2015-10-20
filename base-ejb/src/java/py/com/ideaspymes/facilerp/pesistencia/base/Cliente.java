@@ -20,49 +20,42 @@ import py.com.ideaspymes.facilerp.pesistencia.base.enums.TipoDireccion;
  * @author christian
  */
 @Entity
-@NamedQueries({
-    @NamedQuery(name = Cliente.TODOS, query = "select c from Cliente c")})
 public class Cliente extends Persona {
 
-    public static final String TODOS = "package py.gestionpymes.clientes.persistencia.Cliente.TODOS";
-    
     private String primerNombre;
-    
+
     private String segundoNombre;
-    
+
     private String primerApellido;
-    
+
     private String segundoApellido;
     @Enumerated(EnumType.STRING)
     private Sexo sexo;
     @Enumerated(EnumType.STRING)
     private EstadoCivil estadoCivil;
-   
+
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date fechaNac;
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
     private List<Direccion> direcciones;
-    @OneToMany(mappedBy = "cliente",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
     private List<ReferenciaCliente> referenciaClientes;
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
     private List<ContactoTelefonico> contactoTelefonicos;
-    @OneToMany(mappedBy = "cliente",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
     private List<ActividadLaboral> actividadesLaborales;
-    
+
     //datos requeridos para solicitud y analisis
-    private BigDecimal lineaDeCredito=new BigDecimal(BigInteger.ZERO);
+    private BigDecimal lineaDeCredito = new BigDecimal(BigInteger.ZERO);
     @ManyToOne
     private Categoria categoria;
-   
-    private String nacionalidad="PARAGUAYA";
-    
+
+    private String nacionalidad = "PARAGUAYA";
+
     private boolean esTitular;
-    
+
     @ManyToOne
     private Cliente conyuge;
-    
-    
-    
 
     public boolean isEsTitular() {
         return esTitular;
@@ -71,8 +64,7 @@ public class Cliente extends Persona {
     public void setEsTitular(boolean esTitular) {
         this.esTitular = esTitular;
     }
-       
-    
+
     public EstadoCivil getEstadoCivil() {
         return estadoCivil;
     }
@@ -164,9 +156,7 @@ public class Cliente extends Persona {
         this.fechaNac = fechaNac;
     }
 
-   
     //modifica para que corra por debajo
-
     public BigDecimal getLineaDeCredito() {
         return lineaDeCredito;
     }
@@ -174,7 +164,6 @@ public class Cliente extends Persona {
     public void setLineaDeCredito(BigDecimal lineaDeCredito) {
         this.lineaDeCredito = lineaDeCredito;
     }
-    
 
     //modificar para que corra por debajo
     public Categoria getCategoria() {
@@ -192,88 +181,87 @@ public class Cliente extends Persona {
     public void setNacionalidad(String nacionalidad) {
         this.nacionalidad = nacionalidad.toUpperCase();
     }
-    
-    public String devuelveTelefonoParticular(){
-    
+
+    public String devuelveTelefonoParticular() {
+
         for (ContactoTelefonico c : contactoTelefonicos) {
-            if(c.getTipo().LINEA_BAJA==TipoContactoTelefonico.LINEA_BAJA){
-                return c.getNumero();
-            }
-        }
-        return null;
-    }
-    
-    public String devuelveTelefonoLaboral(){
-    
-        for (ContactoTelefonico c : contactoTelefonicos) {
-            if(c.getTipo().TRABAJO==TipoContactoTelefonico.TRABAJO){
+            if (c.getTipo().LINEA_BAJA == TipoContactoTelefonico.LINEA_BAJA) {
                 return c.getNumero();
             }
         }
         return null;
     }
 
-    
-    public String devuelveDireccionParticular(){
-    
-        for (Direccion d : direcciones) {
-            if(d.getTipo().PARTICULAR==TipoDireccion.PARTICULAR){
-                return d.getDireccion()+" "+d.getNrocasa();
+    public String devuelveTelefonoLaboral() {
+
+        for (ContactoTelefonico c : contactoTelefonicos) {
+            if (c.getTipo().TRABAJO == TipoContactoTelefonico.TRABAJO) {
+                return c.getNumero();
             }
         }
         return null;
     }
-    
-    public String devuelveDireccionLaboral(){
-    
+
+    public String devuelveDireccionParticular() {
+
         for (Direccion d : direcciones) {
-            if(d.getTipo().LABORAL==TipoDireccion.LABORAL){
-                return d.getDireccion()+" "+d.getNrocasa();
+            if (d.getTipo().PARTICULAR == TipoDireccion.PARTICULAR) {
+                return d.getDireccion() + " " + d.getNrocasa();
             }
         }
         return null;
     }
-    
-    public String devuelveCiudadParticular(){
-    
+
+    public String devuelveDireccionLaboral() {
+
         for (Direccion d : direcciones) {
-            if(d.getTipo().PARTICULAR==TipoDireccion.PARTICULAR){
-                return d.getCiudad()+" - "+d.getPais();
+            if (d.getTipo().LABORAL == TipoDireccion.LABORAL) {
+                return d.getDireccion() + " " + d.getNrocasa();
             }
         }
         return null;
     }
-    
-     public String devuelveCiudadLaboral(){
-    
+
+    public String devuelveCiudadParticular() {
+
         for (Direccion d : direcciones) {
-            if(d.getTipo().LABORAL==TipoDireccion.LABORAL){
-                return d.getCiudad()+" - "+d.getPais();
+            if (d.getTipo().PARTICULAR == TipoDireccion.PARTICULAR) {
+                return d.getCiudad() + " - " + d.getPais();
             }
         }
         return null;
     }
-     
-    public String devuelveBarrioParticular(){
-    
+
+    public String devuelveCiudadLaboral() {
+
         for (Direccion d : direcciones) {
-            if(d.getTipo().PARTICULAR==TipoDireccion.PARTICULAR){
+            if (d.getTipo().LABORAL == TipoDireccion.LABORAL) {
+                return d.getCiudad() + " - " + d.getPais();
+            }
+        }
+        return null;
+    }
+
+    public String devuelveBarrioParticular() {
+
+        for (Direccion d : direcciones) {
+            if (d.getTipo().PARTICULAR == TipoDireccion.PARTICULAR) {
                 return d.getBarrio();
             }
         }
         return null;
     }
-    
-    public String devuelveBarrioLaboral(){
-    
+
+    public String devuelveBarrioLaboral() {
+
         for (Direccion d : direcciones) {
-            if(d.getTipo().LABORAL==TipoDireccion.LABORAL){
+            if (d.getTipo().LABORAL == TipoDireccion.LABORAL) {
                 return d.getBarrio();
             }
         }
         return null;
     }
-    
+
     public Cliente getConyuge() {
         return conyuge;
     }
@@ -281,16 +269,14 @@ public class Cliente extends Persona {
     public void setConyuge(Cliente conyuge) {
         this.conyuge = conyuge;
     }
-    
-    
-    
-    public String devuelveNombreCompleto(){
-    
-        return getPrimerNombre()+" "+getSegundoNombre()+" "+getPrimerApellido()+" "+getSegundoApellido();
+
+    public String devuelveNombreCompleto() {
+
+        return getPrimerNombre() + " " + getSegundoNombre() + " " + getPrimerApellido() + " " + getSegundoApellido();
     }
 
     @Override
     public String toString() {
-        return getPrimerNombre()+" "+getSegundoNombre()+" "+getPrimerApellido()+" "+getSegundoApellido();
+        return getPrimerNombre() + " " + getSegundoNombre() + " " + getPrimerApellido() + " " + getSegundoApellido();
     }
 }

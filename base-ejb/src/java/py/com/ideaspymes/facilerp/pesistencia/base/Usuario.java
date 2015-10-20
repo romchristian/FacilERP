@@ -13,20 +13,12 @@ import javax.validation.constraints.NotNull;
 import py.com.ideaspymes.facilerp.pesistencia.base.enums.TipoDocumento;
 
 
-
-
-
 /**
  *
  * @author elias
  */
 @Entity
-@NamedQueries({
-    @NamedQuery(name = Usuario.TODOS, query = "select u from Usuario u"),
-    @NamedQuery(name = Usuario.POR_CREDENCIAL, query = "select u from Usuario u where u.usuario = :usuario")})
 public class Usuario extends Persona{
-    public static final String TODOS = "py.gestionpymes.seguridad.Usuario.TODOS";
-    public static final String POR_CREDENCIAL = "py.gestionpymes.seguridad.Usuario.POR_CREDENCIAL";
     
     private String nombre;
     private String apellido;
@@ -107,7 +99,7 @@ public class Usuario extends Persona{
 
     public List<Rol> getRoles() {
         if(roles == null)
-            roles = new ArrayList<Rol>();
+            roles = new ArrayList<>();
         return roles;
     }
 

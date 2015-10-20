@@ -161,6 +161,6 @@ public class ContactoTelefonico implements Serializable {
 
     @Override
     public String toString() {
-        return "py.gestionpymes.jpa.clientes.ContactoTelefonico[ id=" + id + " ]";
+        return "py.com.ideaspymes.facilerp.pesistencia.base.ContactoTelefonico[ id=" + id + " ]";
     }
 }

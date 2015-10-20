@@ -4,6 +4,7 @@
  */
 package py.com.ideaspymes.facilerp.pesistencia.base;
 
+import py.com.ideaspymes.facilerp.pesistencia.base.enums.Estado;
 import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -146,6 +147,6 @@ public class Direccion implements Serializable {
 
     @Override
     public String toString() {
-        return "py.gestionpymes.jpa.adm.Direccion[ id=" + id + " ]";
+        return "py.com.ideaspymes.facilerp.pesistencia.base.Direccion[ id=" + id + " ]";
     }
 }

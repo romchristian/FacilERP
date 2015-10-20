@@ -94,7 +94,7 @@ public class Auditoria implements Serializable {
 
     @Override
     public String toString() {
-        return "py.gestionpymes.prestamos.seguridad.persistencia.auditoria[ id=" + id + " ]";
+        return "py.com.ideaspymes.facilerp.pesistencia.base.auditoria[ id=" + id + " ]";
     }
     
 }

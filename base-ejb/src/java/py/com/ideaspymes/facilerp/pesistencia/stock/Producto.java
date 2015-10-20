@@ -9,8 +9,9 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.*;
-import py.com.ideaspymes.facilerp.pesistencia.base.Estado;
-import py.com.ideaspymes.facilerp.pesistencia.base.ImpuestoIVA;
+import py.com.ideaspymes.facilerp.pesistencia.base.Auditable;
+import py.com.ideaspymes.facilerp.pesistencia.base.enums.Estado;
+import py.com.ideaspymes.facilerp.pesistencia.base.Impuesto;
 import py.com.ideaspymes.facilerp.pesistencia.stock.enums.TipoCosto;
 import py.com.ideaspymes.facilerp.pesistencia.stock.enums.TipoProducto;
 
@@ -19,7 +20,7 @@ import py.com.ideaspymes.facilerp.pesistencia.stock.enums.TipoProducto;
  * @author christian
  */
 @Entity
-public class Producto implements Serializable {
+public class Producto implements Serializable,Auditable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -31,7 +32,7 @@ public class Producto implements Serializable {
     private String nombre;
     private TipoProducto tipoProducto;
     @ManyToOne
-    private ImpuestoIVA iva;
+    private Impuesto impuesto;
     @Enumerated(EnumType.STRING)
     private TipoCosto tipoCosto;
     private boolean costoCalculado;
@@ -40,7 +41,7 @@ public class Producto implements Serializable {
     private Double costoLifo;
     private Double costoPonderado;
     private Double costo;
-    private BigDecimal precioVenta;
+    private Double precioVenta;
     private boolean inventariable;
     private boolean vendible;
     private Double stockMinimo;
@@ -72,11 +73,11 @@ public class Producto implements Serializable {
         this.nombre = nombre;
     }
 
-    public Producto(Long id, String codigo, String nombre, ImpuestoIVA iva, BigDecimal precioVenta) {
+    public Producto(Long id, String codigo, String nombre, Impuesto iva, Double precioVenta) {
         this.id = id;
         this.codigo = codigo;
         this.nombre = nombre;
-        this.iva = iva;
+        this.impuesto = iva;
         this.precioVenta = precioVenta;
     }
 
@@ -96,6 +97,7 @@ public class Producto implements Serializable {
         this.estado = estado;
     }
 
+    @Override
     public Long getId() {
         return id;
     }
@@ -176,12 +178,12 @@ public class Producto implements Serializable {
         this.inventariable = inventariable;
     }
 
-    public ImpuestoIVA getIva() {
-        return iva;
+    public Impuesto getImpuesto() {
+        return impuesto;
     }
 
-    public void setIva(ImpuestoIVA iva) {
-        this.iva = iva;
+    public void setImpuesto(Impuesto iva) {
+        this.impuesto = iva;
     }
 
     public TipoCosto getTipoCosto() {
@@ -237,11 +239,11 @@ public class Producto implements Serializable {
         this.generarCodigo = generarCodigo;
     }
 
-    public BigDecimal getPrecioVenta() {
+    public Double getPrecioVenta() {
         return precioVenta;
     }
 
-    public void setPrecioVenta(BigDecimal precioVenta) {
+    public void setPrecioVenta(Double precioVenta) {
         this.precioVenta = precioVenta;
     }
 
