@@ -14,10 +14,11 @@
                 <div class="Separator"/>
                 <h:form>
 
+                    <p:growl globalOnly="false" autoUpdate="true"/>  
                     <p:outputPanel id="panel">
                         <h:panelGrid columns="3" columnClasses="gridColumn1,gridColumn2,gridColumn2" >
                             <p:outputLabel value="Código" for="codigo"/>
-                            <h:outputText value="#{productoBean.actual.codigo}}" rendered="#{(contexto == 'vista')}"/>
+                            <h:outputText value="#{productoBean.actual.codigo}" rendered="#{(contexto == 'vista')}"/>
                             <p:inputText value="#{productoBean.actual.codigo}" required="true" id="codigo" rendered="#{not(contexto == 'vista')}"/>
                             <p:message for="codigo"/>
                             
@@ -27,51 +28,68 @@
                             <p:message for="nombre"/>
                             
                             <p:outputLabel value="Tipo producto" for="tipoProducto"/>
-                            <h:outputText value="#{productoBean.actual.tipoProducto}}" rendered="#{(contexto == 'vista')}"/>
+                            <h:outputText value="#{productoBean.actual.tipoProducto}" rendered="#{(contexto == 'vista')}"/>
                             <p:selectOneMenu value="#{productoBean.actual.tipoProducto}" id="tipoProducto" rendered="#{not(contexto == 'vista')}">
                                 <f:selectItems value="#{productorEnums.obtTipoProducto()}"/>
                             </p:selectOneMenu>
                             <p:spacer/>
                             
                             <p:outputLabel value="Impuesto" for="impuesto"/>
-                            <h:outputText value="#{productoBean.actual.impuesto}}" rendered="#{(contexto == 'vista')}"/>
-                            <p:selectOneMenu value="#{productoBean.actual.impuesto}" id="impuesto" rendered="#{not(contexto == 'vista')}" required="true">
+                            <h:outputText value="#{(productoBean.actual.impuesto != null?productoBean.actual.impuesto.nombre:'')}" rendered="#{(contexto == 'vista')}"/>
+                            <p:selectOneMenu value="#{productoBean.actual.impuesto}" id="impuesto" rendered="#{not(contexto == 'vista')}">
                                 <f:selectItems value="#{impuestoBean.itemsAvailableSelectOne}"/>
                             </p:selectOneMenu>
                             <p:message for="impuesto"/>
                             
                             <p:outputLabel value="Costo" for="costo"/>
-                            <h:outputText value="#{productoBean.actual.costo}}" rendered="#{(contexto == 'vista')}">
+                            <h:outputText value="#{productoBean.actual.costo}" rendered="#{(contexto == 'vista')}">
                                 <f:convertNumber locale="#{formato.locale}" />
                             </h:outputText>
                             <p:inputText value="#{productoBean.actual.costo}" required="true" id="costo" rendered="#{not(contexto == 'vista')}">
                                 <f:convertNumber locale="#{formato.locale}" />
-                                <p:ajax process="@this" update="@this" event="blur"/>
+<!--                                <p:ajax process="@this" update="@this" event="blur"/>-->
                             </p:inputText>
                             <p:message for="costo"/>
                             
                             <p:outputLabel value="Precio Venta" for="precioVenta"/>
-                            <h:outputText value="#{productoBean.actual.precioVenta}}" rendered="#{(contexto == 'vista')}">
+                            <h:outputText value="#{productoBean.actual.precioVenta}" rendered="#{(contexto == 'vista')}">
                                 <f:convertNumber locale="#{formato.locale}" />
                             </h:outputText>
                             <p:inputText value="#{productoBean.actual.precioVenta}" required="true" id="precioVenta" rendered="#{not(contexto == 'vista')}">
                                 <f:convertNumber locale="#{formato.locale}" />
-                                <p:ajax process="@this" update="@this" event="blur"/>
+<!--                                <p:ajax process="@this" update="@this" event="blur"/>-->
                             </p:inputText>
                             <p:message for="precioVenta"/>
                             
                           
                             <p:outputLabel value="Unidad de Medida" for="unidadMedida"/>
-                            <h:outputText value="#{productoBean.actual.unidadMedidaBase}}" rendered="#{(contexto == 'vista')}"/>
-                            <p:selectOneMenu value="#{productoBean.actual.unidadMedidaBase}" id="unidadMedida" rendered="#{not(contexto == 'vista')}" required="true">
+                            <h:outputText value="#{(productoBean.actual.unidadMedidaBase != null?productoBean.actual.unidadMedidaBase.nombre:'')}" rendered="#{(contexto == 'vista')}"/>
+                            <p:selectOneMenu value="#{productoBean.actual.unidadMedidaBase}" id="unidadMedida" rendered="#{not(contexto == 'vista')}">
                                 <f:selectItems value="#{unidadMedidaBean.itemsAvailableSelectOne}"/>
                             </p:selectOneMenu>
                             <p:message for="unidadMedida"/>
                             
-                            
-                           
-                            
                         </h:panelGrid>
+                        
+                        <p:commandButton styleClass="Fright" value="Agregar" action="#{productoBean.actual.addIngrediente()}" update="ingredientes"/>
+                        <p:dataTable value="#{productoBean.actual.ingredientes}" var="i" id="ingredientes">
+                            
+                            <f:facet name="header">
+                                <h:outputText value="Ingredientes"/>
+                            </f:facet>
+                            
+                            <p:column headerText="Producto">
+                                <h:panelGroup id="bidView">
+                                    <p:focus context="bidView" for="autoCompleteProducto"/>
+                                    <p:autoComplete  value="#{i.producto}"  id="autoCompleteProducto" style="width: 95%!important;font-size: 9pt" 
+                                                     completeMethod="#{autocompleteProducto.completar}" size="60" placeholder="Producto" binding="#{acProducto}"
+                                                    forceSelection="true" converter="productoConverter" var="p" itemValue="#{p}" 
+                                                    itemLabel="#{p.nombre}">
+
+                                    </p:autoComplete>
+                                </h:panelGroup>
+                            </p:column>
+                        </p:dataTable>
                     </p:outputPanel>
 
                     <br/>

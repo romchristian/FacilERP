@@ -12,13 +12,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Version;
+import py.com.ideaspymes.facilerp.pesistencia.base.Auditable;
 
 /**
  *
  * @author Acer
  */
 @Entity
-public class Ingrediente implements Serializable {
+public class Ingrediente implements Serializable, Auditable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,13 +28,25 @@ public class Ingrediente implements Serializable {
     private Long version;
     
     @ManyToOne
+    private Producto productoPadre;
+    @ManyToOne
     private Producto producto;
     @ManyToOne
     private UnidadMedida unidadMedida;
     private Double cantidad;
+    private Double costo;
+
+    public Producto getProductoPadre() {
+        return productoPadre;
+    }
+
+    public void setProductoPadre(Producto productoPadre) {
+        this.productoPadre = productoPadre;
+    }
     
     
 
+    @Override
     public Long getId() {
         return id;
     }
@@ -73,7 +86,14 @@ public class Ingrediente implements Serializable {
     public void setCantidad(Double cantidad) {
         this.cantidad = cantidad;
     }
-    
+
+    public Double getCosto() {
+        return costo;
+    }
+
+    public void setCosto(Double costo) {
+        this.costo = costo;
+    }
     
 
     @Override

@@ -9,7 +9,6 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import py.com.ideaspymes.facilerp.pesistencia.base.Auditable;
-import py.com.ideaspymes.web.generico.BeanGenerico;
 
 
 /**
@@ -57,9 +56,7 @@ public abstract class ConverterGenerico<T> implements Converter {
             return null;
         }
 
-        if(object instanceof Auditable){
-            return null;
-        }
+      
         
         try {
 

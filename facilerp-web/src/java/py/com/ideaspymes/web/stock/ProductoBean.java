@@ -40,4 +40,5 @@ public class ProductoBean extends BeanGenerico<Producto> implements Serializable
     }
 
     
+    
 }

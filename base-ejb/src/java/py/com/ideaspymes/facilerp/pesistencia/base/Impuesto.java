@@ -87,7 +87,7 @@ public class Impuesto implements Serializable, Auditable {
 
     @Override
     public String toString() {
-        return "py.com.ideaspymes.facilerp.pesistencia.base.ImpuestoIVA[ id=" + id + " ]";
+        return nombre;
     }
     
 }

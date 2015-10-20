@@ -20,7 +20,7 @@ import py.com.ideaspymes.facilerp.pesistencia.stock.enums.TipoProducto;
  * @author christian
  */
 @Entity
-public class Producto implements Serializable,Auditable {
+public class Producto implements Serializable, Auditable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -46,8 +46,7 @@ public class Producto implements Serializable,Auditable {
     private boolean vendible;
     private Double stockMinimo;
     private Double stock;
-    
-    
+
     @ManyToOne
     private UnidadMedida unidadMedidaBase;
     @Enumerated(EnumType.STRING)
@@ -218,8 +217,6 @@ public class Producto implements Serializable,Auditable {
         this.unidadMedidaBase = unidadMedidaBase;
     }
 
-   
-
     public List<Familia> getFamilias() {
         if (familias == null) {
             familias = new ArrayList<>();
@@ -279,7 +276,17 @@ public class Producto implements Serializable,Auditable {
         this.ingredientes = ingredientes;
     }
 
-   
+    public void addIngrediente() {
+        if (ingredientes == null) {
+            ingredientes = new ArrayList<>();
+        }
+        Ingrediente i = new Ingrediente();
+        i.setProductoPadre(this);
+        i.setCantidad(0d);
+        i.setCosto(0d);
+
+        ingredientes.add(i);
+    }
 
     @Override
     public int hashCode() {
