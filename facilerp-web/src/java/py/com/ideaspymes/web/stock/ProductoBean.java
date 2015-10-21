@@ -4,19 +4,21 @@
  */
 package py.com.ideaspymes.web.stock;
 
-
 import java.io.Serializable;
+import java.util.ArrayList;
 import javax.ejb.EJB;
+import javax.faces.event.AjaxBehaviorEvent;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
+import org.primefaces.component.inputtext.InputText;
+import org.primefaces.event.SelectEvent;
 
 import py.com.ideaspymes.facilerp.generico.AbstractDAO;
+import py.com.ideaspymes.facilerp.pesistencia.stock.Ingrediente;
 
 import py.com.ideaspymes.web.generico.BeanGenerico;
 import py.com.ideaspymes.facilerp.pesistencia.stock.Producto;
-import py.com.ideaspymes.facilerp.stock.persistencia.business.interfaces.IProductoDAO;
-
-
+import py.com.ideaspymes.facilerp.stock.business.interfaces.IProductoDAO;
 
 /**
  *
@@ -24,11 +26,12 @@ import py.com.ideaspymes.facilerp.stock.persistencia.business.interfaces.IProduc
  */
 @Named
 @ViewScoped
-public class ProductoBean extends BeanGenerico<Producto> implements Serializable{
+public class ProductoBean extends BeanGenerico<Producto> implements Serializable {
 
-    @EJB private IProductoDAO ejb;
-    
-    
+    @EJB
+    private IProductoDAO ejb;
+    private Ingrediente ingredienteSeleccionado;
+
     @Override
     public AbstractDAO<Producto> getEjb() {
         return ejb;
@@ -39,6 +42,61 @@ public class ProductoBean extends BeanGenerico<Producto> implements Serializable
         return new Producto();
     }
 
-    
-    
+    public Ingrediente getIngredienteSeleccionado() {
+        return ingredienteSeleccionado;
+    }
+
+    public void setIngredienteSeleccionado(Ingrediente ingredienteSeleccionado) {
+        this.ingredienteSeleccionado = ingredienteSeleccionado;
+    }
+
+    public void addIngrediente() {
+        if (getActual().getIngredientes() == null) {
+            getActual().setIngredientes(new ArrayList<Ingrediente>());
+        }
+        ingredienteSeleccionado = new Ingrediente();
+        ingredienteSeleccionado.setProductoPadre(getActual());
+        ingredienteSeleccionado.setCantidad(0d);
+        ingredienteSeleccionado.setCosto(0d);
+
+        getActual().getIngredientes().add(ingredienteSeleccionado);
+
+    }
+
+    public void removeIngrediente(Ingrediente i) {
+        int indexARemover = 0;
+
+        for (Ingrediente ig : getActual().getIngredientes()) {
+            if (ig.getProducto().equals(i.getProducto())) {
+                break;
+            }
+            indexARemover++;
+        }
+
+        getActual().getIngredientes().remove(indexARemover);
+    }
+
+    public void autoCompleteSelectProducto(SelectEvent event) {
+        Producto p = (Producto) event.getObject();
+        ingredienteSeleccionado.setProducto(p);
+        ingredienteSeleccionado.setUnidadMedida(p.getUnidadMedidaBase());
+    }
+
+    public void inputTextBlurCantidad(AjaxBehaviorEvent event) {
+        if (event.getSource() instanceof InputText) {
+            InputText input = (InputText) event.getSource();
+            Double cantidad = (Double) input.getValue();
+            calculaCosto(cantidad);
+        }
+    }
+
+    public void calculaCosto(Double cantidad) {
+        if (ingredienteSeleccionado != null && ingredienteSeleccionado.getProducto() != null) {
+            if (cantidad != null && cantidad > 0) {
+                ingredienteSeleccionado.setCosto(cantidad * (ingredienteSeleccionado.getProducto().getCosto() == null ? 0d : ingredienteSeleccionado.getProducto().getCosto()));
+                System.out.println("Costo: " + ingredienteSeleccionado.getCosto());
+            }
+        }
+    }
+
 }

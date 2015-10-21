@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package py.com.ideaspymes.facilerp.stock.persistencia.business.impl;
+package py.com.ideaspymes.facilerp.stock.business.impl;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -12,7 +12,7 @@ import py.com.ideaspymes.facilerp.generico.ABMService;
 import py.com.ideaspymes.facilerp.pesistencia.stock.MovimientoStockVenta;
 import py.com.ideaspymes.facilerp.pesistencia.stock.Producto;
 import py.com.ideaspymes.facilerp.pesistencia.stock.UnidadMedida;
-import py.com.ideaspymes.facilerp.stock.persistencia.business.interfaces.IMovimientoStock;
+import py.com.ideaspymes.facilerp.stock.business.interfaces.IMovimientoStock;
 
 
 

@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package py.com.ideaspymes.facilerp.stock.persistencia.business.impl;
+package py.com.ideaspymes.facilerp.stock.business.impl;
 
 import py.com.ideaspymes.facilerp.generico.ABMService;
 import py.com.ideaspymes.facilerp.generico.QueryParameter;
@@ -12,7 +12,7 @@ import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import py.com.ideaspymes.facilerp.pesistencia.stock.Deposito;
-import py.com.ideaspymes.facilerp.stock.persistencia.business.interfaces.IDepositoDAO;
+import py.com.ideaspymes.facilerp.stock.business.interfaces.IDepositoDAO;
 
 
 

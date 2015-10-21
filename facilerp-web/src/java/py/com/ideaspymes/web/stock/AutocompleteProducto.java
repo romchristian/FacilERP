@@ -15,7 +15,7 @@ import javax.inject.Named;
 import py.com.ideaspymes.facilerp.generico.QueryParameter;
 import py.com.ideaspymes.facilerp.pesistencia.base.enums.Estado;
 import py.com.ideaspymes.facilerp.pesistencia.stock.Producto;
-import py.com.ideaspymes.facilerp.stock.persistencia.business.interfaces.IProductoDAO;
+import py.com.ideaspymes.facilerp.stock.business.interfaces.IProductoDAO;
 
 /**
  *

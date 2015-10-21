@@ -5,7 +5,6 @@
 package py.com.ideaspymes.facilerp.pesistencia.stock;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.*;
@@ -20,6 +19,7 @@ import py.com.ideaspymes.facilerp.pesistencia.stock.enums.TipoProducto;
  * @author christian
  */
 @Entity
+@Table(uniqueConstraints = @UniqueConstraint(columnNames = {"codigo"}))
 public class Producto implements Serializable, Auditable {
 
     private static final long serialVersionUID = 1L;
@@ -58,7 +58,7 @@ public class Producto implements Serializable, Auditable {
 
     @Lob
     private byte[] imagen;
-    @OneToMany(mappedBy = "producto")
+    @OneToMany(mappedBy = "productoPadre", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Ingrediente> ingredientes;
 
     public Producto() {
@@ -274,18 +274,6 @@ public class Producto implements Serializable, Auditable {
 
     public void setIngredientes(List<Ingrediente> ingredientes) {
         this.ingredientes = ingredientes;
-    }
-
-    public void addIngrediente() {
-        if (ingredientes == null) {
-            ingredientes = new ArrayList<>();
-        }
-        Ingrediente i = new Ingrediente();
-        i.setProductoPadre(this);
-        i.setCantidad(0d);
-        i.setCosto(0d);
-
-        ingredientes.add(i);
     }
 
     @Override

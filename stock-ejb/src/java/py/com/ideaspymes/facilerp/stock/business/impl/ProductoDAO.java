@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package py.com.ideaspymes.facilerp.stock.persistencia.business.impl;
+package py.com.ideaspymes.facilerp.stock.business.impl;
 
 import py.com.ideaspymes.facilerp.generico.ABMService;
 import py.com.ideaspymes.facilerp.generico.QueryParameter;
@@ -11,8 +11,8 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
-import py.com.ideaspymes.facilerp.pesistencia.stock.Familia;
-import py.com.ideaspymes.facilerp.stock.persistencia.business.interfaces.IFamiliaDAO;
+import py.com.ideaspymes.facilerp.pesistencia.stock.Producto;
+import py.com.ideaspymes.facilerp.stock.business.interfaces.IProductoDAO;
 
 
 
@@ -24,38 +24,38 @@ import py.com.ideaspymes.facilerp.stock.persistencia.business.interfaces.IFamili
  */
 @Stateless
 @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
-public class FamiliaDAO implements IFamiliaDAO {
+public class ProductoDAO implements IProductoDAO {
 
     @EJB(beanName = "ABMServiceBean")
     private ABMService abmService;
 
     @Override
-    public Familia create(Familia entity,String usuario) {
+    public Producto create(Producto entity,String usuario) {
         return abmService.create(entity,usuario);
     }
 
     @Override
-    public Familia edit(Familia entity,String usuario) {
+    public Producto edit(Producto entity,String usuario) {
         return abmService.update(entity,usuario);
     }
 
     @Override
-    public void remove(Familia entity,String usuario) {
+    public void remove(Producto entity,String usuario) {
          abmService.delete(entity,usuario);
     }
 
     @Override
-    public Familia find(Object id) {
-        return abmService.find(id, Familia.class);
+    public Producto find(Object id) {
+        return abmService.find(id, Producto.class);
     }
 
     @Override
-    public List<Familia> findAll() {
-        return abmService.getEM().createQuery("select obj from Familia obj").getResultList();
+    public List<Producto> findAll() {
+        return abmService.getEM().createQuery("select obj from Producto obj").getResultList();
     }
 
     @Override
-    public List<Familia> findAll(String query, QueryParameter params) {
+    public List<Producto> findAll(String query, QueryParameter params) {
         return abmService.findByQuery(query, params.parameters());
     }
 

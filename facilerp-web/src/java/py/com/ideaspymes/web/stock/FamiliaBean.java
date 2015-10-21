@@ -14,7 +14,7 @@ import py.com.ideaspymes.facilerp.generico.AbstractDAO;
 
 import py.com.ideaspymes.web.generico.BeanGenerico;
 import py.com.ideaspymes.facilerp.pesistencia.stock.Familia;
-import py.com.ideaspymes.facilerp.stock.persistencia.business.interfaces.IFamiliaDAO;
+import py.com.ideaspymes.facilerp.stock.business.interfaces.IFamiliaDAO;
 
 
 

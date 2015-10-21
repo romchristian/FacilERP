@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://java.sun.com/jsf/core">
+
+
+
+    <div class="Container100 Responsive100">
+        <div class="ContainerIndent">
+            <div class="Card ShadowEffect HeiAutoOnMobile">
+                <h2 class="CardTopic"><i class="fa fa-plus-square Fs25 Fleft MarRight10 "></i>#{titulo}</h2>
+                <div class="Separator"/>
+                <h:form>
+
+                    <p:outputPanel id="panel">
+                        <h:panelGrid columns="3" columnClasses="gridColumn1,gridColumn2,gridColumn2" >
+                            <p:outputLabel value="Nombre" for="nombre" />
+                            <h:outputText value="#{impuestoBean.actual.nombre}" rendered="#{(contexto == 'vista')}"/>
+                            <p:inputText value="#{impuestoBean.actual.nombre}" required="true" id="nombre" rendered="#{not(contexto == 'vista')}"/>
+                            <p:message for="nombre"/>
+
+                            <p:outputLabel value="Valor" for="valor" />
+                            <h:outputText value="#{impuestoBean.actual.valor}" rendered="#{(contexto == 'vista')}"/>
+                            <p:inputText value="#{impuestoBean.actual.valor}" required="true" id="valor" rendered="#{not(contexto == 'vista')}"/>
+                            <p:message for="valor"/>
+
+                        </h:panelGrid>
+                    </p:outputPanel>
+
+                    <br/>
+
+
+                    <p:commandButton value="Crear" action="#{impuestoBean.create()}" styleClass="Fleft GreenButton" update="panel" rendered="#{(contexto == 'creacion')}"/>
+                    <p:commandButton value="Guardar" action="#{impuestoBean.edit()}" styleClass="Fleft BlueButton" update="panel" rendered="#{(contexto == 'edicion')}"/>
+                    <p:commandButton value="Eliminar" action="#{impuestoBean.remove()}" styleClass="Fleft RedButton" update="panel" rendered="#{(contexto == 'vista')}"/>
+                    <p:button value="Editar"  styleClass="Fleft BlueButton" outcome="edita" rendered="#{(contexto == 'vista')}">
+                        <f:param name="id" value="#{impuestoBean.actual.id}"/>
+                    </p:button>
+                    <p:button value="Atras"  styleClass="Fleft PurpleButton" outcome="listado"/>
+
+
+                    <br/>
+
+                </h:form>
+
+            </div>
+        </div>
+    </div>
+</ui:composition>
+

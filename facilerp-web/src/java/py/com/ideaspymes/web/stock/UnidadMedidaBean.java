@@ -14,7 +14,7 @@ import py.com.ideaspymes.facilerp.generico.AbstractDAO;
 
 import py.com.ideaspymes.web.generico.BeanGenerico;
 import py.com.ideaspymes.facilerp.pesistencia.stock.UnidadMedida;
-import py.com.ideaspymes.facilerp.stock.persistencia.business.interfaces.IUnidadMedidaDAO;
+import py.com.ideaspymes.facilerp.stock.business.interfaces.IUnidadMedidaDAO;
 
 
 

@@ -6,6 +6,7 @@
 package py.com.ideaspymes.facilerp.pesistencia.stock;
 
 import java.io.Serializable;
+import javax.faces.event.AjaxBehaviorEvent;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -20,13 +21,14 @@ import py.com.ideaspymes.facilerp.pesistencia.base.Auditable;
  */
 @Entity
 public class Ingrediente implements Serializable, Auditable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Version
     private Long version;
-    
+
     @ManyToOne
     private Producto productoPadre;
     @ManyToOne
@@ -43,8 +45,6 @@ public class Ingrediente implements Serializable, Auditable {
     public void setProductoPadre(Producto productoPadre) {
         this.productoPadre = productoPadre;
     }
-    
-    
 
     @Override
     public Long getId() {
@@ -94,6 +94,7 @@ public class Ingrediente implements Serializable, Auditable {
     public void setCosto(Double costo) {
         this.costo = costo;
     }
+
     
 
     @Override
@@ -120,5 +121,5 @@ public class Ingrediente implements Serializable, Auditable {
     public String toString() {
         return "py.com.ideaspymes.facilerp.stock.persistencia.Receta[ id=" + id + " ]";
     }
-    
+
 }
