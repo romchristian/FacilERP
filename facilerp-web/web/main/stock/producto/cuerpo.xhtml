@@ -94,7 +94,7 @@
                             <p:column headerText="Cantidad">
                                 <p:outputPanel styleClass="cantidad">
                                     <p:inputText value="#{i.cantidad}">
-                                        <p:ajax event="change" listener="#{productoBean.inputTextBlurCantidad}" process="@this" update="@(.costo)"/>
+                                        <p:ajax event="change" listener="#{productoBean.calculaCosto(i.cantidad, i)}" process="@this" update="@(.costo)"/>
                                     </p:inputText>
                                 </p:outputPanel>
 

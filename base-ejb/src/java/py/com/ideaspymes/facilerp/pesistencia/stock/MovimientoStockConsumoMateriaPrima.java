@@ -13,12 +13,12 @@ import javax.persistence.Entity;
  * @author Acer
  */
 @Entity
-public class MovimientoStockCompra extends MovimientoStock {
+public class MovimientoStockConsumoMateriaPrima extends MovimientoStock {
 
     private String comprobante;
 
-    public MovimientoStockCompra() {
-        setTipo(TipoMovimientoStock.ENTRADA);
+    public MovimientoStockConsumoMateriaPrima() {
+        setTipo(TipoMovimientoStock.SALIDA);
     }
 
     public String getComprobante() {
@@ -31,7 +31,7 @@ public class MovimientoStockCompra extends MovimientoStock {
 
     @Override
     public Double cantidadAAfectar() {
-        return getCantidad() == null ? 0d : getCantidad();
+        return (getCantidad() == null ? 0d : getCantidad())*-1;
     }
 
 }

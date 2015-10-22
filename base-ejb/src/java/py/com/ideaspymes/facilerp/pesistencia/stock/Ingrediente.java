@@ -33,6 +33,8 @@ public class Ingrediente implements Serializable, Auditable {
     private Producto productoPadre;
     @ManyToOne
     private Producto producto;
+    
+    
     @ManyToOne
     private UnidadMedida unidadMedida;
     private Double cantidad;

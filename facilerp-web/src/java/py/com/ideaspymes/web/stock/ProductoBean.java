@@ -86,15 +86,15 @@ public class ProductoBean extends BeanGenerico<Producto> implements Serializable
         if (event.getSource() instanceof InputText) {
             InputText input = (InputText) event.getSource();
             Double cantidad = (Double) input.getValue();
-            calculaCosto(cantidad);
+    //        calculaCosto(cantidad);
         }
     }
 
-    public void calculaCosto(Double cantidad) {
-        if (ingredienteSeleccionado != null && ingredienteSeleccionado.getProducto() != null) {
+    public void calculaCosto(Double cantidad, Ingrediente i) {
+        if (i != null && i.getProducto() != null) {
             if (cantidad != null && cantidad > 0) {
-                ingredienteSeleccionado.setCosto(cantidad * (ingredienteSeleccionado.getProducto().getCosto() == null ? 0d : ingredienteSeleccionado.getProducto().getCosto()));
-                System.out.println("Costo: " + ingredienteSeleccionado.getCosto());
+                i.setCosto(cantidad * (i.getProducto().getCosto() == null ? 0d : i.getProducto().getCosto()));
+                System.out.println("Costo: " + i.getCosto());
             }
         }
     }

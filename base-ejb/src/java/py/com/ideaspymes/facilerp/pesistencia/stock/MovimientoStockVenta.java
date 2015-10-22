@@ -13,9 +13,10 @@ import javax.persistence.Entity;
  * @author Acer
  */
 @Entity
-public class MovimientoStockVenta extends MovimientoStock{
+public class MovimientoStockVenta extends MovimientoStock {
+
     private String comprobante;
-    
+
     public MovimientoStockVenta() {
         setTipo(TipoMovimientoStock.SALIDA);
     }
@@ -27,7 +28,10 @@ public class MovimientoStockVenta extends MovimientoStock{
     public void setComprobante(String comprobante) {
         this.comprobante = comprobante;
     }
-    
-    
-    
+
+    @Override
+    public Double cantidadAAfectar() {
+        return (getCantidad() == null ? 0d: getCantidad()) * -1;
+    }
+
 }

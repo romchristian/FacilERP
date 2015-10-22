@@ -23,7 +23,7 @@ import javax.persistence.Version;
  * @author Acer
  */
 @Entity
-public class MovimientoStock implements Serializable {
+public abstract class MovimientoStock implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -40,6 +40,8 @@ public class MovimientoStock implements Serializable {
     @ManyToOne
     private UnidadMedida unidadMedida;
     private Double cantidad;
+    
+    public abstract Double cantidadAAfectar();
 
     public Long getId() {
         return id;

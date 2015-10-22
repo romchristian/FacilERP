@@ -6,8 +6,7 @@
 package py.com.ideaspymes.facilerp.stock.business.interfaces;
 
 import javax.ejb.Local;
-import py.com.ideaspymes.facilerp.pesistencia.stock.Producto;
-import py.com.ideaspymes.facilerp.pesistencia.stock.UnidadMedida;
+import py.com.ideaspymes.facilerp.pesistencia.stock.MovimientoStock;
 
 /**
  *
@@ -17,5 +16,5 @@ import py.com.ideaspymes.facilerp.pesistencia.stock.UnidadMedida;
 
 @Local
 public interface IMovimientoStock {
-    public void creaMovimientoStockVenta(Producto producto, Double cantidad,  UnidadMedida unidadMedida,String comprobante);
+    public void creaMovimientoStock(MovimientoStock m);
 }
