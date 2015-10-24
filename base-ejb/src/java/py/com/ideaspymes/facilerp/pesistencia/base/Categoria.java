@@ -12,12 +12,14 @@ import javax.persistence.*;
  * @author elias
  */
 @Entity
-public class Categoria implements Serializable,Auditable {
-    
+public class Categoria implements Serializable, Auditable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Version
+    private Long version;
 
     private float ddm;
     private float promAtrazo;
@@ -41,6 +43,14 @@ public class Categoria implements Serializable,Auditable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Long getVersion() {
+        return version;
+    }
+
+    public void setVersion(Long version) {
+        this.version = version;
     }
 
     public float getDdm() {

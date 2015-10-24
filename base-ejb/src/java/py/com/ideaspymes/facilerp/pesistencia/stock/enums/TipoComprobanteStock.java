@@ -3,13 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package py.com.ideaspymes.facilerp.pesistencia.base;
+package py.com.ideaspymes.facilerp.pesistencia.stock.enums;
 
 /**
  *
  * @author Acer
  */
-public interface Auditable {
-    Long getId();
-    Long getVersion();
+public enum TipoComprobanteStock {
+   VENTA,COMPRA,TRANSFERENCIA_INTERNA,TRANSFERENCIA_EXTERNA
 }

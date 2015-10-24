@@ -8,25 +8,25 @@ import py.com.ideaspymes.facilerp.pesistencia.base.enums.Estado;
 import java.io.Serializable;
 import javax.persistence.*;
 
-
-
 /**
  *
  * @author christian
  */
 @Entity
-public class Canal implements Serializable,Auditable {
+public class Canal implements Serializable, Auditable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Version
+    private Long version;
     @ManyToOne
     private Empresa empresa;
     private String nombre;
     @Enumerated(EnumType.STRING)
     private Estado estado;
-    
+
     public Canal() {
         this.estado = Estado.ACTIVO;
     }
@@ -37,7 +37,6 @@ public class Canal implements Serializable,Auditable {
         this.nombre = nombre;
     }
 
-  
     public Estado getEstado() {
         return estado;
     }
@@ -53,6 +52,14 @@ public class Canal implements Serializable,Auditable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Long getVersion() {
+        return version;
+    }
+
+    public void setVersion(Long version) {
+        this.version = version;
     }
 
     public Empresa getEmpresa() {

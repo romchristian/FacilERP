@@ -15,20 +15,13 @@ import javax.persistence.Entity;
 @Entity
 public class MovimientoStockDevolucionMateriaPrima extends MovimientoStock {
 
-    private String comprobante;
+   
 
     public MovimientoStockDevolucionMateriaPrima() {
         setTipo(TipoMovimientoStock.ENTRADA);
     }
 
-    public String getComprobante() {
-        return comprobante;
-    }
-
-    public void setComprobante(String comprobante) {
-        this.comprobante = comprobante;
-    }
-
+  
     @Override
     public Double cantidadAAfectar() {
         return (getCantidad() == null ? 0d : getCantidad())*-1;

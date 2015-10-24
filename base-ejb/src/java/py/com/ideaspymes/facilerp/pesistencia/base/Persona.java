@@ -10,7 +10,6 @@ import java.util.Date;
 import javax.persistence.*;
 import py.com.ideaspymes.facilerp.pesistencia.base.enums.TipoDocumento;
 
-
 /**
  *
  * @author christian
@@ -22,6 +21,8 @@ public class Persona implements Serializable, Auditable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Version
+    private Long version;
     @Column(updatable = false)
     private String nroDocumento;
     @ManyToOne
@@ -42,6 +43,14 @@ public class Persona implements Serializable, Auditable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Long getVersion() {
+        return version;
+    }
+
+    public void setVersion(Long version) {
+        this.version = version;
     }
 
     public Persona() {

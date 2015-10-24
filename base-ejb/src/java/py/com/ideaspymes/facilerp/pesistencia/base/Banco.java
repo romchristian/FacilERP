@@ -13,19 +13,21 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
-
+import javax.persistence.Version;
 
 /**
  *
  * @author Acer
  */
 @Entity
-public class Banco implements Serializable,Auditable {
+public class Banco implements Serializable, Auditable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Version
+    private Long version;
     private String nombre;
     @Enumerated(EnumType.STRING)
     private Estado estado;
@@ -33,7 +35,15 @@ public class Banco implements Serializable,Auditable {
     public Banco() {
         this.estado = Estado.ACTIVO;
     }
-    
+
+    public Long getVersion() {
+        return version;
+    }
+
+    public void setVersion(Long version) {
+        this.version = version;
+    }
+
     @Override
     public Long getId() {
         return id;
@@ -58,7 +68,7 @@ public class Banco implements Serializable,Auditable {
     public void setEstado(Estado estado) {
         this.estado = estado;
     }
-    
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -83,5 +93,5 @@ public class Banco implements Serializable,Auditable {
     public String toString() {
         return this.nombre;
     }
-    
+
 }

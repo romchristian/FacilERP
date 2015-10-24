@@ -23,6 +23,8 @@ public class ActividadLaboral implements Serializable,Auditable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Version
+    private Long version;
     @NotNull
     private String nombreEmpresa;
     private String cargo;
@@ -43,6 +45,14 @@ public class ActividadLaboral implements Serializable,Auditable {
     public ActividadLaboral() {
         
         this.estado=Estado.ACTIVO;
+    }
+
+    public Long getVersion() {
+        return version;
+    }
+
+    public void setVersion(Long version) {
+        this.version = version;
     }
     
     

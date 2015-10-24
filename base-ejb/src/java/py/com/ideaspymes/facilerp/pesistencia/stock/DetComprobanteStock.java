@@ -5,46 +5,37 @@
  */
 package py.com.ideaspymes.facilerp.pesistencia.stock;
 
-import py.com.ideaspymes.facilerp.pesistencia.stock.enums.TipoMovimientoStock;
 import java.io.Serializable;
-import java.util.Date;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.Temporal;
 import javax.persistence.Version;
+import py.com.ideaspymes.facilerp.pesistencia.base.Auditable;
 
 /**
  *
  * @author Acer
  */
 @Entity
-public abstract class MovimientoStock implements Serializable {
-
+public class DetComprobanteStock implements Serializable, Auditable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Version
     private Long version;
-    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
-    private Date fecha;
-    @Enumerated(EnumType.STRING)
-    private TipoMovimientoStock tipo;
+    @ManyToOne
+    private ComprobanteStock comprobanteStock;
     @ManyToOne
     private Producto producto;
     @ManyToOne
     private UnidadMedida unidadMedida;
     private Double cantidad;
-    @ManyToOne
-    private ComprobanteStock comprobanteStock;
+    private Double valor;
 
-    public abstract Double cantidadAAfectar();
-
+    @Override
     public Long getId() {
         return id;
     }
@@ -53,20 +44,20 @@ public abstract class MovimientoStock implements Serializable {
         this.id = id;
     }
 
-    public Date getFecha() {
-        return fecha;
+    public Long getVersion() {
+        return version;
     }
 
-    public void setFecha(Date fecha) {
-        this.fecha = fecha;
+    public void setVersion(Long version) {
+        this.version = version;
     }
 
-    public TipoMovimientoStock getTipo() {
-        return tipo;
+    public ComprobanteStock getComprobanteStock() {
+        return comprobanteStock;
     }
 
-    public void setTipo(TipoMovimientoStock tipo) {
-        this.tipo = tipo;
+    public void setComprobanteStock(ComprobanteStock comprobanteStock) {
+        this.comprobanteStock = comprobanteStock;
     }
 
     public Producto getProducto() {
@@ -93,22 +84,15 @@ public abstract class MovimientoStock implements Serializable {
         this.cantidad = cantidad;
     }
 
-    public Long getVersion() {
-        return version;
+    public Double getValor() {
+        return valor;
     }
 
-    public void setVersion(Long version) {
-        this.version = version;
+    public void setValor(Double valor) {
+        this.valor = valor;
     }
 
-    public ComprobanteStock getComprobanteStock() {
-        return comprobanteStock;
-    }
-
-    public void setComprobanteStock(ComprobanteStock comprobanteStock) {
-        this.comprobanteStock = comprobanteStock;
-    }
-
+    
     @Override
     public int hashCode() {
         int hash = 0;
@@ -119,10 +103,10 @@ public abstract class MovimientoStock implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof MovimientoStock)) {
+        if (!(object instanceof DetComprobanteStock)) {
             return false;
         }
-        MovimientoStock other = (MovimientoStock) object;
+        DetComprobanteStock other = (DetComprobanteStock) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -131,7 +115,7 @@ public abstract class MovimientoStock implements Serializable {
 
     @Override
     public String toString() {
-        return "py.com.ideaspymes.facilerp.stock.persistencia.MovimientoStock[ id=" + id + " ]";
+        return "py.com.ideaspymes.facilerp.pesistencia.stock.DetComprobanteStock[ id=" + id + " ]";
     }
-
+    
 }

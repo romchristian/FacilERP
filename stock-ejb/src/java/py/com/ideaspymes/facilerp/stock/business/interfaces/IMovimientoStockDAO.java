@@ -15,6 +15,6 @@ import py.com.ideaspymes.facilerp.pesistencia.stock.MovimientoStock;
 
 
 @Local
-public interface IMovimientoStock {
+public interface IMovimientoStockDAO {
     public void creaMovimientoStock(MovimientoStock m);
 }
