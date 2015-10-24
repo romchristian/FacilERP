@@ -5,102 +5,42 @@
  */
 package py.com.ideaspymes.facilerp.pesistencia.stock;
 
-import py.com.ideaspymes.facilerp.pesistencia.stock.enums.TipoMovimientoStock;
 import java.io.Serializable;
-import java.util.Date;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.Temporal;
 import javax.persistence.Version;
+import py.com.ideaspymes.facilerp.pesistencia.base.Auditable;
 
 /**
  *
  * @author Acer
  */
 @Entity
-public abstract class MovimientoStock implements Serializable {
-
+public class Existencia implements Serializable, Auditable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Version
     private Long version;
-    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
-    private Date fecha;
-    @Enumerated(EnumType.STRING)
-    private TipoMovimientoStock tipo;
-    @ManyToOne
-    private Producto producto;
-    @ManyToOne
-    private UnidadMedida unidadMedida;
-    private Double cantidad;
-    @ManyToOne
-    private ComprobanteStock comprobanteStock;
     @ManyToOne
     private Deposito deposito;
+    @ManyToOne
+    private Producto producto;
+    private Double cantidad;
+    @ManyToOne
+    private UnidadMedida unidadMedida;
 
-    public abstract Double cantidadAAfectar();
-
+    @Override
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Deposito getDeposito() {
-        return deposito;
-    }
-
-    public void setDeposito(Deposito deposito) {
-        this.deposito = deposito;
-    }
-    
-    public Date getFecha() {
-        return fecha;
-    }
-
-    public void setFecha(Date fecha) {
-        this.fecha = fecha;
-    }
-
-    public TipoMovimientoStock getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(TipoMovimientoStock tipo) {
-        this.tipo = tipo;
-    }
-
-    public Producto getProducto() {
-        return producto;
-    }
-
-    public void setProducto(Producto producto) {
-        this.producto = producto;
-    }
-
-    public UnidadMedida getUnidadMedida() {
-        return unidadMedida;
-    }
-
-    public void setUnidadMedida(UnidadMedida unidadMedida) {
-        this.unidadMedida = unidadMedida;
-    }
-
-    public Double getCantidad() {
-        return cantidad;
-    }
-
-    public void setCantidad(Double cantidad) {
-        this.cantidad = cantidad;
     }
 
     public Long getVersion() {
@@ -111,14 +51,39 @@ public abstract class MovimientoStock implements Serializable {
         this.version = version;
     }
 
-    public ComprobanteStock getComprobanteStock() {
-        return comprobanteStock;
+    public Deposito getDeposito() {
+        return deposito;
     }
 
-    public void setComprobanteStock(ComprobanteStock comprobanteStock) {
-        this.comprobanteStock = comprobanteStock;
+    public void setDeposito(Deposito deposito) {
+        this.deposito = deposito;
     }
 
+    public Producto getProducto() {
+        return producto;
+    }
+
+    public void setProducto(Producto producto) {
+        this.producto = producto;
+    }
+
+    public Double getCantidad() {
+        return cantidad;
+    }
+
+    public void setCantidad(Double cantidad) {
+        this.cantidad = cantidad;
+    }
+
+    public UnidadMedida getUnidadMedida() {
+        return unidadMedida;
+    }
+
+    public void setUnidadMedida(UnidadMedida unidadMedida) {
+        this.unidadMedida = unidadMedida;
+    }
+
+    
     @Override
     public int hashCode() {
         int hash = 0;
@@ -129,10 +94,10 @@ public abstract class MovimientoStock implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof MovimientoStock)) {
+        if (!(object instanceof Existencia)) {
             return false;
         }
-        MovimientoStock other = (MovimientoStock) object;
+        Existencia other = (Existencia) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -141,7 +106,7 @@ public abstract class MovimientoStock implements Serializable {
 
     @Override
     public String toString() {
-        return "py.com.ideaspymes.facilerp.stock.persistencia.MovimientoStock[ id=" + id + " ]";
+        return "py.com.ideaspymes.facilerp.pesistencia.stock.Existencia[ id=" + id + " ]";
     }
-
+    
 }

@@ -11,13 +11,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Version;
+import py.com.ideaspymes.facilerp.pesistencia.base.Auditable;
 
 /**
  *
  * @author Acer
  */
 @Entity
-public class Deposito implements Serializable {
+public class Deposito implements Serializable, Auditable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -27,6 +28,7 @@ public class Deposito implements Serializable {
     private Long version;
     private String nombre;
 
+    @Override
     public Long getId() {
         return id;
     }
@@ -35,6 +37,16 @@ public class Deposito implements Serializable {
         this.id = id;
     }
 
+    @Override
+    public Long getVersion() {
+        return version;
+    }
+
+    public void setVersion(Long version) {
+        this.version = version;
+    }
+
+    
     public String getNombre() {
         return nombre;
     }
