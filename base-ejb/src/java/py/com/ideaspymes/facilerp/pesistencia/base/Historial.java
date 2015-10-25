@@ -19,7 +19,7 @@ import javax.persistence.Temporal;
  * @author Acer
  */
 @Entity
-public class Historial implements Serializable {
+public class Historial implements Serializable, Auditable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -44,6 +44,7 @@ public class Historial implements Serializable {
         this.descripcion = descripcion;
     }
 
+    @Override
     public Long getId() {
         return id;
     }
@@ -107,6 +108,11 @@ public class Historial implements Serializable {
     @Override
     public String toString() {
         return "py.com.ideaspymes.facilerp.pesistencia.base.Historial[ id=" + id + " ]";
+    }
+
+    @Override
+    public Long getVersion() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

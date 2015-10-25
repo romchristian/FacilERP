@@ -38,6 +38,7 @@ public class UnidadMedida implements Serializable, Auditable{
         this.nombre = nombre;
     }
 
+    @Override
     public Long getVersion() {
         return version;
     }

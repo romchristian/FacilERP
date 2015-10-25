@@ -44,6 +44,7 @@ public class DetComprobanteStock implements Serializable, Auditable {
         this.id = id;
     }
 
+    @Override
     public Long getVersion() {
         return version;
     }

@@ -5,7 +5,6 @@
  */
 package py.com.ideaspymes.facilerp.pesistencia.base;
 
-import java.io.Serializable;
 import javax.persistence.Entity;
 
 /**
@@ -13,7 +12,7 @@ import javax.persistence.Entity;
  * @author Acer
  */
 @Entity
-public class Cobrador extends Persona implements Serializable{
+public class Cobrador extends Persona{
     private String nombres;
     private String apellidos;
 

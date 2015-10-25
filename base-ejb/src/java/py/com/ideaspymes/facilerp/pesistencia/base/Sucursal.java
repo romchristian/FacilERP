@@ -13,7 +13,7 @@ import javax.persistence.*;
  * @author christian
  */
 @Entity
-public class Sucursal implements Serializable {
+public class Sucursal implements Serializable, Auditable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -37,6 +37,7 @@ public class Sucursal implements Serializable {
         this.nombre = nombre;
     }
 
+    @Override
     public Long getVersion() {
         return version;
     }
@@ -53,6 +54,7 @@ public class Sucursal implements Serializable {
         this.estado = estado;
     }
 
+    @Override
     public Long getId() {
         return id;
     }

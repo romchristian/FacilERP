@@ -7,7 +7,7 @@
 
 
 
-    <div class="Container100 Responsive100">
+    <div class="Container100 Responsive100" >
         <div class="ContainerIndent">
             <div class="Card ShadowEffect HeiAutoOnMobile">
                 <h2 class="CardTopic"><i class="fa fa-plus-square Fs25 Fleft MarRight10 "></i>#{titulo}</h2>
@@ -15,11 +15,56 @@
                 <h:form>
 
                     <p:outputPanel id="panel">
-                        <h:panelGrid columns="3" columnClasses="gridColumn1,gridColumn2,gridColumn2" >
+                        <h:panelGrid columns="6" columnClasses="gridColumn1,gridColumn2,gridColumn2" >
                             <p:outputLabel value="Descripción" for="nombre" />
                             <h:outputText value="#{bancoBean.actual.nombre}" rendered="#{(contexto == 'vista')}"/>
                             <p:inputText value="#{bancoBean.actual.nombre}" required="true" id="nombre" rendered="#{not(contexto == 'vista')}"/>
                             <p:message for="nombre"/>
+                                                        
+                            <p:outputLabel value="Identificador Bancario" for="identificador" />
+                            <h:outputText value="#{bancoBean.actual.codigoIdentifiBancario}" rendered="#{(contexto == 'vista')}"/>
+                            <p:inputText value="#{bancoBean.actual.codigoIdentifiBancario}" required="false" id="identificador" rendered="#{not(contexto == 'vista')}"/>
+                            <p:message for="identificador"/>
+                            
+                            <p:outputLabel value="Dirección" for="direccion" />
+                            <h:outputText value="#{bancoBean.actual.direccion.direccion}" rendered="#{(contexto == 'vista')}"/>
+                            <p:inputText value="#{bancoBean.actual.direccion.direccion}" required="false" id="direccion" rendered="#{not(contexto == 'vista')}"/>
+                            <p:message for="direccion"/>
+                            
+                            <p:outputLabel value="Nro. Casa" for="nrocasa" />
+                            <h:outputText value="#{bancoBean.actual.direccion.nrocasa}" rendered="#{(contexto == 'vista')}"/>
+                            <p:inputText value="#{bancoBean.actual.direccion.nrocasa}" required="false" id="nrocasa" rendered="#{not(contexto == 'vista')}"/>
+                            <p:message for="nrocasa"/>
+                            
+                            <p:outputLabel value="Barrio" for="barrio" />
+                            <h:outputText value="#{bancoBean.actual.direccion.barrio}" rendered="#{(contexto == 'vista')}"/>
+                            <p:inputText value="#{bancoBean.actual.direccion.barrio}" required="false" id="barrio" rendered="#{not(contexto == 'vista')}"/>
+                            <p:message for="barrio"/>
+                            
+                            <p:outputLabel value="Ciudad" for="ciudad" />
+                            <h:outputText value="#{bancoBean.actual.direccion.ciudad}" rendered="#{(contexto == 'vista')}"/>
+                            <p:inputText value="#{bancoBean.actual.direccion.ciudad}" required="false" id="ciudad" rendered="#{not(contexto == 'vista')}"/>
+                            <p:message for="ciudad"/>
+                            
+                            <p:outputLabel value="Pais" for="pais" />
+                            <h:outputText value="#{bancoBean.actual.direccion.pais}" rendered="#{(contexto == 'vista')}"/>
+                            <p:inputText value="#{bancoBean.actual.direccion.pais}" required="false" id="pais" rendered="#{not(contexto == 'vista')}"/>
+                            <p:message for="pais"/>
+                            
+                            <p:outputLabel value="Teléfono" for="telefono" />
+                            <h:outputText value="#{bancoBean.actual.telefono}" rendered="#{(contexto == 'vista')}"/>
+                            <p:inputText value="#{bancoBean.actual.telefono}" required="false" id="telefono" rendered="#{not(contexto == 'vista')}"/>
+                            <p:message for="telefono"/>
+                            
+                            <p:outputLabel value="Fax" for="fax" />
+                            <h:outputText value="#{bancoBean.actual.fax}" rendered="#{(contexto == 'vista')}"/>
+                            <p:inputText value="#{bancoBean.actual.fax}" required="false" id="fax" rendered="#{not(contexto == 'vista')}"/>
+                            <p:message for="fax"/>
+                            
+                            <p:outputLabel value="E-mail" for="email" />
+                            <h:outputText value="#{bancoBean.actual.email}" rendered="#{(contexto == 'vista')}"/>
+                            <p:inputText value="#{bancoBean.actual.email}" required="false" id="email" rendered="#{not(contexto == 'vista')}"/>
+                            <p:message for="email"/>
                             
                             <p:outputLabel value="Estado" for="estado" />
                             <p:selectOneMenu value="#{bancoBean.actual.estado}" id="estado" rendered="#{not(contexto == 'vista')}">

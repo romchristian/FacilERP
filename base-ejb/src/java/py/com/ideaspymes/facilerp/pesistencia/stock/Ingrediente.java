@@ -6,7 +6,6 @@
 package py.com.ideaspymes.facilerp.pesistencia.stock;
 
 import java.io.Serializable;
-import javax.faces.event.AjaxBehaviorEvent;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -57,6 +56,7 @@ public class Ingrediente implements Serializable, Auditable {
         this.id = id;
     }
 
+    @Override
     public Long getVersion() {
         return version;
     }

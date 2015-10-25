@@ -31,6 +31,7 @@ public class Impuesto implements Serializable, Auditable {
         this.valor = valor;
     }
 
+    @Override
     public Long getVersion() {
         return version;
     }

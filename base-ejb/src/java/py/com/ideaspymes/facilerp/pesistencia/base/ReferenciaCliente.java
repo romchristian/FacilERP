@@ -20,7 +20,7 @@ import py.com.ideaspymes.facilerp.pesistencia.base.enums.TipoReferencia;
  * @author ACER
  */
 @Entity
-public class ReferenciaCliente implements Serializable {
+public class ReferenciaCliente implements Serializable, Auditable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,6 +32,7 @@ public class ReferenciaCliente implements Serializable {
     @ManyToOne
     private Cliente cliente;
     
+    @Override
     public Long getId() {
         return id;
     }
@@ -97,6 +98,11 @@ public class ReferenciaCliente implements Serializable {
     @Override
     public String toString() {
         return "py.com.ideaspymes.facilerp.pesistencia.base.ReferenciaCliente[ id=" + id + " ]";
+    }
+
+    @Override
+    public Long getVersion() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

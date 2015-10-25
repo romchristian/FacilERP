@@ -16,7 +16,7 @@ import javax.persistence.*;
  * @author cromero
  */
 @Entity
-public class Rol implements Serializable{
+public class Rol implements Serializable, Auditable{
     
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
@@ -39,6 +39,7 @@ public class Rol implements Serializable{
         this.nombre = nombre;
     }
     
+    @Override
     public Long getId() {
         return id;
     }
@@ -66,6 +67,7 @@ public class Rol implements Serializable{
         this.estado = estado;
     }
 
+    @Override
     public Long getVersion() {
         return version;
     }
@@ -81,9 +83,6 @@ public class Rol implements Serializable{
     public void setUsuarios(List<Usuario> usuarios) {
         this.usuarios = usuarios;
     }
-
-    
-    
 
     @Override
     public boolean equals(Object obj) {

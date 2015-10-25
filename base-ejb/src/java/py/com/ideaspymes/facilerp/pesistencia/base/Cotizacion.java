@@ -20,7 +20,7 @@ import javax.persistence.Temporal;
  * @author christian
  */
 @Entity
-public class Cotizacion implements Serializable {
+public class Cotizacion implements Serializable, Auditable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -36,6 +36,7 @@ public class Cotizacion implements Serializable {
     public Cotizacion() {
     }
 
+    @Override
     public Long getId() {
         return id;
     }
@@ -101,6 +102,11 @@ public class Cotizacion implements Serializable {
 
         NumberFormat nf = NumberFormat.getCurrencyInstance(new Locale("es", "py"));
         return String.format("C: %s / V: %s ", nf.format(compra), nf.format(venta));
+    }
+
+    @Override
+    public Long getVersion() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

@@ -29,6 +29,11 @@ public class Banco implements Serializable, Auditable {
     @Version
     private Long version;
     private String nombre;
+    private String codigoIdentifiBancario;
+    private Direccion direccion;
+    private String telefono;
+    private String fax;
+    private String email;
     @Enumerated(EnumType.STRING)
     private Estado estado;
 
@@ -36,6 +41,7 @@ public class Banco implements Serializable, Auditable {
         this.estado = Estado.ACTIVO;
     }
 
+    @Override
     public Long getVersion() {
         return version;
     }
@@ -59,6 +65,46 @@ public class Banco implements Serializable, Auditable {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public String getCodigoIdentifiBancario() {
+        return codigoIdentifiBancario;
+    }
+
+    public void setCodigoIdentifiBancario(String codigoIdentifiBancario) {
+        this.codigoIdentifiBancario = codigoIdentifiBancario;
+    }
+
+    public Direccion getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(Direccion direccion) {
+        this.direccion = direccion;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+
+    public String getFax() {
+        return fax;
+    }
+
+    public void setFax(String fax) {
+        this.fax = fax;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public Estado getEstado() {

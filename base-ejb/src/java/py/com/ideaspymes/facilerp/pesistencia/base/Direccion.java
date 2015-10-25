@@ -21,7 +21,7 @@ import py.com.ideaspymes.facilerp.pesistencia.base.enums.TipoDireccion;
  * @author cromero
  */
 @Entity
-public class Direccion implements Serializable {
+public class Direccion implements Serializable,Auditable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -92,6 +92,7 @@ public class Direccion implements Serializable {
         this.estado = estado;
     }
 
+    @Override
     public Long getId() {
         return id;
     }
@@ -148,5 +149,10 @@ public class Direccion implements Serializable {
     @Override
     public String toString() {
         return "py.com.ideaspymes.facilerp.pesistencia.base.Direccion[ id=" + id + " ]";
+    }
+
+    @Override
+    public Long getVersion() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

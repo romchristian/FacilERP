@@ -47,6 +47,7 @@ public class ActividadLaboral implements Serializable,Auditable {
         this.estado=Estado.ACTIVO;
     }
 
+    @Override
     public Long getVersion() {
         return version;
     }

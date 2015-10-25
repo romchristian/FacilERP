@@ -23,7 +23,7 @@ import py.com.ideaspymes.facilerp.pesistencia.base.enums.TipoContactoTelefonico;
  * @author ACER
  */
 @Entity
-public class ContactoTelefonico implements Serializable {
+public class ContactoTelefonico implements Serializable,Auditable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -49,6 +49,7 @@ public class ContactoTelefonico implements Serializable {
         this.cliente = cliente;
     }
 
+    @Override
     public Long getId() {
         return id;
     }
@@ -65,6 +66,7 @@ public class ContactoTelefonico implements Serializable {
         this.tipo = tipo;
     }
 
+    @Override
     public Long getVersion() {
         return version;
     }

@@ -10,12 +10,13 @@ import javax.ejb.LocalBean;
 
 /**
  *
- * @author Acer
+ * @author Elias
+ * 
+ * Este Bean no se usa en realidad, solo se ha creado en caracter de requeriddo
+ * por la arquitectura...Por lo menos eso es lo que creemos.
  */
 @Stateless
 @LocalBean
 public class RequeridoBean {
 
-    // Add business logic below. (Right-click in editor and choose
-    // "Insert Code > Add Business Method")
 }

@@ -46,6 +46,7 @@ public class Familia implements Serializable, Auditable {
         this.cod = cod;
     }
 
+    @Override
     public Long getVersion() {
         return version;
     }

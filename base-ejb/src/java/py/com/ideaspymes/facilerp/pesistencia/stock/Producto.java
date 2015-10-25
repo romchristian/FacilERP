@@ -80,6 +80,7 @@ public class Producto implements Serializable, Auditable {
         this.precioVenta = precioVenta;
     }
 
+    @Override
     public Long getVersion() {
         return version;
     }

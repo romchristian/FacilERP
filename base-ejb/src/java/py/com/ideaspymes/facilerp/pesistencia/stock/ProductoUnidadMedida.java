@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+import py.com.ideaspymes.facilerp.pesistencia.base.Auditable;
 
 /**
  *
@@ -20,7 +21,7 @@ import javax.persistence.UniqueConstraint;
  */
 @Entity
 @Table(uniqueConstraints = @UniqueConstraint(columnNames = {"producto_id","unidadmedidade_id","unidadmedidaa_id"}))
-public class ProductoUnidadMedida implements Serializable {
+public class ProductoUnidadMedida implements Serializable, Auditable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,6 +37,7 @@ public class ProductoUnidadMedida implements Serializable {
     
     
 
+    @Override
     public Long getId() {
         return id;
     }
@@ -109,6 +111,11 @@ public class ProductoUnidadMedida implements Serializable {
     @Override
     public String toString() {
         return "py.com.ideaspymes.facilerp.stock.persistencia.ProductoUnidadMedida[ id=" + id + " ]";
+    }
+
+    @Override
+    public Long getVersion() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

@@ -14,7 +14,7 @@ import javax.persistence.*;
  * @author christian
  */
 @Entity
-public class Moneda implements Serializable {
+public class Moneda implements Serializable,Auditable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -51,6 +51,7 @@ public class Moneda implements Serializable {
         this.estado = estado;
     }
 
+    @Override
     public Long getVersion() {
         return version;
     }
@@ -59,6 +60,7 @@ public class Moneda implements Serializable {
         this.version = version;
     }
 
+    @Override
     public Long getId() {
         return id;
     }

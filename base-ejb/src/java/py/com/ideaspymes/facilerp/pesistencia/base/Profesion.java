@@ -15,13 +15,14 @@ import javax.persistence.Id;
  * @author christian
  */
 @Entity
-public class Profesion implements Serializable {
+public class Profesion implements Serializable, Auditable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nombre;
 
+    @Override
     public Long getId() {
         return id;
     }
@@ -63,6 +64,11 @@ public class Profesion implements Serializable {
     @Override
     public String toString() {
         return "py.com.ideaspymes.facilerp.pesistencia.base.Profesion[ id=" + id + " ]";
+    }
+
+    @Override
+    public Long getVersion() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }
