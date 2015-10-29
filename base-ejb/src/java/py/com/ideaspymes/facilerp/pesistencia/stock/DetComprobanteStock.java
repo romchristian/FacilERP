@@ -6,11 +6,13 @@
 package py.com.ideaspymes.facilerp.pesistencia.stock;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
 import javax.persistence.Version;
 import py.com.ideaspymes.facilerp.pesistencia.base.Auditable;
 
@@ -20,6 +22,7 @@ import py.com.ideaspymes.facilerp.pesistencia.base.Auditable;
  */
 @Entity
 public class DetComprobanteStock implements Serializable, Auditable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -93,7 +96,7 @@ public class DetComprobanteStock implements Serializable, Auditable {
         this.valor = valor;
     }
 
-    
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -118,5 +121,5 @@ public class DetComprobanteStock implements Serializable, Auditable {
     public String toString() {
         return "py.com.ideaspymes.facilerp.pesistencia.stock.DetComprobanteStock[ id=" + id + " ]";
     }
-    
+
 }

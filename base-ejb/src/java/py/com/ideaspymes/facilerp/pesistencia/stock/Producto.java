@@ -44,6 +44,7 @@ public class Producto implements Serializable, Auditable {
     private Double precioVenta;
     private boolean inventariable;
     private boolean vendible;
+    private boolean tieneVencimiento;
     private Double stockMinimo;
     private Double stock;
 
@@ -276,6 +277,16 @@ public class Producto implements Serializable, Auditable {
     public void setIngredientes(List<Ingrediente> ingredientes) {
         this.ingredientes = ingredientes;
     }
+
+    public boolean isTieneVencimiento() {
+        return tieneVencimiento;
+    }
+
+    public void setTieneVencimiento(boolean tieneVencimiento) {
+        this.tieneVencimiento = tieneVencimiento;
+    }
+    
+    
 
     @Override
     public int hashCode() {
