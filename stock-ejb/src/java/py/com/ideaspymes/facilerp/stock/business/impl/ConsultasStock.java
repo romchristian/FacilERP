@@ -11,7 +11,7 @@ package py.com.ideaspymes.facilerp.stock.business.impl;
  */
 public class ConsultasStock {
 
-    public String getRendimiento() {
+    public static String getRendimiento() {
         return "SELECT pp.nombre,min(x.stock / x.cantidad) as rendimiento from producto pp \n"
                 + "join \n"
                 + "(SELECT p.nombre,p.stock,i.cantidad,i.productopadre_id from ingrediente i\n"
