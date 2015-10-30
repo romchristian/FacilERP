@@ -2,6 +2,9 @@
 <application version="7" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/application_7.xsd">
   <display-name>FacilERP</display-name>
   <module>
+    <ejb>stock-ejb.jar</ejb>
+  </module>
+  <module>
     <ejb>base-ejb.jar</ejb>
   </module>
   <module>
@@ -11,9 +14,9 @@
     </web>
   </module>
   <module>
-    <ejb>stock-ejb.jar</ejb>
+    <ejb>contabilidad-ejb.jar</ejb>
   </module>
   <module>
-    <ejb>contabilidad-ejb.jar</ejb>
+    <ejb>listeners-ejb.jar</ejb>
   </module>
 </application>

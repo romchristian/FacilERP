@@ -10,5 +10,5 @@ package py.com.ideaspymes.facilerp.pesistencia.stock.enums;
  * @author cromero
  */
 public enum EstadoLote {
-    ABIERTO,RESERVADO,RESERVA_PARCIAL,VENCIDO, CERRADO
+    PENDIENTE_CONFIRMACION,ABIERTO,VENCIDO, CERRADO
 }

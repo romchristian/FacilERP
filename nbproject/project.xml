@@ -8,6 +8,10 @@
             <web-module-libraries/>
             <web-module-additional-libraries>
                 <library>
+                    <file>${reference.stock-ejb.dist-ear}</file>
+                    <path-in-war>/</path-in-war>
+                </library>
+                <library>
                     <file>${reference.base-ejb.dist-ear}</file>
                     <path-in-war>/</path-in-war>
                 </library>
@@ -16,11 +20,11 @@
                     <path-in-war>/</path-in-war>
                 </library>
                 <library>
-                    <file>${reference.stock-ejb.dist-ear}</file>
+                    <file>${reference.contabilidad-ejb.dist-ear}</file>
                     <path-in-war>/</path-in-war>
                 </library>
                 <library>
-                    <file>${reference.contabilidad-ejb.dist-ear}</file>
+                    <file>${reference.listeners-ejb.dist-ear}</file>
                     <path-in-war>/</path-in-war>
                 </library>
             </web-module-additional-libraries>
@@ -44,6 +48,14 @@
             </reference>
             <reference>
                 <foreign-project>facilerp-web</foreign-project>
+                <artifact-type>j2ee_ear_archive</artifact-type>
+                <script>build.xml</script>
+                <target>dist-ear</target>
+                <clean-target>clean-ear</clean-target>
+                <id>dist-ear</id>
+            </reference>
+            <reference>
+                <foreign-project>listeners-ejb</foreign-project>
                 <artifact-type>j2ee_ear_archive</artifact-type>
                 <script>build.xml</script>
                 <target>dist-ear</target>

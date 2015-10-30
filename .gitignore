@@ -19,3 +19,6 @@
 /contabilidad-ejb/build/
 /contabilidad-ejb/dist/
 /contabilidad-ejb/nbproject/private/
+/listeners-ejb/nbproject/private/
+/listeners-ejb/build/
+/listeners-ejb/dist/

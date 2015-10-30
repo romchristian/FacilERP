@@ -41,6 +41,19 @@
                             </p:selectOneMenu>
                             <p:message for="impuesto"/>
 
+                            <p:spacer/>
+                            <p:selectBooleanCheckbox value="#{productoBean.actual.inventariable}" itemLabel="Es Inventariable?"
+                                                     disabled="#{(contexto == 'vista')}"/>
+                            <p:spacer/>
+                            <p:spacer/>
+                            <p:selectBooleanCheckbox value="#{productoBean.actual.tieneVencimiento}" itemLabel="Tiene vencimiento?"
+                                                     disabled="#{(contexto == 'vista')}"/>
+                            <p:spacer/>
+                            <p:spacer/>
+                            <p:selectBooleanCheckbox value="#{productoBean.actual.costoCalculado}" itemLabel="Su es calculado?"
+                                                     disabled="#{(contexto == 'vista')}"/>
+                            <p:spacer/>
+                            
                             <p:outputLabel value="Costo" for="costo"/>
                             <h:outputText value="#{productoBean.actual.costo}" rendered="#{(contexto == 'vista')}">
                                 <f:convertNumber locale="#{formato.locale}" />

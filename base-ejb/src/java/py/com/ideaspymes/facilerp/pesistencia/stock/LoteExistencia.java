@@ -17,6 +17,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.Version;
 import py.com.ideaspymes.facilerp.pesistencia.base.Auditable;
+import py.com.ideaspymes.facilerp.pesistencia.contabilidad.Proveedor;
 import py.com.ideaspymes.facilerp.pesistencia.stock.enums.EstadoLote;
 
 /**
@@ -36,6 +37,8 @@ public class LoteExistencia implements Serializable, Auditable {
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date ingreso;
     private String ubicacion;
+    private String refProveedor;
+    private String refFactura;
     @ManyToOne
     private ComprobanteStock comprobanteStock;
     @ManyToOne
@@ -196,6 +199,24 @@ public class LoteExistencia implements Serializable, Auditable {
         this.estado = estado;
     }
 
+    public String getRefProveedor() {
+        return refProveedor;
+    }
+
+    public void setRefProveedor(String refProveedor) {
+        this.refProveedor = refProveedor;
+    }
+
+    public String getRefFactura() {
+        return refFactura;
+    }
+
+    public void setRefFactura(String refFactura) {
+        this.refFactura = refFactura;
+    }
+
+    
+    
     @Override
     public int hashCode() {
         int hash = 0;

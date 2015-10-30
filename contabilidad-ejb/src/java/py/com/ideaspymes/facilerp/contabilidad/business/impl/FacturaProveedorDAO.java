@@ -28,6 +28,7 @@ public class FacturaProveedorDAO implements IFacturaProveedorDAO {
     private ABMService abmService;
     
     @Inject
+    @EventoFP
     private Event<EventoFacturaProveedor> evento;
 
     @Override

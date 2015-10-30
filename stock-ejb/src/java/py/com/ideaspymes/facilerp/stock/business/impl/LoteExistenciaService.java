@@ -30,8 +30,6 @@ public class LoteExistenciaService implements ILoteExistenciaService {
 
     @Override
     public void creaLoteExitencia(LoteExistencia l) {
-        l.setEstado(EstadoLote.ABIERTO);
-        l.setCantidadSaldo(l.getCantidadIngresada());
         abmService.getEM().persist(l);
     }
 
