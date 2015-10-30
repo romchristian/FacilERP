@@ -15,8 +15,13 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import org.primefaces.component.inputtext.InputText;
 import org.primefaces.event.SelectEvent;
+import py.com.ideaspymes.facilerp.contabilidad.business.interfaces.IFacturaProveedorDAO;
 
 import py.com.ideaspymes.facilerp.generico.AbstractDAO;
+import py.com.ideaspymes.facilerp.pesistencia.base.Empresa;
+import py.com.ideaspymes.facilerp.pesistencia.contabilidad.DetFacturaProveedor;
+import py.com.ideaspymes.facilerp.pesistencia.contabilidad.FacturaProveedor;
+import py.com.ideaspymes.facilerp.pesistencia.contabilidad.Proveedor;
 import py.com.ideaspymes.facilerp.pesistencia.stock.Ingrediente;
 
 import py.com.ideaspymes.web.generico.BeanGenerico;
@@ -42,6 +47,8 @@ public class ComprobanteStockBean extends BeanGenerico<ComprobanteStock> impleme
     @EJB
     private IComprobanteStockDAO ejb;
     @EJB
+    private IFacturaProveedorDAO ejbFactura;
+    @EJB
     private IProductoDAO productoDAO;
 
     @Override
@@ -57,6 +64,7 @@ public class ComprobanteStockBean extends BeanGenerico<ComprobanteStock> impleme
     public void generarComprobante() {
         generarComprobanteCompra();
         generarComprobanteVenta();
+        generarFactura();
     }
 
     public void generarComprobanteCompra() {
@@ -87,6 +95,33 @@ public class ComprobanteStockBean extends BeanGenerico<ComprobanteStock> impleme
         ejb.create(c, credencial.getUsuario().getUsuario());
     }
 
+    public void generarFactura() {
+
+        FacturaProveedor fp = new FacturaProveedor();
+        fp.setNumero("123456");
+        fp.setTotal(1000000.0d);
+
+        //Detalles
+        List<Producto> productos = productoDAO.findAll();
+        ArrayList lista = new ArrayList();
+        fp.setDetalles(lista);
+        for (Producto p : productos) {
+            if (p.getTipoProducto() == TipoProducto.MATERIA_PRIMA) {
+                DetFacturaProveedor dfp = new DetFacturaProveedor();
+                dfp.setFacturaProveedor(fp);
+                dfp.setProducto(p);
+                dfp.setUnidadMedida(p.getUnidadMedidaBase());
+                dfp.setCantidad(10d);
+                dfp.setPrecioUnitario(25000.0d);
+                dfp.setTotal(250000.0d);
+                fp.getDetalles().add(dfp);
+            }
+        }
+        
+        ejbFactura.create(fp, credencial.getUsuario().getUsuario());
+
+    }
+
     public void generarComprobanteVenta() {
         ComprobanteStock c = new ComprobanteStock();
 
@@ -108,7 +143,7 @@ public class ComprobanteStockBean extends BeanGenerico<ComprobanteStock> impleme
                     d.setProducto(i.getProducto());
                     d.setUnidadMedida(i.getProducto().getUnidadMedidaBase());
                     d.setCantidad(3d * i.getCantidad());
-                    d.setValor(i.getCosto()*3d);
+                    d.setValor(i.getCosto() * 3d);
                     c.getDetalles().add(d);
                 }
 
