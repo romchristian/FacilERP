@@ -5,15 +5,12 @@
  */
 package py.com.ideaspymes.facilerp.pesistencia.contabilidad;
 
-import com.sun.xml.wss.saml.internal.saml11.jaxb10.Audience;
 import java.io.Serializable;
-import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.Temporal;
 import javax.persistence.Version;
 import py.com.ideaspymes.facilerp.pesistencia.base.Auditable;
 import py.com.ideaspymes.facilerp.pesistencia.stock.Producto;
