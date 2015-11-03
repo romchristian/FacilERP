@@ -14,10 +14,6 @@ import javax.ejb.TransactionAttributeType;
 import py.com.ideaspymes.facilerp.pesistencia.stock.Deposito;
 import py.com.ideaspymes.facilerp.stock.business.interfaces.IDepositoDAO;
 
-
-
-
-
 /**
  *
  * @author christian
@@ -30,18 +26,18 @@ public class DepositoDAO implements IDepositoDAO {
     private ABMService abmService;
 
     @Override
-    public Deposito create(Deposito entity,String usuario) {
-        return abmService.create(entity,usuario);
+    public Deposito create(Deposito entity, String usuario) {
+        return abmService.create(entity, usuario);
     }
 
     @Override
-    public Deposito edit(Deposito entity,String usuario) {
-        return abmService.update(entity,usuario);
+    public Deposito edit(Deposito entity, String usuario) {
+        return abmService.update(entity, usuario);
     }
 
     @Override
-    public void remove(Deposito entity,String usuario) {
-         abmService.delete(entity,usuario);
+    public void remove(Deposito entity, String usuario) {
+        abmService.delete(entity, usuario);
     }
 
     @Override
@@ -59,5 +55,15 @@ public class DepositoDAO implements IDepositoDAO {
         return abmService.findByQuery(query, params.parameters());
     }
 
-   
+    public Deposito findDefault() {
+        Deposito R = null;
+        try {
+            R = (Deposito) abmService.getEM().createQuery("SELECT d FROM Deposito d")
+                    .setMaxResults(1).getSingleResult();
+            
+        } catch (Exception e) {
+        }
+        return R;
+    }
+
 }

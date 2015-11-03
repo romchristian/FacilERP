@@ -39,5 +39,7 @@ public interface IDepositoDAO extends AbstractDAO<Deposito> {
 
     @Override
     void remove(Deposito entity, String usuario);
+
+    Deposito findDefault();
     
 }

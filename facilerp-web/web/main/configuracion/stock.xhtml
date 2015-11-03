@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://java.sun.com/jsf/core">
+
+    <h:form id="formStock">
+        <div class="Container100 Responsive100">
+            <div class="ContainerIndent">
+                <div class="Card ShadowEffect HeiAutoOnMobile">
+
+                    <h2 class="CardTopic"><i class="icon-google132 Fs20 Fleft MarRight10"></i>Configuración Stock
+                        <p:commandButton value="Guardar" styleClass="GreenButton Fright"
+                                         action="#{configuracionBean.guardaConfiguracionStock()}"/>
+                    </h2>
+                    <div class="Separator"/>
+
+
+                    <ui:repeat value="#{configuracionBean.configuracionesStock}" var="c">
+
+                        <h:panelGrid columns="3">
+                            <p:outputLabel value="#{c.nombre}" for="opciones"/>
+                            <p:spacer width="20"/>
+                            <p:selectOneMenu value="#{c.valor}" id="opciones">
+                                <f:selectItems value="#{configuracionBean.getItemsOpciones(c.opciones)}" var="o" itemLabel="#{o}" itemValue="#{o}"/>
+                            </p:selectOneMenu>
+                        </h:panelGrid>
+                    </ui:repeat>
+
+                </div>
+            </div>
+        </div>
+    </h:form>
+
+
+
+</ui:composition>
+

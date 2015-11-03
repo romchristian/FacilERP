@@ -13,6 +13,7 @@ import javax.ejb.LocalBean;
 import javax.enterprise.event.Observes;
 import javax.enterprise.event.TransactionPhase;
 import javax.inject.Inject;
+import py.com.ideaspymes.facilerp.business.interfaces.IConfiguracionDAO;
 import py.com.ideaspymes.facilerp.contabilidad.business.impl.EventoFP;
 import py.com.ideaspymes.facilerp.contabilidad.business.impl.EventoFacturaProveedor;
 import py.com.ideaspymes.facilerp.pesistencia.contabilidad.DetFacturaProveedor;
@@ -23,6 +24,7 @@ import py.com.ideaspymes.facilerp.pesistencia.stock.LoteExistencia;
 import py.com.ideaspymes.facilerp.pesistencia.stock.enums.EstadoLote;
 import py.com.ideaspymes.facilerp.pesistencia.stock.enums.TipoComprobanteStock;
 import py.com.ideaspymes.facilerp.stock.business.interfaces.IComprobanteStockDAO;
+import py.com.ideaspymes.facilerp.stock.business.interfaces.IDepositoDAO;
 import py.com.ideaspymes.facilerp.stock.business.interfaces.ILoteExistenciaService;
 
 /**
@@ -37,19 +39,29 @@ public class FacturaProveedorListener {
     private ILoteExistenciaService loteExistenciaService;
     @EJB
     private IComprobanteStockDAO comprobanteStockDAO;
+    @EJB
+    private IConfiguracionDAO configuracionDAO;
+    @EJB
+    private IDepositoDAO depositoDAO;
 
     public void creacionFacturaProveedor(@Observes(during = TransactionPhase.AFTER_SUCCESS) @EventoFP EventoFacturaProveedor event) {
         System.out.println("En el listener : " + event.getFacturaProveedor());
         if (event.getFacturaProveedor() != null) {
 
             boolean conLoteAConfirmar = true;
-            if (conLoteAConfirmar) {
+            String multipleDepositos = configuracionDAO.getValor("stock", "MULTIPLE_DEPOSITO");
+
+            if (multipleDepositos.compareToIgnoreCase("HABILITADO") == 0) {
                 for (DetFacturaProveedor d : event.getFacturaProveedor().getDetalles()) {
-                    creaLote(d, EstadoLote.PENDIENTE_CONFIRMACION,null);
+                    creaLote(d, EstadoLote.PENDIENTE_CONFIRMACION, null);
                 }
             } else {
+
+                Deposito defaultDeposito = getDepositoDefault();
+               
+                
                 for (DetFacturaProveedor d : event.getFacturaProveedor().getDetalles()) {
-                    creaLote(d, EstadoLote.ABIERTO,getDepositoDefault());
+                    creaLote(d, EstadoLote.ABIERTO, defaultDeposito);
                 }
 
                 ComprobanteStock c = new ComprobanteStock();
@@ -96,6 +108,6 @@ public class FacturaProveedorListener {
     }
 
     private Deposito getDepositoDefault() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return depositoDAO.findDefault();
     }
 }
