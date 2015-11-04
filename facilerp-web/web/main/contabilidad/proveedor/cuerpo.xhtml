@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://java.sun.com/jsf/core">
+
+
+
+    <div class="Container100 Responsive100">
+        <div class="ContainerIndent">
+            <div class="Card ShadowEffect HeiAutoOnMobile">
+                <h2 class="CardTopic"><i class="fa fa-plus-square Fs25 Fleft MarRight10 "></i>#{titulo}</h2>
+                <div class="Separator"/>
+                <h:form>
+
+                    <p:outputPanel id="panel">
+                        <h:panelGrid columns="3" columnClasses="gridColumn1,gridColumn2,gridColumn2" >
+                            
+                            <p:outputLabel value="nombre" for="nombre" />
+                            <h:outputText value="#{proveedorBean.actual.nombres}" rendered="#{(contexto == 'vista')}"/>
+                            <p:inputText value="#{proveedorBean.actual.nombres}" required="true" id="nombre" rendered="#{not(contexto == 'vista')}"/>
+                            <p:message for="nombre"/>
+                            
+                           
+                            
+                        </h:panelGrid>
+                    </p:outputPanel>
+
+                    <br/>
+
+
+                    <p:commandButton value="Crear" action="#{proveedorBean.create()}" styleClass="Fleft GreenButton" update="panel" rendered="#{(contexto == 'creacion')}"/>
+                    <p:commandButton value="Guardar" action="#{proveedorBean.edit()}" styleClass="Fleft BlueButton" update="panel" rendered="#{(contexto == 'edicion')}"/>
+                    <p:commandButton value="Eliminar" action="#{proveedorBean.remove()}" styleClass="Fleft RedButton" update="panel" rendered="#{(contexto == 'vista')}"/>
+                    <p:button value="Editar"  styleClass="Fleft BlueButton" outcome="edita" rendered="#{(contexto == 'vista')}">
+                        <f:param name="id" value="#{proveedorBean.actual.id}"/>
+                    </p:button>
+                    <p:button value="Atras"  styleClass="Fleft PurpleButton" outcome="listado"/>
+
+
+                    <br/>
+
+                </h:form>
+
+            </div>
+        </div>
+    </div>
+</ui:composition>
+

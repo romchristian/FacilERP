@@ -1,0 +1,168 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://java.sun.com/jsf/core">
+
+
+
+    <div class="Container100 Responsive100" >
+        <div class="ContainerIndent">
+            <div class="Card ShadowEffect HeiAutoOnMobile">
+                <h2 class="CardTopic"><i class="fa fa-plus-square Fs25 Fleft MarRight10 "></i>#{titulo}</h2>
+                <div class="Separator"/>
+                <h:form>
+                    <p:outputPanel id="panel">
+
+
+
+                        <div class="Container50 Responsive100" >
+                            <h:panelGrid columns="3" columnClasses="gridColumn1,gridColumn2,gridColumn2" >
+
+                                <p:outputLabel value="Proveedor" for="proveedor" />
+                                <h:outputText value="#{facturaProveedorBean.actual.proveedor==null?'':facturaProveedorBean.actual.proveedor.nombres}" rendered="#{(contexto == 'vista')}"/>
+                                <p:selectOneMenu value="#{facturaProveedorBean.actual.proveedor}" id="proveedor"
+                                                 rendered="#{not(contexto == 'vista')}" required="true">
+                                    <f:selectItems value="#{proveedorBean.itemsAvailableSelectOne}"/>
+                                </p:selectOneMenu>
+                                <p:message for="proveedor"/>
+
+                                <p:outputLabel value="Timbrado" for="timbrado" />
+                                <h:outputText value="#{facturaProveedorBean.actual.timbrado}" rendered="#{(contexto == 'vista')}"/>
+                                <p:inputText value="#{facturaProveedorBean.actual.timbrado}" required="true" id="timbrado" rendered="#{not(contexto == 'vista')}"/>
+                                <p:message for="timbrado"/>
+
+                                <p:outputLabel value="Emisión" for="emision" />
+                                <h:outputText value="#{facturaProveedorBean.actual.fechaEmision}" rendered="#{(contexto == 'vista')}">
+                                    <f:convertDateTime locale="#{formato.locale}" pattern="#{formato.patronFecha}"/>
+                                </h:outputText>
+
+                                <p:calendar value="#{facturaProveedorBean.actual.fechaEmision}" required="true" id="emision" rendered="#{not(contexto == 'vista')}"/>
+                                <p:message for="emision"/>
+
+                            </h:panelGrid>
+
+                        </div>
+                        <div class="Container50 Responsive100" >
+                            <h:panelGrid columns="3" columnClasses="gridColumn1,gridColumn2,gridColumn2" >
+                                <p:spacer/>
+                                <p:spacer/>
+                                <p:spacer/>
+
+                                <p:outputLabel value="Nro." for="numero"/>
+
+                                <h:panelGrid columns="3" rendered="#{(contexto == 'vista')}">
+                                    <h:outputText value="#{facturaProveedorBean.actual.establecimiento}"/>
+                                    <h:outputText value="#{facturaProveedorBean.actual.puntoExpedicion}"/>
+                                    <h:outputText value="#{facturaProveedorBean.actual.numero}"/>
+                                </h:panelGrid>
+
+                                <h:panelGrid columns="3"  rendered="#{not(contexto == 'vista')}">
+                                    <p:inputText value="#{facturaProveedorBean.actual.establecimiento}" size="3"/>
+                                    <p:inputText value="#{facturaProveedorBean.actual.puntoExpedicion}" size="3"/>
+                                    <p:inputText value="#{facturaProveedorBean.actual.numero}" size="7" id="numero"/>
+                                </h:panelGrid>
+                                <p:message for="numero"/>
+
+
+                                <p:outputLabel value="Condición" for="tipo" />
+                                <h:outputText value="#{facturaProveedorBean.actual.tipoFactura}" rendered="#{(contexto == 'vista')}"/>
+                                <p:selectOneMenu value="#{facturaProveedorBean.actual.tipoFactura}" id="tipo"
+                                                 rendered="#{not(contexto == 'vista')}" required="true">
+                                    <f:selectItems value="#{productorEnums.obtTipoFactura()}"/>
+                                </p:selectOneMenu>
+                                <p:message for="tipo"/>
+
+
+                                <p:outputLabel value="Cant. Cuotas" for="cantidadCuotas" />
+                                <h:outputText value="#{facturaProveedorBean.actual.cantidadCuotas}" rendered="#{(contexto == 'vista')}"/>
+                                <p:inputText value="#{facturaProveedorBean.actual.cantidadCuotas}" required="true" id="cantidadCuotas" rendered="#{not(contexto == 'vista')}"/>
+                                <p:message for="cantidadCuotas"/>
+
+
+                            </h:panelGrid>
+                        </div>
+
+                        <div class="Container100 Responsive100">
+                            <p:dataTable value="#{facturaProveedorBean.actual.detalles}" var="d" id="detalles">
+
+                                <f:facet name="header">
+                                    <h:outputText value="Detalles"/>
+                                    <p:commandButton styleClass="Fright" value="Agregar" action="#{facturaProveedorBean.addDetalle()}" update="detalles"/>
+                                </f:facet>
+
+                                <p:column headerText="Producto">
+                                    <h:panelGroup id="bidView">
+                                        <p:focus context="bidView" for="autoCompleteProducto"/>
+                                        <p:autoComplete  value="#{d.producto}"  id="autoCompleteProducto" style="width: 95%!important;font-size: 9pt" 
+                                                         completeMethod="#{autocompleteProducto.completar}" size="60" placeholder="Producto" binding="#{acProducto}"
+                                                         forceSelection="true" converter="productoConverter" var="p" itemValue="#{p}" 
+                                                         itemLabel="#{p.nombre}">
+                                            <p:ajax event="itemSelect" listener="#{facturaProveedorBean.autoCompleteSelectProducto}" process="@this" update="@(.unidadMedida, impuesto)"/>
+                                        </p:autoComplete>
+                                    </h:panelGroup>
+                                </p:column>
+
+                                <p:column headerText="Cantidad">
+                                    <p:outputPanel styleClass="cantidad">
+                                        <p:inputText value="#{d.cantidad}">
+                                            <p:ajax event="change" listener="#{facturaProveedorBean.calculaTotal(d)}" process="@this" update="@(.total)"/>
+                                        </p:inputText>
+                                    </p:outputPanel>
+
+                                </p:column>
+                                <p:column headerText="U.M">
+                                    <p:outputPanel styleClass="unidadMedida">
+                                        <h:outputText value="#{(d.unidadMedida == null?'':d.unidadMedida.nombre)}"/>
+                                    </p:outputPanel>
+                                </p:column>
+
+                                <p:column headerText="P.U">
+                                    <p:outputPanel styleClass="precio">
+                                        <p:inputText value="#{d.precioUnitario}">
+                                            <p:ajax event="change" listener="#{facturaProveedorBean.calculaTotal(d)}" process="@this" update="@(.total)"/>
+                                        </p:inputText>
+                                    </p:outputPanel>
+
+                                </p:column>
+                                <p:column headerText="Impuesto">
+                                    <p:outputPanel styleClass="impuesto">
+                                        <h:outputText value="#{(d.producto == null?'':d.producto.impuesto.nombre)}"/>
+                                    </p:outputPanel>
+                                </p:column>
+                                <p:column headerText="Total">
+                                    <p:outputPanel styleClass="total">
+                                        <h:outputText value="#{d.total}">
+                                            <f:convertNumber locale="#{formato.locale}"/>
+                                        </h:outputText>
+                                    </p:outputPanel>
+                                </p:column>
+                                <p:column headerText="Remover">
+                                    <p:commandLink value="X" styleClass="FontRobotoLight Fs28" action="#{facturaProveedorBean.removeDetalle(d)}"
+                                                   update="detalles"/>
+                                </p:column>
+                            </p:dataTable>
+                        </div>
+                    </p:outputPanel>
+                    <br/>
+
+
+                    <p:commandButton value="Crear" action="#{facturaProveedorBean.create()}" styleClass="Fleft GreenButton" update="panel" rendered="#{(contexto == 'creacion')}"/>
+                    <p:commandButton value="Guardar" action="#{facturaProveedorBean.edit()}" styleClass="Fleft BlueButton" update="panel" rendered="#{(contexto == 'edicion')}"/>
+                    <p:commandButton value="Eliminar" action="#{facturaProveedorBean.remove()}" styleClass="Fleft RedButton" update="panel" rendered="#{(contexto == 'vista')}"/>
+                    <p:button value="Editar"  styleClass="Fleft BlueButton" outcome="edita" rendered="#{(contexto == 'vista')}">
+                        <f:param name="id" value="#{facturaProveedorBean.actual.id}"/>
+                    </p:button>
+                    <p:button value="Atras"  styleClass="Fleft PurpleButton" outcome="listado"/>
+
+
+                    <br/>
+
+                </h:form>
+
+            </div>
+        </div>
+    </div>
+</ui:composition>
+

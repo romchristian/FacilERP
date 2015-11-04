@@ -15,4 +15,22 @@ import py.com.ideaspymes.facilerp.pesistencia.base.Persona;
 @Entity
 public class Proveedor extends Persona {
 
+    private String nombres;
+
+    public String getNombres() {
+        return nombres;
+    }
+
+    public void setNombres(String nombres) {
+        this.nombres = nombres;
+    }
+
+    @Override
+    public String toString() {
+        return nombres;
+    }
+    
+    
+    
+    
 }

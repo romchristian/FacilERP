@@ -19,7 +19,8 @@ import py.com.ideaspymes.facilerp.pesistencia.stock.UnidadMedida;
 
 @Local
 public interface ILoteExistenciaService {
-    public void creaLoteExitencia(LoteExistencia l);
+    public LoteExistencia creaLoteExitencia(LoteExistencia l);
+    public LoteExistencia guardaLoteExitencia(LoteExistencia l);
     public void afectaLotesExistenciaMasCovenientes(Producto p, UnidadMedida um, Double cantidad);
     public Double afectaCantidadUsadaLoteExitencia(LoteExistencia l, Double cantidad);
     public List<LoteExistencia>  getLotesExitenciaMasAntiguos(Producto p , UnidadMedida um, Double cantidad);

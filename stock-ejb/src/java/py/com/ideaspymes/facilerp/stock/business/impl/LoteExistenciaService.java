@@ -29,22 +29,35 @@ public class LoteExistenciaService implements ILoteExistenciaService {
     private ABMService abmService;
 
     @Override
-    public void creaLoteExitencia(LoteExistencia l) {
+    public LoteExistencia creaLoteExitencia(LoteExistencia l) {
         abmService.getEM().persist(l);
+        abmService.getEM().flush();
+        abmService.getEM().refresh(l);
+
+        return l;
+    }
+
+    @Override
+    public LoteExistencia guardaLoteExitencia(LoteExistencia l) {
+        l = abmService.getEM().merge(l);
+        abmService.getEM().flush();
+        abmService.getEM().refresh(l);
+
+        return l;
     }
 
     @Override
     public void afectaLotesExistenciaMasCovenientes(Producto p, UnidadMedida um, Double cantidad) {
         List<LoteExistencia> lotesAAfectar = null;
-        
-        if(p.isTieneVencimiento()){
+
+        if (p.isTieneVencimiento()) {
             lotesAAfectar = getLotesExitenciaVencimientosMasProximos(p, um, cantidad);
-        }else{
+        } else {
             lotesAAfectar = getLotesExitenciaMasAntiguos(p, um, cantidad);
         }
         double saldo = cantidad;
-        for(LoteExistencia l: lotesAAfectar){
-            if(saldo > 0){
+        for (LoteExistencia l : lotesAAfectar) {
+            if (saldo > 0) {
                 saldo = afectaCantidadUsadaLoteExitencia(l, saldo);
             }
         }

@@ -20,8 +20,8 @@ import py.com.ideaspymes.facilerp.pesistencia.base.enums.TipoDireccion;
 import py.com.ideaspymes.facilerp.pesistencia.base.enums.TipoDocumento;
 import py.com.ideaspymes.facilerp.pesistencia.base.enums.TipoEmpresa;
 import py.com.ideaspymes.facilerp.pesistencia.base.enums.TipoReferencia;
+import py.com.ideaspymes.facilerp.pesistencia.contabilidad.enums.TipoFactura;
 import py.com.ideaspymes.facilerp.pesistencia.stock.enums.TipoProducto;
-
 
 /**
  *
@@ -160,7 +160,17 @@ public class ProductorEnums implements Serializable {
         }
         return R;
     }
-    
+
+    public SelectItem[] obtTipoFactura() {
+        SelectItem[] R = new SelectItem[TipoFactura.values().length];
+        TipoFactura[] lista = TipoFactura.values();
+        for (int i = 0; i < lista.length; i++) {
+            TipoFactura tc = lista[i];
+            R[i] = new SelectItem(tc, tc.toString());
+        }
+        return R;
+    }
+
 }
 
 //TipoCargo

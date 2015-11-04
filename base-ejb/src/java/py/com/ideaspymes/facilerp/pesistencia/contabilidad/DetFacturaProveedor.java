@@ -37,7 +37,14 @@ public class DetFacturaProveedor implements Serializable, Auditable {
     private UnidadMedida unidadMedida;
     private Double cantidad;
     private Double precioUnitario;
+    private Double totalGravada10;
+    private Double totalGravada5;
+    private Double totalIva;
+    private Double totalIva10;
+    private Double totalIva5;
+    private Double totalExcenta;
     private Double total;
+    private Double descuento;
 
     @Override
     public Long getId() {
@@ -104,6 +111,63 @@ public class DetFacturaProveedor implements Serializable, Auditable {
     public void setTotal(Double total) {
         this.total = total;
     }
+
+    public Double getTotalGravada10() {
+        return totalGravada10;
+    }
+
+    public void setTotalGravada10(Double totalGravada10) {
+        this.totalGravada10 = totalGravada10;
+    }
+
+    public Double getTotalGravada5() {
+        return totalGravada5;
+    }
+
+    public void setTotalGravada5(Double totalGravada5) {
+        this.totalGravada5 = totalGravada5;
+    }
+
+    public Double getTotalIva() {
+        return totalIva;
+    }
+
+    public void setTotalIva(Double totalIva) {
+        this.totalIva = totalIva;
+    }
+
+    public Double getTotalIva10() {
+        return totalIva10;
+    }
+
+    public void setTotalIva10(Double totalIva10) {
+        this.totalIva10 = totalIva10;
+    }
+
+    public Double getTotalIva5() {
+        return totalIva5;
+    }
+
+    public void setTotalIva5(Double totalIva5) {
+        this.totalIva5 = totalIva5;
+    }
+
+    public Double getTotalExcenta() {
+        return totalExcenta;
+    }
+
+    public void setTotalExcenta(Double totalExcenta) {
+        this.totalExcenta = totalExcenta;
+    }
+
+    public Double getDescuento() {
+        return descuento;
+    }
+
+    public void setDescuento(Double descuento) {
+        this.descuento = descuento;
+    }
+    
 
     @Override
     public int hashCode() {
