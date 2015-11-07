@@ -4,6 +4,7 @@
  */
 package py.com.ideaspymes.facilerp.stock.business.impl;
 
+import java.util.ArrayList;
 import java.util.Date;
 import py.com.ideaspymes.facilerp.generico.ABMService;
 import py.com.ideaspymes.facilerp.generico.QueryParameter;
@@ -13,14 +14,14 @@ import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import py.com.ideaspymes.facilerp.generico.ResolutorReferencia;
+import py.com.ideaspymes.facilerp.generico.exceptions.SinDetallesException;
 import py.com.ideaspymes.facilerp.pesistencia.stock.ComprobanteStock;
 import py.com.ideaspymes.facilerp.pesistencia.stock.Deposito;
 import py.com.ideaspymes.facilerp.pesistencia.stock.DetComprobanteStock;
-import py.com.ideaspymes.facilerp.pesistencia.stock.Ingrediente;
+import py.com.ideaspymes.facilerp.pesistencia.stock.LoteExistencia;
 import py.com.ideaspymes.facilerp.pesistencia.stock.MovimientoStockCompra;
 import py.com.ideaspymes.facilerp.pesistencia.stock.MovimientoStockVenta;
-import py.com.ideaspymes.facilerp.pesistencia.stock.Producto;
-import py.com.ideaspymes.facilerp.pesistencia.stock.enums.TipoProducto;
+import py.com.ideaspymes.facilerp.pesistencia.stock.enums.EstadoLote;
 import py.com.ideaspymes.facilerp.stock.business.interfaces.IComprobanteStockDAO;
 import py.com.ideaspymes.facilerp.stock.business.interfaces.IMovimientoStockDAO;
 
@@ -36,6 +37,7 @@ public class ComprobanteStockDAO implements IComprobanteStockDAO {
     private ABMService abmService;
     @EJB
     private IMovimientoStockDAO movimientoStockDAO;
+
     @EJB
     private ResolutorReferencia resolutorRef;
 
@@ -59,6 +61,45 @@ public class ComprobanteStockDAO implements IComprobanteStockDAO {
         }
 
         return c;
+    }
+
+    /**
+     *
+     * @param entity
+     * @param lotesPedientes
+     * @param usuario
+     * @return
+     */
+    @Override
+    public ComprobanteStock create(ComprobanteStock entity, List<LoteExistencia> lotesPedientes, String usuario) throws SinDetallesException {
+
+        entity.setDetalles(new ArrayList<DetComprobanteStock>());
+        for (LoteExistencia lt : lotesPedientes) {
+            if (lt.getEstado() == EstadoLote.PENDIENTE_CONFIRMACION) {
+                DetComprobanteStock ds = new DetComprobanteStock();
+                ds.setComprobanteStock(entity);
+                ds.setProducto(lt.getProducto());
+                ds.setUnidadMedida(lt.getUnidadMedida());
+                ds.setCantidad(lt.getCantidadIngresada());
+                ds.setValor(lt.getCosto());
+                entity.getDetalles().add(ds);
+            }
+        }
+
+        if (entity.getDetalles() == null || entity.getDetalles().isEmpty()) {
+            throw new SinDetallesException();
+        }
+
+        create(entity, usuario);
+
+        for (LoteExistencia lt : lotesPedientes) {
+            if (lt.getEstado() == EstadoLote.PENDIENTE_CONFIRMACION) {
+                lt.setEstado(EstadoLote.ABIERTO);
+                abmService.getEM().merge(lt);
+            }
+        }
+
+        return entity;
     }
 
     @Override

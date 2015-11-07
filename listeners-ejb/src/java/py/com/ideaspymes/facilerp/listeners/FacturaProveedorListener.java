@@ -16,6 +16,7 @@ import javax.enterprise.event.TransactionPhase;
 import py.com.ideaspymes.facilerp.business.interfaces.IConfiguracionDAO;
 import py.com.ideaspymes.facilerp.contabilidad.business.impl.EventoFP;
 import py.com.ideaspymes.facilerp.contabilidad.business.impl.EventoFacturaProveedor;
+import py.com.ideaspymes.facilerp.generico.exceptions.SinDetallesException;
 import py.com.ideaspymes.facilerp.pesistencia.contabilidad.DetFacturaProveedor;
 import py.com.ideaspymes.facilerp.pesistencia.stock.ComprobanteStock;
 import py.com.ideaspymes.facilerp.pesistencia.stock.Deposito;
@@ -44,7 +45,7 @@ public class FacturaProveedorListener {
     @EJB
     private ILoteExistenciaDAO loteExistenciaDAO;
 
-    public void creacionFacturaProveedor(@Observes(during = TransactionPhase.AFTER_SUCCESS) @EventoFP EventoFacturaProveedor event) {
+    public void creacionFacturaProveedor(@Observes(during = TransactionPhase.AFTER_SUCCESS) @EventoFP EventoFacturaProveedor event) throws SinDetallesException {
         System.out.println("En el listener : " + event.getFacturaProveedor());
         if (event.getFacturaProveedor() != null) {
 
@@ -67,6 +68,11 @@ public class FacturaProveedorListener {
                 }
 
                 Deposito defaultDeposito = getDepositoDefault();
+                for (LoteExistencia lt : listaACrear) {
+                    lt.setDeposito(defaultDeposito);
+                    loteExistenciaDAO.edit(lt, null);
+                }
+
                 ComprobanteStock c = new ComprobanteStock();
 
                 c.setTipo(TipoComprobanteStock.COMPRA);
@@ -75,24 +81,8 @@ public class FacturaProveedorListener {
                 c.setRefOrigen(event.getFacturaProveedor().getProveedor().getClass().getName() + ":" + event.getFacturaProveedor().getProveedor().getId());
                 c.setRefDestino(defaultDeposito.getClass().getName() + ":" + defaultDeposito.getId());
                 //c.setUsuario(credencial.getUsuario());
-                c.setDetalles(new ArrayList<DetComprobanteStock>());
-                for (LoteExistencia lt : listaACrear) {
-                    DetComprobanteStock ds = new DetComprobanteStock();
-                    ds.setComprobanteStock(c);
-                    ds.setProducto(lt.getProducto());
-                    ds.setUnidadMedida(lt.getUnidadMedida());
-                    ds.setCantidad(lt.getCantidadIngresada());
-                    ds.setValor(lt.getCosto());
-                    c.getDetalles().add(ds);
-                }
 
-                comprobanteStockDAO.create(c, "");
-
-                for (LoteExistencia lt : listaACrear) {
-                    lt.setDeposito(defaultDeposito);
-                    lt.setEstado(EstadoLote.ABIERTO);
-                    loteExistenciaDAO.edit(lt, null);
-                }
+                comprobanteStockDAO.create(c, listaACrear, "");
 
             }
 

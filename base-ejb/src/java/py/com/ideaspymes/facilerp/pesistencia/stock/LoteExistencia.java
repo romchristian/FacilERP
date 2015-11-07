@@ -35,7 +35,7 @@ public class LoteExistencia implements Serializable, Auditable {
     @Version
     private Long version;
     private String codigo;
-    @Temporal(javax.persistence.TemporalType.DATE)
+    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Date ingreso;
     private String ubicacion;
     private String refProveedor;
@@ -60,7 +60,7 @@ public class LoteExistencia implements Serializable, Auditable {
     @Enumerated(EnumType.STRING)
     private EstadoLote estado;
     @Transient
-    private boolean seleccionado;
+    private boolean seleccionado = false;
 
     @Override
     public Long getId() {
