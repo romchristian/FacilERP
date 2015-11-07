@@ -15,6 +15,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
+import javax.persistence.Transient;
 import javax.persistence.Version;
 import py.com.ideaspymes.facilerp.pesistencia.base.Auditable;
 import py.com.ideaspymes.facilerp.pesistencia.contabilidad.Proveedor;
@@ -58,9 +59,9 @@ public class LoteExistencia implements Serializable, Auditable {
     private Date vencimiento;
     @Enumerated(EnumType.STRING)
     private EstadoLote estado;
+    @Transient
+    private boolean seleccionado;
 
-    
-    
     @Override
     public Long getId() {
         return id;
@@ -215,8 +216,14 @@ public class LoteExistencia implements Serializable, Auditable {
         this.refFactura = refFactura;
     }
 
-    
-    
+    public boolean isSeleccionado() {
+        return seleccionado;
+    }
+
+    public void setSeleccionado(boolean seleccionado) {
+        this.seleccionado = seleccionado;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;

@@ -30,6 +30,7 @@ public class Producto implements Serializable, Auditable {
     private Long version;
     private String codigo;
     private String nombre;
+    @Enumerated(EnumType.STRING)
     private TipoProducto tipoProducto;
     @ManyToOne
     private Impuesto impuesto;

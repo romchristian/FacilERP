@@ -1,0 +1,99 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml"
+                xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:define name="content">
+
+        <h:form id="formList">
+            <div class="Container100 Responsive100">
+                <div class="ContainerIndent">
+                    <div class="Card ShadowEffect HeiAutoOnMobile">
+                        <h2 class="CardTopic"><i class="icon-google132 Fs20 Fleft MarRight10"></i>LISTADO DE LOTES PENDIENTES
+                          
+                        </h2>
+                        <div class="Separator"/>
+
+
+                        <p:dataTable value="#{loteExistenciaBean.pendientes}" var="l" paginator="true" rows="20" paginatorPosition="bottom" reflow="true"
+                                     selection="#{loteExistenciaBean.actual}"
+                                     rowKey="#{l.id}"
+                                     selectionMode="single"
+                                     id="tablaLotes">
+
+                            <p:column style="text-align: center">
+                                <f:facet name="header">
+                                    <p:selectBooleanCheckbox value="#{loteExistenciaBean.todos}">
+                                        <p:ajax listener="#{loteExistenciaBean.toggleTodos}" update="tablaLotes"/>
+                                    </p:selectBooleanCheckbox>
+                                </f:facet>
+                                
+                                <p:selectBooleanCheckbox value="#{l.seleccionado}"/>
+                            </p:column>
+                           
+             
+
+                            <p:column headerText="Ingreso">
+                                <h:outputText value="#{l.ingreso}">
+                                    <f:convertDateTime locale="#{formato.locale}" pattern="#{formato.patronFechaHora}"/>
+                                </h:outputText>
+                            </p:column>
+                            
+                            <p:column headerText="Cod.">
+                                <h:outputText value="#{l.codigo}"/>
+                            </p:column>
+                            
+                            <p:column headerText="Producto">
+                                <h:outputText value="#{l.producto==null?'':l.producto.nombre}"/>
+                            </p:column>
+                            
+                            <p:column headerText="Estado">
+                                <h:outputText value="#{l.estado}"/>
+                            </p:column>
+                            
+                            <p:column headerText="Depósito">
+                                <h:outputText value="#{l.deposito==null?'':l.deposito.nombre}"/>
+                            </p:column>
+                            
+                            <p:column headerText="Cant. Ingresada">
+                                <h:outputText value="#{l.cantidadIngresada}"/>
+                            </p:column>
+                            
+                            <p:column headerText="U.M.">
+                                <h:outputText value="#{l.unidadMedida == null?'':l.unidadMedida.nombre}"/>
+                            </p:column>
+                            <p:column headerText="Cant. Usada">
+                                <h:outputText value="#{l.cantidadUsada}"/>
+                            </p:column>
+                            
+                            <p:column headerText="Saldo">
+                                <h:outputText value="#{l.cantidadSaldo}"/>
+                            </p:column>
+                            
+                            <p:column headerText="Elaboración">
+                                <h:outputText value="#{l.elaboracion}">
+                                    <f:convertDateTime locale="#{formato.locale}" pattern="#{formato.patronFechaHora}"/>
+                                </h:outputText>
+                            </p:column>
+                            
+                            <p:column headerText="Vencimiento">
+                                <h:outputText value="#{l.vencimiento}">
+                                    <f:convertDateTime locale="#{formato.locale}" pattern="#{formato.patronFechaHora}"/>
+                                </h:outputText>
+                            </p:column>
+                            
+                            
+                        </p:dataTable>
+
+                    </div>
+                </div>
+            </div>
+        </h:form>
+
+
+    </ui:define>
+</ui:composition>
+
