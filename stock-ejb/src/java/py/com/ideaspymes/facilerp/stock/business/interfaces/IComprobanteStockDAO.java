@@ -9,7 +9,6 @@ import java.util.List;
 import javax.ejb.Local;
 import py.com.ideaspymes.facilerp.generico.AbstractDAO;
 import py.com.ideaspymes.facilerp.generico.QueryParameter;
-import py.com.ideaspymes.facilerp.generico.exceptions.SinDetallesException;
 import py.com.ideaspymes.facilerp.pesistencia.stock.ComprobanteStock;
 import py.com.ideaspymes.facilerp.pesistencia.stock.LoteExistencia;
 
@@ -23,7 +22,7 @@ public interface IComprobanteStockDAO extends AbstractDAO<ComprobanteStock> {
     @Override
     ComprobanteStock create(ComprobanteStock entity, String usuario);
 
-    ComprobanteStock create(ComprobanteStock entity, List<LoteExistencia> lotes,String usuario)  throws SinDetallesException;
+    ComprobanteStock create(ComprobanteStock entity, List<LoteExistencia> lotes,String usuario);
 
     @Override
     ComprobanteStock edit(ComprobanteStock entity, String usuario);

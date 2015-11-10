@@ -77,7 +77,7 @@ public class Deposito implements Serializable, Auditable {
 
     @Override
     public String toString() {
-        return "py.com.ideaspymes.facilerp.stock.persistencia.Deposito[ id=" + id + " ]";
+        return nombre;
     }
 
 }

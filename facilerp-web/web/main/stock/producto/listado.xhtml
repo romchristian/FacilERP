@@ -25,14 +25,18 @@
                                      selection="#{productoBean.actual}"
                                      rowKey="#{b.id}"
                                      selectionMode="single">
-
+                            
                             <p:ajax event="rowSelect"   update=":formList:createButton :formList:viewButton"/>
                             <p:ajax event="rowUnselect" update=":formList:createButton :formList:viewButton"/>
 
-                           
-
                             <p:column headerText="Nombre">
                                 <h:outputText value="#{b.nombre}"/>
+                            </p:column>
+                            <p:column headerText="Precio Venta">
+                                <h:outputText value="#{b.precioVenta}"/>
+                            </p:column>
+                             <p:column headerText="Stock">
+                                <h:outputText value="#{b.stock}"/>
                             </p:column>
                         </p:dataTable>
 

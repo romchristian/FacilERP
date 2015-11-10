@@ -32,19 +32,24 @@
                            
 
                             <p:column headerText="Fecha">
-                                <h:outputText value="#{f.fecha}">
+                                <h:outputText value="#{f.fechaEmision}">
                                     <f:convertDateTime locale="#{formato.locale}" pattern="#{formato.patronFecha}"/>
                                 </h:outputText>
                             </p:column>
-                            <p:column headerText="Estado">
-                                <h:outputText value="#{f.estado}"/>
+                            <p:column headerText="Nro">
+                                <h:outputText value="#{f.timbrado} / #{f.establecimiento} - #{f.puntoExpedicion} - #{f.numero}"/>
                             </p:column>
+                            
                             <p:column headerText="Proveedor">
                                 <h:outputText value="#{f.proveedor ==null ? '' : f.proveedor.nombres}"/>
                             </p:column>
                             
                             <p:column headerText="Total">
                                 <h:outputText value="#{f.total}"/>
+                            </p:column>
+                            
+                            <p:column headerText="Estado">
+                                <h:outputText value="#{f.estado}"/>
                             </p:column>
                         </p:dataTable>
 

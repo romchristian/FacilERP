@@ -29,7 +29,6 @@ import py.com.ideaspymes.facilerp.pesistencia.base.Auditable;
  */
 @Entity
 public class FacturaProveedor implements Serializable, Auditable {
-    
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -62,10 +61,9 @@ public class FacturaProveedor implements Serializable, Auditable {
     private Date fechaEmision;
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date fechaCancelacion;
-    @OneToMany(mappedBy = "facturaProveedor",cascade = CascadeType.ALL,orphanRemoval = true)
+    @OneToMany(mappedBy = "facturaProveedor", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<DetFacturaProveedor> detalles;
 
-    
     @Override
     public Long getId() {
         return id;
@@ -91,8 +89,6 @@ public class FacturaProveedor implements Serializable, Auditable {
         this.fecha = fecha;
     }
 
-    
-    
     public Date getFechaEmision() {
         return fechaEmision;
     }
@@ -109,8 +105,6 @@ public class FacturaProveedor implements Serializable, Auditable {
         this.fechaCancelacion = fechaCancelacion;
     }
 
-    
-    
     @Override
     public Long getVersion() {
         return version;
@@ -249,6 +243,13 @@ public class FacturaProveedor implements Serializable, Auditable {
     }
 
     public Double getTotal() {
+        total = 0d;
+        if (detalles != null) {
+            for (DetFacturaProveedor d : detalles) {
+                total += d.getTotal();
+            }
+        }
+
         return total;
     }
 

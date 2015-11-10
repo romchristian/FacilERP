@@ -71,7 +71,7 @@ public class ComprobanteStockDAO implements IComprobanteStockDAO {
      * @return
      */
     @Override
-    public ComprobanteStock create(ComprobanteStock entity, List<LoteExistencia> lotesPedientes, String usuario) throws SinDetallesException {
+    public ComprobanteStock create(ComprobanteStock entity, List<LoteExistencia> lotesPedientes, String usuario)  {
 
         entity.setDetalles(new ArrayList<DetComprobanteStock>());
         for (LoteExistencia lt : lotesPedientes) {
@@ -86,18 +86,15 @@ public class ComprobanteStockDAO implements IComprobanteStockDAO {
             }
         }
 
-        if (entity.getDetalles() == null || entity.getDetalles().isEmpty()) {
-            throw new SinDetallesException();
-        }
-
+        
         create(entity, usuario);
 
-        for (LoteExistencia lt : lotesPedientes) {
-            if (lt.getEstado() == EstadoLote.PENDIENTE_CONFIRMACION) {
-                lt.setEstado(EstadoLote.ABIERTO);
-                abmService.getEM().merge(lt);
-            }
-        }
+//        for (LoteExistencia lt : lotesPedientes) {
+//            if (lt.getEstado() == EstadoLote.PENDIENTE_CONFIRMACION) {
+//                lt.setEstado(EstadoLote.ABIERTO);
+//                abmService.getEM().merge(lt);
+//            }
+//        }
 
         return entity;
     }

@@ -45,7 +45,7 @@ public class FacturaProveedorListener {
     @EJB
     private ILoteExistenciaDAO loteExistenciaDAO;
 
-    public void creacionFacturaProveedor(@Observes(during = TransactionPhase.AFTER_SUCCESS) @EventoFP EventoFacturaProveedor event) throws SinDetallesException {
+    public void creacionFacturaProveedor(@Observes(during = TransactionPhase.AFTER_SUCCESS) @EventoFP EventoFacturaProveedor event) {
         System.out.println("En el listener : " + event.getFacturaProveedor());
         if (event.getFacturaProveedor() != null) {
 
@@ -67,26 +67,51 @@ public class FacturaProveedorListener {
                     }
                 }
 
-                Deposito defaultDeposito = getDepositoDefault();
-                for (LoteExistencia lt : listaACrear) {
-                    lt.setDeposito(defaultDeposito);
-                    loteExistenciaDAO.edit(lt, null);
+                if (!listaACrear.isEmpty()) {
+
+                    Deposito defaultDeposito = getDepositoDefault();
+
+                    ComprobanteStock c = new ComprobanteStock();
+
+                    c.setTipo(TipoComprobanteStock.COMPRA);
+                    c.setFecha(new Date());
+                    c.setRefDocumento(event.getFacturaProveedor().getClass().getName() + ":" + event.getFacturaProveedor().getId());
+                    c.setRefOrigen(event.getFacturaProveedor().getProveedor().getClass().getName() + ":" + event.getFacturaProveedor().getProveedor().getId());
+                    c.setRefDestino(defaultDeposito.getClass().getName() + ":" + defaultDeposito.getId());
+
+                    c = agregaDetalleDesdeLote(c, listaACrear);
+                    //c.setUsuario(credencial.getUsuario());
+
+                    comprobanteStockDAO.create(c, "");
+
+                    for (LoteExistencia lt : listaACrear) {
+                        lt.setDeposito(defaultDeposito);
+                        lt.setEstado(EstadoLote.ABIERTO);
+                        loteExistenciaDAO.edit(lt, "");
+                    }
+
                 }
-
-                ComprobanteStock c = new ComprobanteStock();
-
-                c.setTipo(TipoComprobanteStock.COMPRA);
-                c.setFecha(new Date());
-                c.setRefDocumento(event.getFacturaProveedor().getClass().getName() + ":" + event.getFacturaProveedor().getId());
-                c.setRefOrigen(event.getFacturaProveedor().getProveedor().getClass().getName() + ":" + event.getFacturaProveedor().getProveedor().getId());
-                c.setRefDestino(defaultDeposito.getClass().getName() + ":" + defaultDeposito.getId());
-                //c.setUsuario(credencial.getUsuario());
-
-                comprobanteStockDAO.create(c, listaACrear, "");
 
             }
 
         }
+    }
+
+    public ComprobanteStock agregaDetalleDesdeLote(ComprobanteStock entity, List<LoteExistencia> lotesPendientes) {
+        entity.setDetalles(new ArrayList<DetComprobanteStock>());
+        for (LoteExistencia lt : lotesPendientes) {
+            if (lt.getEstado() == EstadoLote.PENDIENTE_CONFIRMACION) {
+                DetComprobanteStock ds = new DetComprobanteStock();
+                ds.setComprobanteStock(entity);
+                ds.setProducto(lt.getProducto());
+                ds.setUnidadMedida(lt.getUnidadMedida());
+                ds.setCantidad(lt.getCantidadIngresada());
+                ds.setValor(lt.getCosto());
+                entity.getDetalles().add(ds);
+            }
+        }
+
+        return entity;
     }
 
     private LoteExistencia creaLote(DetFacturaProveedor d, EstadoLote estadoLote, Deposito dp) {

@@ -50,7 +50,9 @@
                                     </p:selectBooleanCheckbox>
                                 </f:facet>
 
-                                <p:selectBooleanCheckbox value="#{l.seleccionado}"/>
+                                <p:selectBooleanCheckbox value="#{l.seleccionado}">
+                                    <p:ajax process="@this" update="tablaLotes :formList:botones"/>
+                                </p:selectBooleanCheckbox>
                             </p:column>
 
 
