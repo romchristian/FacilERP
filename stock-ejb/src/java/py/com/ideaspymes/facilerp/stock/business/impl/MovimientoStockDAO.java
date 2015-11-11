@@ -8,6 +8,7 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
+import javax.persistence.LockModeType;
 import py.com.ideaspymes.facilerp.generico.ABMService;
 import py.com.ideaspymes.facilerp.pesistencia.stock.Deposito;
 import py.com.ideaspymes.facilerp.pesistencia.stock.Existencia;
@@ -69,6 +70,7 @@ public class MovimientoStockDAO implements IMovimientoStockDAO {
             System.out.println("Hizo el merge: " + e.getCantidad());
 
             afectaStock(p, um);
+             
 
         }
     }
@@ -83,9 +85,14 @@ public class MovimientoStockDAO implements IMovimientoStockDAO {
                         .setParameter("unidadmedida", um)
                         .getSingleResult();
 
+                p = abms.getEM().find(Producto.class, p.getId());
+                
                 p.setStock(cantidadAcumulada);
                 abms.getEM().merge(p);
+                
+                System.out.println("Afecte stock: " + cantidadAcumulada);
             } catch (Exception e) {
+                throw new RuntimeException(e);
             }
 
         }

@@ -114,6 +114,7 @@ public class LoteExistenciaBean extends BeanGenerico<LoteExistencia> implements 
             ejb.edit(l, credencial.getUsuario().getUsuario());
         }
         cancelaEdicion();
+        cargaPendientes();
     }
 
     public boolean isHaySeleccion() {
@@ -131,71 +132,54 @@ public class LoteExistenciaBean extends BeanGenerico<LoteExistencia> implements 
 
     public void generarComprobante() {
 
-        ComprobanteStock c = new ComprobanteStock();
-        c.setTipo(TipoComprobanteStock.COMPRA);
-        c.setFecha(new Date());
-        c.setRefDocumento("");
-        c.setRefOrigen("");
-        c.setRefDestino("");
 
-        c = agregaDetalleDesdeLote(c, pendientes);
-        System.out.println("Creo los detalles del comprobante a partir de los lotes!");
-        ejbComprobanteStockDAO.create(c, credencial.getUsuario().getUsuario());
+        
+        List<Deposito> depositos = new ArrayList<>();
 
-        for (LoteExistencia lt : pendientes) {
-            lt.setEstado(EstadoLote.ABIERTO);
-            ejbLoteExistenciaDAO.edit(lt, credencial.getUsuario().getUsuario());
-            System.out.println("Cambio estado de los lotes!");
+        for (LoteExistencia l : pendientes) {
+            if (l.isSeleccionado() && l.getDeposito() != null) {
+                System.out.println("Agrege deposito!");
+                depositos.add(l.getDeposito());
+            }
         }
 
-//        
-//        List<Deposito> depositos = new ArrayList<>();
-//
-//        for (LoteExistencia l : pendientes) {
-//            if (l.isSeleccionado() && l.getDeposito() != null) {
-//                System.out.println("Agrege deposito!");
-//                depositos.add(l.getDeposito());
-//            }
-//        }
-//
-//        for (Deposito d : depositos) {
-//            List<LoteExistencia> lotesACrear = new ArrayList<>();
-//
-//            String refProveedor = "";
-//            String refFactura = "";
-//            String refDeposito = d.getClass().getName() + ":" + d.getId();
-//            for (LoteExistencia l : pendientes) {
-//                System.out.println("Recorro lotes!");
-//                if (l.isSeleccionado() && d.equals(l.getDeposito())) {
-//                    System.out.println("Agrego el lote con el matcheo de deposito");
-//                    lotesACrear.add(l);
-//                    refProveedor = l.getRefProveedor();
-//                    refFactura = l.getRefFactura();
-//
-//                }
-//            }
-//
-//            if (!lotesACrear.isEmpty()) {
-//                System.out.println("Empiezo a crear el comprobante!");
-//                ComprobanteStock c = new ComprobanteStock();
-//                c.setTipo(TipoComprobanteStock.COMPRA);
-//                c.setFecha(new Date());
-//                c.setRefDocumento(refFactura);
-//                c.setRefOrigen(refProveedor);
-//                c.setRefDestino(refDeposito);
-//
-//                c = agregaDetalleDesdeLote(c, lotesACrear);
-//                System.out.println("Creo los detalles del comprobante a partir de los lotes!");
-//                ejbComprobanteStockDAO.create(c, credencial.getUsuario().getUsuario());
-//                System.out.println("Despues de crear el comprobante!");
-//
-//                for (LoteExistencia lt : lotesACrear) {
-//                    lt.setEstado(EstadoLote.ABIERTO);
-//                    ejbLoteExistenciaDAO.edit(lt, credencial.getUsuario().getUsuario());
-//                    System.out.println("Cambio estado de los lotes!");
-//                }
-//            }
-//        }
+        for (Deposito d : depositos) {
+            List<LoteExistencia> lotesACrear = new ArrayList<>();
+
+            String refProveedor = "";
+            String refFactura = "";
+            String refDeposito = d.getClass().getName() + ":" + d.getId();
+            for (LoteExistencia l : pendientes) {
+                System.out.println("Recorro lotes!");
+                if (l.isSeleccionado() && d.equals(l.getDeposito())) {
+                    System.out.println("Agrego el lote con el matcheo de deposito");
+                    lotesACrear.add(l);
+                    refProveedor = l.getRefProveedor();
+                    refFactura = l.getRefFactura();
+
+                }
+            }
+
+            if (!lotesACrear.isEmpty()) {
+                System.out.println("Empiezo a crear el comprobante!");
+                ComprobanteStock c = new ComprobanteStock();
+                c.setTipo(TipoComprobanteStock.COMPRA);
+                c.setFecha(new Date());
+                c.setRefDocumento(refFactura);
+                c.setRefOrigen(refProveedor);
+                c.setRefDestino(refDeposito);
+
+                c = agregaDetalleDesdeLote(c, lotesACrear);  
+                ejbComprobanteStockDAO.create(c, credencial.getUsuario().getUsuario());
+                System.out.println("Despues de crear el comprobante!");
+
+                for (LoteExistencia lt : lotesACrear) {
+                    lt.setEstado(EstadoLote.ABIERTO);
+                    ejbLoteExistenciaDAO.edit(lt, credencial.getUsuario().getUsuario());
+                    System.out.println("Cambio estado de los lotes!");
+                }
+            }
+        }
         cargaPendientes();
     }
 
