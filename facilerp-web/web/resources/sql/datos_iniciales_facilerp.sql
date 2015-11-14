@@ -18,3 +18,14 @@ CREATE OR REPLACE VIEW users AS SELECT usuario AS userid, clave AS password FROM
 ALTER TABLE users OWNER TO postgres;
 
 insert into configuracion(modulo,nombreclave,nombre,opciones,valor, version) values ('stock','MULTIPLE_DEPOSITO','Multiple depósitos','INHABILITADO,HABILITADO','INHABILITADO',1);
+
+insert into salon (descripcion,version) values('interior',1);
+insert into mesa(descripcion,capacidad,estado,numero,version,salon_id) values ('Mesa',2,'SIN_ASIGNAR',1,1,1);
+insert into mesa(descripcion,capacidad,estado,numero,version,salon_id) values ('Mesa',4,'SIN_ASIGNAR',2,1,1);
+insert into mesa(descripcion,capacidad,estado,numero,version,salon_id) values ('Mesa',4,'SIN_ASIGNAR',3,1,1);
+insert into mesa(descripcion,capacidad,estado,numero,version,salon_id) values ('Mesa',2,'SIN_ASIGNAR',4,1,1);
+insert into mesa(descripcion,capacidad,estado,numero,version,salon_id) values ('Mesa',6,'SIN_ASIGNAR',5,1,1);
+insert into mesa(descripcion,capacidad,estado,numero,version,salon_id) values ('Mesa',4,'SIN_ASIGNAR',6,1,1);
+insert into mesa(descripcion,capacidad,estado,numero,version,salon_id) values ('Mesa',2,'SIN_ASIGNAR',7,1,1);
+insert into mesa(descripcion,capacidad,estado,numero,version,salon_id) values ('Mesa',6,'SIN_ASIGNAR',8,1,1);
+insert into mesa(descripcion,capacidad,estado,numero,version,salon_id) values ('Mesa',2,'SIN_ASIGNAR',9,1,1);
