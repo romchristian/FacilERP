@@ -19,4 +19,7 @@
   <module>
     <ejb>listeners-ejb.jar</ejb>
   </module>
+  <module>
+    <ejb>puntaventa-ejb.jar</ejb>
+  </module>
 </application>
