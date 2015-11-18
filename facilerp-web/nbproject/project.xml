@@ -6,9 +6,6 @@
             <name>facilerp-web</name>
             <minimum-ant-version>1.6.5</minimum-ant-version>
             <web-module-libraries>
-                <library dirs="100">
-                    <file>${reference.base-ejb.dist}</file>
-                </library>
                 <library dirs="200">
                     <file>${libs.PrimeFaces-5.2.classpath}</file>
                     <path-in-war>WEB-INF/lib</path-in-war>
@@ -31,6 +28,12 @@
                     <file>${file.reference.omnifaces-2.0.jar}</file>
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
+                <library dirs="100">
+                    <file>${reference.base-ejb.dist}</file>
+                </library>
+                <library dirs="100">
+                    <file>${reference.puntaventa-ejb.dist}</file>
+                </library>
             </web-module-libraries>
             <web-module-additional-libraries/>
             <source-roots>
@@ -51,6 +54,14 @@
             </reference>
             <reference>
                 <foreign-project>contabilidad-ejb</foreign-project>
+                <artifact-type>jar</artifact-type>
+                <script>build.xml</script>
+                <target>dist</target>
+                <clean-target>clean</clean-target>
+                <id>dist</id>
+            </reference>
+            <reference>
+                <foreign-project>puntaventa-ejb</foreign-project>
                 <artifact-type>jar</artifact-type>
                 <script>build.xml</script>
                 <target>dist</target>

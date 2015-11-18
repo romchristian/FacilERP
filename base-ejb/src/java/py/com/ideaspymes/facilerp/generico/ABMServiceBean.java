@@ -66,7 +66,7 @@ public class ABMServiceBean implements ABMService {
             preparaRegistro(t, "CREATE/UPDATE", usuario);
 
         } catch (OptimisticLockException e) {
-            return null;
+            throw new RuntimeException(e);
         }
         return t;
     }
