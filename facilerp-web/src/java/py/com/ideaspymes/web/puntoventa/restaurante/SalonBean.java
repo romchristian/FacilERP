@@ -15,6 +15,7 @@ import py.com.ideaspymes.facilerp.puntoventa.restaurant.business.interfaces.ISal
 
 import py.com.ideaspymes.web.generico.BeanGenerico;
 
+
 /**
  *
  * @author christian

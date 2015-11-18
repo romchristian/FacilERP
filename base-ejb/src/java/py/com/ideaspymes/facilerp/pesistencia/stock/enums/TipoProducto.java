@@ -10,5 +10,5 @@ package py.com.ideaspymes.facilerp.pesistencia.stock.enums;
  * @author Acer
  */
 public enum TipoProducto {
-    ELABORACION_PREVIA, MATERIA_PRIMA, ELABORACION_EN_CANTINA
+    ELABORACION_PREVIA, MATERIA_PRIMA, ELABORACION_EN_CANTINA,PRODUCTO_ALMACENABLE
 }

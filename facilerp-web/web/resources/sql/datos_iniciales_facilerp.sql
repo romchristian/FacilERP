@@ -10,6 +10,32 @@ insert into deposito(nombre,version) values ('Deposito 2',1);
 
 insert into producto(codigo,nombre,tipoproducto,impuesto_id,unidadmedidabase_id,costo,precioventa,inventariable,tienevencimiento,estado,version)
 values ('001','Azucar','MATERIA_PRIMA',1,1,10000,15000,true,true,'ACTIVO',1);
+insert into producto(codigo,nombre,tipoproducto,impuesto_id,unidadmedidabase_id,costo,precioventa,inventariable,tienevencimiento,estado,version)
+values ('002','Habano 1','PRODUCTO_ALMACENABLE',1,1,10000,15000,true,true,'ACTIVO',1);
+insert into producto(codigo,nombre,tipoproducto,impuesto_id,unidadmedidabase_id,costo,precioventa,inventariable,tienevencimiento,estado,version)
+values ('003','Habano 2','PRODUCTO_ALMACENABLE',1,1,10000,15000,true,true,'ACTIVO',1);
+insert into producto(codigo,nombre,tipoproducto,impuesto_id,unidadmedidabase_id,costo,precioventa,inventariable,tienevencimiento,estado,version)
+values ('004','Habano 3','PRODUCTO_ALMACENABLE',1,1,10000,15000,true,true,'ACTIVO',1);
+insert into producto(codigo,nombre,tipoproducto,impuesto_id,unidadmedidabase_id,costo,precioventa,inventariable,tienevencimiento,estado,version)
+values ('005','Chocolate 1','PRODUCTO_ALMACENABLE',1,1,10000,15000,true,true,'ACTIVO',1);
+insert into producto(codigo,nombre,tipoproducto,impuesto_id,unidadmedidabase_id,costo,precioventa,inventariable,tienevencimiento,estado,version)
+values ('006','Cafe expresso','ELABORACION_EN_CANTINA',1,1,10000,15000,true,true,'ACTIVO',1);
+insert into producto(codigo,nombre,tipoproducto,impuesto_id,unidadmedidabase_id,costo,precioventa,inventariable,tienevencimiento,estado,version)
+values ('007','Capuccino','ELABORACION_EN_CANTINA',1,1,10000,15000,true,true,'ACTIVO',1);
+insert into producto(codigo,nombre,tipoproducto,impuesto_id,unidadmedidabase_id,costo,precioventa,inventariable,tienevencimiento,estado,version)
+values ('008','Ron','ELABORACION_EN_CANTINA',1,1,10000,15000,true,true,'ACTIVO',1);
+insert into producto(codigo,nombre,tipoproducto,impuesto_id,unidadmedidabase_id,costo,precioventa,inventariable,tienevencimiento,estado,version)
+values ('009','Trago 1','ELABORACION_EN_CANTINA',1,1,10000,15000,true,true,'ACTIVO',1);
+insert into producto(codigo,nombre,tipoproducto,impuesto_id,unidadmedidabase_id,costo,precioventa,inventariable,tienevencimiento,estado,version)
+values ('010','Trago 2','ELABORACION_EN_CANTINA',1,1,10000,15000,true,true,'ACTIVO',1);
+insert into producto(codigo,nombre,tipoproducto,impuesto_id,unidadmedidabase_id,costo,precioventa,inventariable,tienevencimiento,estado,version)
+values ('011','Trago 3','ELABORACION_EN_CANTINA',1,1,10000,15000,true,true,'ACTIVO',1);
+insert into producto(codigo,nombre,tipoproducto,impuesto_id,unidadmedidabase_id,costo,precioventa,inventariable,tienevencimiento,estado,version)
+values ('012','Trago 4','ELABORACION_EN_CANTINA',1,1,10000,15000,true,true,'ACTIVO',1);
+insert into producto(codigo,nombre,tipoproducto,impuesto_id,unidadmedidabase_id,costo,precioventa,inventariable,tienevencimiento,estado,version)
+values ('013','Trago 5','ELABORACION_EN_CANTINA',1,1,10000,15000,true,true,'ACTIVO',1);
+
+
 
 
 CREATE OR REPLACE VIEW groups AS select cast(lower(r.nombre) as character varying(255)) AS groupid, p.usuario AS userid from persona_rol pr join rol r on r.id = pr.roles_id join persona p on p.id = pr.usuarios_id;

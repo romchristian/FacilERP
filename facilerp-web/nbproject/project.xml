@@ -6,10 +6,6 @@
             <name>facilerp-web</name>
             <minimum-ant-version>1.6.5</minimum-ant-version>
             <web-module-libraries>
-                <library dirs="200">
-                    <file>${libs.PrimeFaces-5.2.classpath}</file>
-                    <path-in-war>WEB-INF/lib</path-in-war>
-                </library>
                 <library dirs="100">
                     <file>${reference.stock-ejb.dist}</file>
                 </library>
@@ -20,6 +16,12 @@
                     <file>${file.reference.rio-theme-2.0.jar}</file>
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
+                <library dirs="100">
+                    <file>${reference.contabilidad-ejb.dist}</file>
+                </library>
+                <library dirs="100">
+                    <file>${reference.base-ejb.dist}</file>
+                </library>
                 <library dirs="200">
                     <file>${file.reference.cdi-api-1.1-20130918.jar}</file>
                     <path-in-war>WEB-INF/lib</path-in-war>
@@ -29,10 +31,11 @@
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
                 <library dirs="100">
-                    <file>${reference.base-ejb.dist}</file>
-                </library>
-                <library dirs="100">
                     <file>${reference.puntaventa-ejb.dist}</file>
+                </library>
+                <library dirs="200">
+                    <file>${libs.PrimeFaces-5.3.classpath}</file>
+                    <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
             </web-module-libraries>
             <web-module-additional-libraries/>
