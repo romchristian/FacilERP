@@ -17,14 +17,7 @@
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
                 <library dirs="100">
-                    <file>${reference.contabilidad-ejb.dist}</file>
-                </library>
-                <library dirs="100">
                     <file>${reference.base-ejb.dist}</file>
-                </library>
-                <library dirs="200">
-                    <file>${file.reference.cdi-api-1.1-20130918.jar}</file>
-                    <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
                 <library dirs="200">
                     <file>${file.reference.omnifaces-2.0.jar}</file>
@@ -34,7 +27,11 @@
                     <file>${reference.puntaventa-ejb.dist}</file>
                 </library>
                 <library dirs="200">
-                    <file>${libs.PrimeFaces-5.3.classpath}</file>
+                    <file>${libs.PrimeFaces_5.3.classpath}</file>
+                    <path-in-war>WEB-INF/lib</path-in-war>
+                </library>
+                <library dirs="200">
+                    <file>${file.reference.cdi-api-1.1.jar}</file>
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
             </web-module-libraries>
