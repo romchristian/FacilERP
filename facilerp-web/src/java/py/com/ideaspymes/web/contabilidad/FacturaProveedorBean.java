@@ -17,7 +17,6 @@ import py.com.ideaspymes.facilerp.contabilidad.business.interfaces.IFacturaProve
 import py.com.ideaspymes.facilerp.generico.AbstractDAO;
 import py.com.ideaspymes.facilerp.pesistencia.contabilidad.DetFacturaProveedor;
 import py.com.ideaspymes.facilerp.pesistencia.contabilidad.FacturaProveedor;
-import py.com.ideaspymes.facilerp.pesistencia.stock.Ingrediente;
 import py.com.ideaspymes.facilerp.pesistencia.stock.Producto;
 import py.com.ideaspymes.web.generico.BeanGenerico;
 

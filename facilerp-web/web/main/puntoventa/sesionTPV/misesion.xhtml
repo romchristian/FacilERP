@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml"
+                xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:define name="content">
+
+        <h:form id="formList">
+            <div class="Container100 Responsive100">
+                <div class="ContainerIndent">
+                    <div class="Card ShadowEffect HeiAutoOnMobile">
+                        <h2 class="CardTopic"><i class="icon-google132 Fs20 Fleft MarRight10"></i>LISTADO DE BANCOS
+                            
+                           
+                        </h2>
+                        <div class="Separator"/>
+
+                        <p:selectOneMenu value="#{sesionTPVBean.puntoVenta}">
+                            <f:selectItems value="#{puntoVentaBean.itemsAvailableSelectOne}"/>
+                        </p:selectOneMenu>
+                        <p:commandButton value="Abrir Sesion" action="#{sesionTPVBean.abrirSesion()}"/>
+                        
+                            
+
+                    </div>
+                </div>
+            </div>
+        </h:form>
+
+
+    </ui:define>
+</ui:composition>
+
