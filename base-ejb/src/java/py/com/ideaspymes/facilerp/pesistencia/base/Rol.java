@@ -26,8 +26,8 @@ public class Rol implements Serializable, Auditable{
     private String nombre;
     @Enumerated(EnumType.STRING)
     private Estado estado;
-    @ManyToMany(mappedBy = "roles")
-    private List<Usuario> usuarios;
+    @OneToMany(mappedBy = "rol")
+    private List<Permiso> permisos;
     
 
     public Rol() {
@@ -76,12 +76,12 @@ public class Rol implements Serializable, Auditable{
         this.version = version;
     }
 
-    public List<Usuario> getUsuarios() {
-        return usuarios;
+    public List<Permiso> getPermisos() {
+        return permisos;
     }
 
-    public void setUsuarios(List<Usuario> usuarios) {
-        this.usuarios = usuarios;
+    public void setPermisos(List<Permiso> permisos) {
+        this.permisos = permisos;
     }
 
     @Override

@@ -5,12 +5,12 @@
 package py.com.ideaspymes.facilerp.pesistencia.base;
 
 
-import java.util.ArrayList;
+import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
+import java.util.Objects;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import py.com.ideaspymes.facilerp.pesistencia.base.enums.TipoDocumento;
+import py.com.ideaspymes.facilerp.pesistencia.base.enums.Estado;
 
 
 /**
@@ -18,18 +18,24 @@ import py.com.ideaspymes.facilerp.pesistencia.base.enums.TipoDocumento;
  * @author elias
  */
 @Entity
-public class Usuario extends Persona{
-    
-    private String nombre;
-    private String apellido;
+public class Usuario implements Serializable, Auditable{
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @Version
+    private Long version;
+    private String nombres;
+    private String apellidos;
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date fechaNacimiento;
     @NotNull
     private String usuario;
     @NotNull
     private String clave;
-    @ManyToMany
-    private List<Rol> roles;
+    @ManyToOne
+    private Rol rol;
+    @Enumerated(EnumType.STRING)
+    private Estado estado;
     
     @Transient
     private String plainClave;
@@ -37,14 +43,24 @@ public class Usuario extends Persona{
     public Usuario() {
     }
 
-    public Usuario(String nombre, String apellido, Date fechaNacimiento, String usuario, String clave,TipoDocumento tipoDocumento, String nroDocumento) {
-        super(tipoDocumento, nroDocumento);
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.fechaNacimiento = fechaNacimiento;
-        this.usuario = usuario;
-        this.clave = Encryptador.encrypta(clave);
+    @Override
+    public Long getId() {
+        return id;
     }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    @Override
+    public Long getVersion() {
+        return version;
+    }
+
+    public void setVersion(Long version) {
+        this.version = version;
+    }
+
 
     public String getPlainClave() {
         return plainClave;
@@ -52,9 +68,7 @@ public class Usuario extends Persona{
 
     public void setPlainClave(String plainClave) {
         this.plainClave = plainClave;
-    }
-    
-   
+    }   
 
     public String getClave() {
         return clave;
@@ -73,20 +87,20 @@ public class Usuario extends Persona{
         this.usuario = usuario;
     }
 
-    public void setApellido(String apellido) {
-        this.apellido = apellido;
+    public void setApellidos(String apellidos) {
+        this.apellidos = apellidos;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setNombres(String nombres) {
+        this.nombres = nombres;
     }
 
-    public String getNombre() {
-        return this.nombre;
+    public String getNombres() {
+        return this.nombres;
     }
 
-    public String getApellido() {
-        return this.apellido;
+    public String getApellidos() {
+        return this.apellidos;
     }
 
     public Date getFechaNacimiento() {
@@ -97,21 +111,53 @@ public class Usuario extends Persona{
         this.fechaNacimiento = fechaNacimiento;
     }
 
-    public List<Rol> getRoles() {
-        if(roles == null)
-            roles = new ArrayList<>();
-        return roles;
+    public Rol getRol() {
+        return rol;
     }
 
-    public void setRoles(List<Rol> roles) {
-        this.roles = roles;
+    public void setRol(Rol rol) {
+        this.rol = rol;
     }
 
-    @Override
-    public String toString() {
-        return nombre + " " + apellido;
+    public Estado getEstado() {
+        return estado;
+    }
+
+    public void setEstado(Estado estado) {
+        this.estado = estado;
     }
 
     
+
+    @Override
+    public String toString() {
+        return nombres + " " + apellidos;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 23 * hash + Objects.hashCode(this.id);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Usuario other = (Usuario) obj;
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        return true;
+    }
+
+    
+
+      
     
 }

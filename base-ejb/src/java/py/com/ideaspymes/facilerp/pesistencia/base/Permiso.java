@@ -3,27 +3,22 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package py.com.ideaspymes.facilerp.pesistencia.puntoventa.general;
+package py.com.ideaspymes.facilerp.pesistencia.base;
 
 import java.io.Serializable;
-import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Version;
-import py.com.ideaspymes.facilerp.pesistencia.base.Auditable;
-import py.com.ideaspymes.facilerp.pesistencia.base.Secuencia;
-import py.com.ideaspymes.facilerp.pesistencia.base.Usuario;
 
 /**
  *
  * @author Acer
  */
 @Entity
-public class PuntoVenta implements Serializable, Auditable {
-
+public class Permiso implements Serializable, Auditable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,8 +27,8 @@ public class PuntoVenta implements Serializable, Auditable {
     private Long version;
     private String nombre;
     @ManyToOne
-    private Secuencia secuencia;
-    
+    private Rol rol;
+
     @Override
     public Long getId() {
         return id;
@@ -60,27 +55,37 @@ public class PuntoVenta implements Serializable, Auditable {
         this.nombre = nombre;
     }
 
+    public Rol getRol() {
+        return rol;
+    }
+
+    public void setRol(Rol rol) {
+        this.rol = rol;
+    }
+
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 89 * hash + Objects.hashCode(this.id);
+        int hash = 0;
+        hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof Permiso)) {
             return false;
         }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final PuntoVenta other = (PuntoVenta) obj;
-        if (!Objects.equals(this.id, other.id)) {
+        Permiso other = (Permiso) object;
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
         return true;
     }
-    
+
+    @Override
+    public String toString() {
+        return "py.com.ideaspymes.facilerp.pesistencia.base.Permiso[ id=" + id + " ]";
+    }
     
 }

@@ -11,7 +11,7 @@
             <li>
                 <a class="menulink ripplelink">
                     <i class="icon-round58 Fs40"></i>
-                    <span class="Fs18">#{request.userPrincipal}<i class="icon-downwards Fright Fs20"></i><br /><span class="Fs12 FontRobotoLight">#{credencial.usuario.nombre}</span></span>
+                    <span class="Fs18">#{request.userPrincipal}<i class="icon-downwards Fright Fs20"></i><br /><span class="Fs12 FontRobotoLight">#{credencial.usuario.nombres} #{credencial.usuario.apellidos}</span></span>
                 </a>
 
                 <ul>
@@ -30,6 +30,7 @@
             <p:submenu id="rm_theme1" label="Base" icon="icon-mountains14">
                 <p:menuitem id="rm_banco" value="Bancos" icon="icon-browser" outcome="/main/base/banco/listado" />
                 <p:menuitem id="rm_impuesto" value="Impuestos" icon="icon-browser" outcome="/main/base/impuesto/listado" />
+                <p:menuitem id="rm_secuencia" value="Secuencias" icon="icon-browser" outcome="/main/base/secuencia/listado" />
             </p:submenu>
             
             <p:submenu id="rm_pdv" label="Punto de venta" icon="icon-mountains14">
