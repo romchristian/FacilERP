@@ -4,41 +4,41 @@
  */
 package py.com.ideaspymes.facilerp.pesistencia.base;
 
-
 import py.com.ideaspymes.facilerp.pesistencia.base.enums.Estado;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.*;
 
-
 /**
  *
- * @author cromero
+ * @author Acer
  */
 @Entity
-public class Rol implements Serializable, Auditable{
-    
+public class Rol implements Serializable, Auditable {
+
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Version
     private Long version;
+    
+    @ManyToOne
+    private Modulo modulo;
     private String nombre;
     @Enumerated(EnumType.STRING)
     private Estado estado;
     @OneToMany(mappedBy = "rol")
     private List<Permiso> permisos;
-    
 
     public Rol() {
         this.estado = Estado.ACTIVO;
     }
 
-    public Rol (String nombre) {
+    public Rol(String nombre) {
         this();
         this.nombre = nombre;
     }
-    
+
     @Override
     public Long getId() {
         return id;
@@ -48,8 +48,14 @@ public class Rol implements Serializable, Auditable{
         this.id = id;
     }
 
-    
-    
+    public Modulo getModulo() {
+        return modulo;
+    }
+
+    public void setModulo(Modulo modulo) {
+        this.modulo = modulo;
+    }
+
     public String getNombre() {
         return nombre;
     }
@@ -58,7 +64,6 @@ public class Rol implements Serializable, Auditable{
         this.nombre = nombre;
     }
 
-    
     public Estado getEstado() {
         return estado;
     }
@@ -105,5 +110,5 @@ public class Rol implements Serializable, Auditable{
         hash = 43 * hash + (this.id != null ? this.id.hashCode() : 0);
         return hash;
     }
-    
+
 }
