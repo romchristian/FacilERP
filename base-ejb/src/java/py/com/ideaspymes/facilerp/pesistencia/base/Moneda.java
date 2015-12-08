@@ -4,9 +4,11 @@
  */
 package py.com.ideaspymes.facilerp.pesistencia.base;
 
+import py.com.ideaspymes.facilerp.generico.Auditable;
 import py.com.ideaspymes.facilerp.pesistencia.base.enums.Estado;
 import java.io.Serializable;
 import javax.persistence.*;
+import py.com.ideaspymes.facilerp.generico.ConfigModulo;
 
 
 /**
@@ -124,5 +126,10 @@ public class Moneda implements Serializable,Auditable {
     @Override
     public String toString() {
         return nombre;
+    }
+
+    @Override
+    public String getNombreModulo() {
+       return ConfigModulo.MODULO_BASE;
     }
 }

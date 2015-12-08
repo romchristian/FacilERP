@@ -14,6 +14,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
+import javax.persistence.Version;
+import py.com.ideaspymes.facilerp.generico.Auditable;
+import py.com.ideaspymes.facilerp.generico.ConfigModulo;
 import py.com.ideaspymes.facilerp.pesistencia.base.enums.Estado;
 import py.com.ideaspymes.facilerp.pesistencia.base.enums.TipoSecuencia;
 
@@ -22,12 +25,14 @@ import py.com.ideaspymes.facilerp.pesistencia.base.enums.TipoSecuencia;
  * @author Acer
  */
 @Entity
-public class Secuencia implements Serializable {
+public class Secuencia implements Serializable, Auditable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Version
+    private Long version;
     private String nombre;
     private String timbrado;
     private String establecimiento;
@@ -50,7 +55,6 @@ public class Secuencia implements Serializable {
         this.valorFinal = valorFinal == null ? 0L : valorFinal;
         ultimoNumero = 0L;
     }
-    
 
 //    public CuentaBancaria getCuentaBancaria() {
 //        return cuentaBancaria;
@@ -59,7 +63,6 @@ public class Secuencia implements Serializable {
 //    public void setCuentaBancaria(CuentaBancaria cuentaBancaria) {
 //        this.cuentaBancaria = cuentaBancaria;
 //    }
-
     public String getSerie() {
         return serie;
     }
@@ -68,10 +71,9 @@ public class Secuencia implements Serializable {
         this.serie = serie;
     }
 
-    
     public String getNumeroFormateado(Long num) {
-      
-        String valor = num+"";
+
+        String valor = num + "";
         int tamaño = valor.length();
         if (tamaño == 1) {
             valor = "000000" + valor;
@@ -89,12 +91,22 @@ public class Secuencia implements Serializable {
         return valor;
     }
 
+    @Override
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    @Override
+    public Long getVersion() {
+        return version;
+    }
+
+    public void setVersion(Long version) {
+        this.version = version;
     }
 
     public String getNombre() {
@@ -157,11 +169,11 @@ public class Secuencia implements Serializable {
         if (valorFinal > 0 && valorFinal < (ultimoNumero + 1)) {
             return null;
         }
-        if(ultimoNumero == 0){
+        if (ultimoNumero == 0) {
             return valorInicial;
-            
+
         } else {
-            return  ultimoNumero +1;
+            return ultimoNumero + 1;
         }
     }
 
@@ -223,5 +235,10 @@ public class Secuencia implements Serializable {
     @Override
     public String toString() {
         return nombre;
+    }
+
+    @Override
+    public String getNombreModulo() {
+        return ConfigModulo.MODULO_BASE;
     }
 }

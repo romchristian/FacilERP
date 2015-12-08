@@ -13,7 +13,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Version;
-import py.com.ideaspymes.facilerp.pesistencia.base.Auditable;
+import py.com.ideaspymes.facilerp.generico.Auditable;
+import py.com.ideaspymes.facilerp.generico.ConfigModulo;
 
 /**
  *
@@ -149,4 +150,8 @@ public class FacturaVentaDetalle implements Serializable,Auditable {
         return true;
     }
 
+    @Override
+    public String getNombreModulo() {
+       return ConfigModulo.MODULO_CONTABILIDAD;
+    }
 }

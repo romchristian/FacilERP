@@ -17,7 +17,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.Version;
-import py.com.ideaspymes.facilerp.pesistencia.base.Auditable;
+import py.com.ideaspymes.facilerp.generico.Auditable;
+import py.com.ideaspymes.facilerp.generico.ConfigModulo;
 import py.com.ideaspymes.facilerp.pesistencia.base.Moneda;
 import py.com.ideaspymes.facilerp.pesistencia.base.Usuario;
 import py.com.ideaspymes.facilerp.pesistencia.base.enums.TipoMovimiento;
@@ -157,5 +158,9 @@ public class MovimientoTPV implements Serializable, Auditable {
         return true;
     }
     
-    
+
+    @Override
+    public String getNombreModulo() {
+       return ConfigModulo.MODULO_PUNTO_VENTA;
+    }
 }

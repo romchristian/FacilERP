@@ -8,7 +8,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.*;
-import py.com.ideaspymes.facilerp.pesistencia.base.Auditable;
+import py.com.ideaspymes.facilerp.generico.Auditable;
+import py.com.ideaspymes.facilerp.generico.ConfigModulo;
 import py.com.ideaspymes.facilerp.pesistencia.base.enums.Estado;
 import py.com.ideaspymes.facilerp.pesistencia.base.Impuesto;
 import py.com.ideaspymes.facilerp.pesistencia.stock.enums.TipoCosto;
@@ -312,5 +313,10 @@ public class Producto implements Serializable, Auditable {
     @Override
     public String toString() {
         return "py.gestionpymes.jpa.stock.Producto[id=" + id + "]";
+    }
+
+    @Override
+    public String getNombreModulo() {
+       return ConfigModulo.MODULO_STOCK;
     }
 }

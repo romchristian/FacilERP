@@ -4,6 +4,7 @@
  */
 package py.com.ideaspymes.facilerp.pesistencia.base;
 
+import py.com.ideaspymes.facilerp.generico.Auditable;
 import py.com.ideaspymes.facilerp.pesistencia.base.enums.Estado;
 import java.io.Serializable;
 import javax.persistence.Entity;
@@ -13,6 +14,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import py.com.ideaspymes.facilerp.generico.ConfigModulo;
 import py.com.ideaspymes.facilerp.pesistencia.base.enums.TipoDireccion;
 
 
@@ -154,5 +156,10 @@ public class Direccion implements Serializable,Auditable {
     @Override
     public Long getVersion() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    @Override
+    public String getNombreModulo() {
+       return ConfigModulo.MODULO_BASE;
     }
 }

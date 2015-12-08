@@ -5,6 +5,7 @@
  */
 package py.com.ideaspymes.facilerp.pesistencia.base;
 
+import py.com.ideaspymes.facilerp.generico.Auditable;
 import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -49,7 +50,7 @@ public class Configuracion implements Serializable, Auditable {
         this.version = version;
     }
 
-    public String getModulo() {
+    public String getNombreModulo() {
         return modulo;
     }
 

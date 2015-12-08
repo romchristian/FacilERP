@@ -5,11 +5,14 @@
 package py.com.ideaspymes.facilerp.pesistencia.base;
 
 
+import py.com.ideaspymes.facilerp.generico.Auditable;
+import py.com.ideaspymes.facilerp.generico.Encryptador;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import py.com.ideaspymes.facilerp.generico.ConfigModulo;
 import py.com.ideaspymes.facilerp.pesistencia.base.enums.Estado;
 
 
@@ -156,7 +159,10 @@ public class Usuario implements Serializable, Auditable{
         return true;
     }
 
-    
+    @Override
+    public String getNombreModulo() {
+       return ConfigModulo.MODULO_BASE;
+    }
 
       
     

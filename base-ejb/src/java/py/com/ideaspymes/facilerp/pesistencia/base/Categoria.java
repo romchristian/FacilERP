@@ -4,8 +4,10 @@
  */
 package py.com.ideaspymes.facilerp.pesistencia.base;
 
+import py.com.ideaspymes.facilerp.generico.Auditable;
 import java.io.Serializable;
 import javax.persistence.*;
+import py.com.ideaspymes.facilerp.generico.ConfigModulo;
 
 /**
  *
@@ -104,6 +106,11 @@ public class Categoria implements Serializable, Auditable {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public String getNombreModulo() {
+        return ConfigModulo.MODULO_BASE;
     }
 
 }

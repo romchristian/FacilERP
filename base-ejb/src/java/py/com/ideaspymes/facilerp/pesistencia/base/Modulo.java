@@ -5,6 +5,7 @@
  */
 package py.com.ideaspymes.facilerp.pesistencia.base;
 
+import py.com.ideaspymes.facilerp.generico.Auditable;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Entity;
@@ -13,6 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Version;
+import py.com.ideaspymes.facilerp.generico.ConfigModulo;
 import py.com.ideaspymes.facilerp.pesistencia.base.enums.Estado;
 
 /**
@@ -119,4 +121,8 @@ public class Modulo implements Serializable, Auditable {
         return "py.com.ideaspymes.facilerp.pesistencia.base.Modulo[ id=" + id + " ]";
     }
 
+    @Override
+    public String getNombreModulo() {
+       return ConfigModulo.MODULO_BASE;
+    }
 }

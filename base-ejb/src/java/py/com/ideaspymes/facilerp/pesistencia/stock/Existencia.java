@@ -12,7 +12,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Version;
-import py.com.ideaspymes.facilerp.pesistencia.base.Auditable;
+import py.com.ideaspymes.facilerp.generico.Auditable;
+import py.com.ideaspymes.facilerp.generico.ConfigModulo;
 
 /**
  *
@@ -109,5 +110,9 @@ public class Existencia implements Serializable, Auditable {
     public String toString() {
         return "py.com.ideaspymes.facilerp.pesistencia.stock.Existencia[ id=" + id + " ]";
     }
-    
+
+    @Override
+    public String getNombreModulo() {
+       return ConfigModulo.MODULO_STOCK;
+    }
 }

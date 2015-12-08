@@ -4,16 +4,18 @@
  */
 package py.com.ideaspymes.facilerp.pesistencia.base;
 
+import py.com.ideaspymes.facilerp.generico.Auditable;
 import py.com.ideaspymes.facilerp.pesistencia.base.enums.Estado;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.*;
+import py.com.ideaspymes.facilerp.generico.ConfigModulo;
 
 /**
  *
  * @author christian
  */
-@Entity
+@Entity 
 public class Empresa implements Serializable, Auditable {
 
     private static final long serialVersionUID = 1L;
@@ -156,5 +158,10 @@ public class Empresa implements Serializable, Auditable {
     @Override
     public String toString() {
         return razonSocial;
+    }
+    
+    @Override
+    public String getNombreModulo() {
+       return ConfigModulo.MODULO_BASE;
     }
 }

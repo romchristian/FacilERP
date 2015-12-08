@@ -9,7 +9,8 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Date;
 import javax.persistence.*;
-import py.com.ideaspymes.facilerp.pesistencia.base.Auditable;
+import py.com.ideaspymes.facilerp.generico.Auditable;
+import py.com.ideaspymes.facilerp.generico.ConfigModulo;
 import py.com.ideaspymes.facilerp.pesistencia.base.Cotizacion;
 import py.com.ideaspymes.facilerp.pesistencia.base.Moneda;
 
@@ -128,6 +129,11 @@ public abstract class AplicacionPago implements Serializable,Auditable {
     @Override
     public String toString() {
         return "py.gestionpymes.jpa.cobranza.FormaPago[ id=" + id + " ]";
+    }
+    
+    @Override
+    public String getNombreModulo() {
+       return ConfigModulo.MODULO_CONTABILIDAD;
     }
     
 }

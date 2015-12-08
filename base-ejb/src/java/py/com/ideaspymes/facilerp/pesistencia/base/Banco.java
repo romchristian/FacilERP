@@ -5,6 +5,7 @@
  */
 package py.com.ideaspymes.facilerp.pesistencia.base;
 
+import py.com.ideaspymes.facilerp.generico.Auditable;
 import py.com.ideaspymes.facilerp.pesistencia.base.enums.Estado;
 import java.io.Serializable;
 import javax.persistence.Entity;
@@ -14,6 +15,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Version;
+import py.com.ideaspymes.facilerp.generico.ConfigModulo;
 
 /**
  *
@@ -140,4 +142,8 @@ public class Banco implements Serializable, Auditable {
         return this.nombre;
     }
 
+    @Override
+    public String getNombreModulo() {
+        return ConfigModulo.MODULO_BASE;
+    }
 }

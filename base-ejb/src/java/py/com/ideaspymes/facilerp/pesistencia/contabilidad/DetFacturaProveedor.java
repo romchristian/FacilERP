@@ -12,7 +12,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Version;
-import py.com.ideaspymes.facilerp.pesistencia.base.Auditable;
+import py.com.ideaspymes.facilerp.generico.Auditable;
+import py.com.ideaspymes.facilerp.generico.ConfigModulo;
 import py.com.ideaspymes.facilerp.pesistencia.stock.Producto;
 import py.com.ideaspymes.facilerp.pesistencia.stock.UnidadMedida;
 
@@ -194,4 +195,8 @@ public class DetFacturaProveedor implements Serializable, Auditable {
         return "py.com.ideaspymes.facilerp.pesistencia.contabilidad.DetFacturaProveedor[ id=" + id + " ]";
     }
 
+    @Override
+    public String getNombreModulo() {
+       return ConfigModulo.MODULO_CONTABILIDAD;
+    }
 }

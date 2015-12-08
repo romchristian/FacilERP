@@ -7,7 +7,8 @@ package py.com.ideaspymes.facilerp.pesistencia.stock;
 
 import java.io.Serializable;
 import javax.persistence.*;
-import py.com.ideaspymes.facilerp.pesistencia.base.Auditable;
+import py.com.ideaspymes.facilerp.generico.Auditable;
+import py.com.ideaspymes.facilerp.generico.ConfigModulo;
 import py.com.ideaspymes.facilerp.pesistencia.base.enums.Estado;
 
 
@@ -73,9 +74,6 @@ public class UnidadMedida implements Serializable, Auditable{
         this.estado = estado;
     }
 
-    
-    
-
     @Override
     public int hashCode() {
         int hash = 0;
@@ -101,4 +99,8 @@ public class UnidadMedida implements Serializable, Auditable{
         return nombre;
     }
 
+    @Override
+    public String getNombreModulo() {
+       return ConfigModulo.MODULO_STOCK;
+    }
 }

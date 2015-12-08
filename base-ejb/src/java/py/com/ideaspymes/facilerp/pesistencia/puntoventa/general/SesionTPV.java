@@ -16,7 +16,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.Version;
-import py.com.ideaspymes.facilerp.pesistencia.base.Auditable;
+import py.com.ideaspymes.facilerp.generico.Auditable;
+import py.com.ideaspymes.facilerp.generico.ConfigModulo;
 import py.com.ideaspymes.facilerp.pesistencia.base.Usuario;
 import py.com.ideaspymes.facilerp.pesistencia.puntoventa.general.enums.EstadoSesionTPV;
 
@@ -176,5 +177,10 @@ public class SesionTPV implements Serializable, Auditable {
     @Override
     public String toString() {
         return "py.syscvsa.puntoventa.persisitencia.SesionTPV[ id=" + id + " ]";
+    }
+    
+    @Override
+    public String getNombreModulo() {
+       return ConfigModulo.MODULO_PUNTO_VENTA;
     }
 }

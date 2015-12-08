@@ -15,7 +15,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Version;
-import py.com.ideaspymes.facilerp.pesistencia.base.Auditable;
+import py.com.ideaspymes.facilerp.generico.Auditable;
+import py.com.ideaspymes.facilerp.generico.ConfigModulo;
 import py.com.ideaspymes.facilerp.pesistencia.base.Moneda;
 import py.com.ideaspymes.facilerp.pesistencia.base.enums.TipoMovimiento;
 
@@ -115,5 +116,8 @@ public class Comprobante implements Serializable, Auditable {
         return true;
     }
     
-    
+    @Override
+    public String getNombreModulo() {
+       return ConfigModulo.MODULO_PUNTO_VENTA;
+    }
 }

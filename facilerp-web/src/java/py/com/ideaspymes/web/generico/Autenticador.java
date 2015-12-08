@@ -16,10 +16,9 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import py.com.ideaspymes.facilerp.business.interfaces.IModuloFacade;
 import py.com.ideaspymes.facilerp.business.interfaces.IUsuarioDAO;
 import py.com.ideaspymes.facilerp.pesistencia.base.Usuario;
-
-
 
 /**
  *
@@ -31,9 +30,12 @@ public class Autenticador implements Serializable {
 
     @EJB
     private IUsuarioDAO usuarioInterface;
+    @EJB
+    IModuloFacade moduloFacade;
+
     @Inject
     private Credencial credencial;
-    
+
     private String username;
     private String password;
 
@@ -52,8 +54,6 @@ public class Autenticador implements Serializable {
     public void setPassword(String password) {
         this.password = password;
     }
-    
-    
 
     public void keepSessionAlive() {
         FacesContext fc = FacesContext.getCurrentInstance();
@@ -66,12 +66,14 @@ public class Autenticador implements Serializable {
         HttpServletRequest request = (HttpServletRequest) context.getExternalContext().getRequest();
 
         try {
+            moduloFacade.inicializaModulos();
+
             request.login(username, password);
-            
+
             Usuario u = usuarioInterface.find(username);
             System.out.println("Usuario en el login: " + u);
             credencial.setUsuario(u);
-            
+
         } catch (ServletException ex) {
             Logger.getLogger(Autenticador.class.getName()).log(Level.SEVERE, null, ex);
         }

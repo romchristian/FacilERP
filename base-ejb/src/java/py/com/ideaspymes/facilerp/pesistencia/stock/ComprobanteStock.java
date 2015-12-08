@@ -19,7 +19,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.Version;
-import py.com.ideaspymes.facilerp.pesistencia.base.Auditable;
+import py.com.ideaspymes.facilerp.generico.Auditable;
+import py.com.ideaspymes.facilerp.generico.ConfigModulo;
 import py.com.ideaspymes.facilerp.pesistencia.base.Usuario;
 import py.com.ideaspymes.facilerp.pesistencia.stock.enums.TipoComprobanteStock;
 
@@ -148,4 +149,8 @@ public class ComprobanteStock implements Serializable, Auditable {
         return "py.com.ideaspymes.facilerp.pesistencia.stock.ComprobanteStock[ id=" + id + " ]";
     }
 
+    @Override
+    public String getNombreModulo() {
+       return ConfigModulo.MODULO_STOCK;
+    }
 }

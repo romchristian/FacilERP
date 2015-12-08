@@ -17,7 +17,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.Transient;
 import javax.persistence.Version;
-import py.com.ideaspymes.facilerp.pesistencia.base.Auditable;
+import py.com.ideaspymes.facilerp.generico.Auditable;
+import py.com.ideaspymes.facilerp.generico.ConfigModulo;
 import py.com.ideaspymes.facilerp.pesistencia.contabilidad.Proveedor;
 import py.com.ideaspymes.facilerp.pesistencia.stock.enums.EstadoLote;
 
@@ -246,4 +247,8 @@ public class LoteExistencia implements Serializable, Auditable {
         return codigo;
     }
 
+    @Override
+    public String getNombreModulo() {
+       return ConfigModulo.MODULO_STOCK;
+    }
 }

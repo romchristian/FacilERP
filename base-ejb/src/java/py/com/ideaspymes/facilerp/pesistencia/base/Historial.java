@@ -5,6 +5,7 @@
  */
 package py.com.ideaspymes.facilerp.pesistencia.base;
 
+import py.com.ideaspymes.facilerp.generico.Auditable;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Entity;
@@ -13,6 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
+import py.com.ideaspymes.facilerp.generico.ConfigModulo;
 
 /**
  *
@@ -115,4 +117,8 @@ public class Historial implements Serializable, Auditable {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    @Override
+    public String getNombreModulo() {
+       return ConfigModulo.MODULO_BASE;
+    }
 }

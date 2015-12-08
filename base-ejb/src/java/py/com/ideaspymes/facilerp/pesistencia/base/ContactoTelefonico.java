@@ -4,6 +4,7 @@
  */
 package py.com.ideaspymes.facilerp.pesistencia.base;
 
+import py.com.ideaspymes.facilerp.generico.Auditable;
 import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -14,6 +15,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Transient;
 import javax.persistence.Version;
+import py.com.ideaspymes.facilerp.generico.ConfigModulo;
 import py.com.ideaspymes.facilerp.pesistencia.base.enums.EstadoContactoTelefonico;
 import py.com.ideaspymes.facilerp.pesistencia.base.enums.TipoContactoTelefonico;
 
@@ -164,5 +166,10 @@ public class ContactoTelefonico implements Serializable,Auditable {
     @Override
     public String toString() {
         return "py.com.ideaspymes.facilerp.pesistencia.base.ContactoTelefonico[ id=" + id + " ]";
+    }
+    
+    @Override
+    public String getNombreModulo() {
+       return ConfigModulo.MODULO_BASE;
     }
 }

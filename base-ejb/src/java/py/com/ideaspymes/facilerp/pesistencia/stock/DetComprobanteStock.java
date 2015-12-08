@@ -14,7 +14,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.Version;
-import py.com.ideaspymes.facilerp.pesistencia.base.Auditable;
+import py.com.ideaspymes.facilerp.generico.Auditable;
+import py.com.ideaspymes.facilerp.generico.ConfigModulo;
 
 /**
  *
@@ -122,4 +123,8 @@ public class DetComprobanteStock implements Serializable, Auditable {
         return "py.com.ideaspymes.facilerp.pesistencia.stock.DetComprobanteStock[ id=" + id + " ]";
     }
 
+    @Override
+    public String getNombreModulo() {
+       return ConfigModulo.MODULO_STOCK;
+    }
 }

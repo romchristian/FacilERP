@@ -7,7 +7,8 @@ package py.com.ideaspymes.facilerp.pesistencia.stock;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.*;
-import py.com.ideaspymes.facilerp.pesistencia.base.Auditable;
+import py.com.ideaspymes.facilerp.generico.Auditable;
+import py.com.ideaspymes.facilerp.generico.ConfigModulo;
 import py.com.ideaspymes.facilerp.pesistencia.base.enums.Estado;
 
 
@@ -129,5 +130,10 @@ public class Familia implements Serializable, Auditable {
     @Override
     public String toString() {
         return nombre;
+    }
+    
+    @Override
+    public String getNombreModulo() {
+       return ConfigModulo.MODULO_STOCK;
     }
 }

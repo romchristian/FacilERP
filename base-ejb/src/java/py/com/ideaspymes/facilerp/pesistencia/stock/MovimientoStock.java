@@ -17,13 +17,15 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.Version;
+import py.com.ideaspymes.facilerp.generico.Auditable;
+import py.com.ideaspymes.facilerp.generico.ConfigModulo;
 
 /**
  *
  * @author Acer
  */
 @Entity
-public abstract class MovimientoStock implements Serializable {
+public abstract class MovimientoStock implements Serializable, Auditable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -47,6 +49,7 @@ public abstract class MovimientoStock implements Serializable {
 
     public abstract Double cantidadAAfectar();
 
+    @Override
     public Long getId() {
         return id;
     }
@@ -103,6 +106,7 @@ public abstract class MovimientoStock implements Serializable {
         this.cantidad = cantidad;
     }
 
+    @Override
     public Long getVersion() {
         return version;
     }
@@ -142,6 +146,11 @@ public abstract class MovimientoStock implements Serializable {
     @Override
     public String toString() {
         return "py.com.ideaspymes.facilerp.stock.persistencia.MovimientoStock[ id=" + id + " ]";
+    }
+    
+    @Override
+    public String getNombreModulo() {
+       return ConfigModulo.MODULO_STOCK;
     }
 
 }

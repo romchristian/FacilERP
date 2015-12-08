@@ -12,7 +12,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Version;
-import py.com.ideaspymes.facilerp.pesistencia.base.Auditable;
+import py.com.ideaspymes.facilerp.generico.Auditable;
+import py.com.ideaspymes.facilerp.generico.ConfigModulo;
 
 /**
  *
@@ -76,6 +77,10 @@ public class MedioPago implements Serializable, Auditable {
         }
         return true;
     }
-    
+
+    @Override
+    public String getNombreModulo() {
+       return ConfigModulo.MODULO_PUNTO_VENTA;
+    }
     
 }

@@ -18,7 +18,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.OptimisticLockException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import py.com.ideaspymes.facilerp.pesistencia.base.Auditable;
 import py.com.ideaspymes.facilerp.pesistencia.base.Auditoria;
 
 

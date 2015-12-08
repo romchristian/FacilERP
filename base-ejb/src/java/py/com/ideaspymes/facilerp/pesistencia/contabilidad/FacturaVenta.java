@@ -20,7 +20,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.Version;
-import py.com.ideaspymes.facilerp.pesistencia.base.Auditable;
+import py.com.ideaspymes.facilerp.generico.Auditable;
+import py.com.ideaspymes.facilerp.generico.ConfigModulo;
 import py.com.ideaspymes.facilerp.pesistencia.base.Cliente;
 import py.com.ideaspymes.facilerp.pesistencia.base.Cobrador;
 import py.com.ideaspymes.facilerp.pesistencia.base.Cotizacion;
@@ -368,5 +369,9 @@ public class FacturaVenta implements Serializable, Auditable {
         return true;
     }
 
-    
+
+    @Override
+    public String getNombreModulo() {
+       return ConfigModulo.MODULO_CONTABILIDAD;
+    }
 }

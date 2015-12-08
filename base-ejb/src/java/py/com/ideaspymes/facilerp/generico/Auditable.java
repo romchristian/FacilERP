@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package py.com.ideaspymes.facilerp.pesistencia.base;
+package py.com.ideaspymes.facilerp.generico;
 
 /**
  *
@@ -12,4 +12,5 @@ package py.com.ideaspymes.facilerp.pesistencia.base;
 public interface Auditable {
     Long getId();
     Long getVersion();
+    String getNombreModulo();
 }

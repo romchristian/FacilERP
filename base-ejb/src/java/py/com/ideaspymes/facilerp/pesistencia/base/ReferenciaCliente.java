@@ -5,6 +5,7 @@
 package py.com.ideaspymes.facilerp.pesistencia.base;
 
 
+import py.com.ideaspymes.facilerp.generico.Auditable;
 import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -13,6 +14,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import py.com.ideaspymes.facilerp.generico.ConfigModulo;
 import py.com.ideaspymes.facilerp.pesistencia.base.enums.TipoReferencia;
 
 /**
@@ -104,5 +106,9 @@ public class ReferenciaCliente implements Serializable, Auditable {
     public Long getVersion() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
+    @Override
+    public String getNombreModulo() {
+       return ConfigModulo.MODULO_BASE;
+    }
 }
